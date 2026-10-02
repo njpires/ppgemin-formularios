@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Semestral – Orientador(a) | PPGEMIN</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; font-size: 14px; color: #222; background: #f0f4fa; min-height: 100vh; padding: 24px 16px; }
+  .container { max-width: 760px; margin: 0 auto; background: #fff; border-radius: 10px; padding: 36px 44px; box-shadow: 0 2px 8px rgba(0,0,0,0.10); }
+  .logo-bar { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; padding-bottom: 18px; border-bottom: 2px solid #ede8f8; }
+  .logo-sigla { background: #3a1a6b; color: #fff; font-size: 13px; font-weight: 700; border-radius: 6px; padding: 8px 12px; letter-spacing: 0.05em; }
+  .logo-texto h1 { font-size: 16px; font-weight: 700; color: #3a1a6b; }
+  .logo-texto p  { font-size: 12px; color: #666; margin-top: 2px; }
+  .form-desc { font-size: 13px; color: #555; background: #f5f0ff; border-left: 4px solid #3a1a6b; padding: 10px 14px; border-radius: 0 6px 6px 0; margin-bottom: 28px; line-height: 1.6; }
+  .section-title { font-size: 12px; font-weight: 700; color: #3a1a6b; text-transform: uppercase; letter-spacing: 0.07em; border-bottom: 2px solid #3a1a6b; padding-bottom: 5px; margin: 32px 0 18px; }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; color: #333; margin-bottom: 6px; }
+  .field label .req { color: #c0392b; }
+  .field label .hint { font-weight: 400; color: #888; font-size: 12px; }
+  input[type="text"], input[type="date"], select, textarea {
+    width: 100%; border: 1px solid #ccc; border-radius: 5px;
+    padding: 9px 11px; font-size: 13px; color: #222;
+    transition: border 0.15s; background: #fff;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: #3a1a6b; box-shadow: 0 0 0 3px rgba(58,26,107,0.08); }
+  textarea { resize: vertical; min-height: 70px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .radio-group, .check-group { display: flex; flex-direction: column; gap: 8px; margin-top: 5px; }
+  .radio-group label, .check-group label { font-weight: 400; font-size: 13px; display: flex; align-items: flex-start; gap: 9px; cursor: pointer; color: #333; line-height: 1.4; }
+  .radio-group input, .check-group input { margin-top: 2px; flex-shrink: 0; accent-color: #3a1a6b; }
+  .risk-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 13px; border: 1px solid #e5dff5; border-radius: 6px; margin-bottom: 7px; background: #faf8ff; cursor: pointer; }
+  .risk-item input { margin-top: 2px; flex-shrink: 0; accent-color: #3a1a6b; }
+  .risk-label { font-size: 13px; color: #333; font-weight: 600; }
+  .risk-desc  { font-size: 12px; color: #777; margin-top: 2px; }
+  .alert-box { background: #fff8e6; border-left: 4px solid #f0a500; border-radius: 0 6px 6px 0; padding: 10px 14px; font-size: 13px; color: #7a5800; margin-bottom: 18px; line-height: 1.6; }
+  .submit-btn { display: block; width: 100%; background: #3a1a6b; color: #fff; border: none; border-radius: 6px; padding: 14px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 36px; letter-spacing: 0.02em; transition: background 0.2s; }
+  .submit-btn:hover { background: #2e1458; }
+  .submit-btn:disabled { background: #aaa; cursor: not-allowed; }
+  .msg-erro { display: none; background: #fdeaea; border: 1px solid #e74c3c; border-radius: 6px; padding: 14px 16px; margin-top: 16px; color: #922b21; font-size: 13px; }
+  .error-msg { color: #e74c3c; font-size: 12px; margin-top: 4px; display: none; }
+  .field-error { border-color: #e74c3c !important; }
+  @media (max-width: 600px) {
+    .container { padding: 24px 18px; }
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="logo-bar">
+    <div class="logo-sigla">PPGEMIN</div>
+    <div class="logo-texto">
+      <h1>Relatório Semestral de Orientação</h1>
+      <p>Mestrado Profissional em Engenharia de Minas · CEFET-MG Araxá · Formulário do(a) Orientador(a)</p>
+    </div>
+  </div>
+
+  <div class="form-desc">
+    Preencha após a leitura do relatório do(a) discente. As respostas são confidenciais e serão cruzadas com a autoavaliação do(a) aluno(a) pela coordenação do PPGEMIN. Campos com <span style="color:#c0392b">*</span> são obrigatórios.
+  </div>
+
+  <!-- SEÇÃO 1 -->
+  <div class="section-title">1. Identificação</div>
+
+  <div class="grid-2">
+    <div class="field">
+      <label>Nome completo do(a) orientador(a) <span class="req">*</span></label>
+      <input type="text" id="nomeOrientador" placeholder="Seu nome completo">
+      <div class="error-msg" id="err-nomeOrientador">Campo obrigatório.</div>
+    </div>
+    <div class="field">
+      <label>Semestre / Ano de referência <span class="req">*</span></label>
+      <select id="semestre">
+        <option value="">Selecione</option>
+        <option>1º semestre / 2025</option>
+        <option>2º semestre / 2025</option>
+        <option>1º semestre / 2026</option>
+        <option>2º semestre / 2026</option>
+        <option>1º semestre / 2027</option>
+        <option>2º semestre / 2027</option>
+      </select>
+      <div class="error-msg" id="err-semestre">Campo obrigatório.</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="field">
+      <label>Nome completo do(a) discente <span class="req">*</span></label>
+      <input type="text" id="nomeDiscente" placeholder="Nome do(a) aluno(a) orientado(a)">
+      <div class="error-msg" id="err-nomeDiscente">Campo obrigatório.</div>
+    </div>
+    <div class="field">
+      <label>Matrícula do(a) discente <span class="req">*</span></label>
+      <input type="text" id="matricula" placeholder="Ex.: 2024XXXXXX">
+      <div class="error-msg" id="err-matricula">Campo obrigatório.</div>
+    </div>
+  </div>
+
+  <div class="field" style="max-width:220px">
+    <label>Data de preenchimento <span class="req">*</span></label>
+    <input type="date" id="dtPreenchimento">
+    <div class="error-msg" id="err-dtPreenchimento">Campo obrigatório.</div>
+  </div>
+
+  <!-- SEÇÃO 2 -->
+  <div class="section-title">2. Percepção sobre o(a) Discente</div>
+
+  <div class="field">
+    <label>2.1. Comprometimento e dedicação do(a) discente <span class="req">*</span></label>
+    <div class="radio-group" id="comp-group">
+      <label><input type="radio" name="comprometimento" value="Excelente – supera as expectativas, proativo(a) e disciplinado(a)"> Excelente – supera as expectativas, proativo(a) e disciplinado(a)</label>
+      <label><input type="radio" name="comprometimento" value="Bom – cumpre as demandas e mantém regularidade satisfatória"> Bom – cumpre as demandas e mantém regularidade satisfatória</label>
+      <label><input type="radio" name="comprometimento" value="Regular – desempenho aceitável, mas com inconsistências"> Regular – desempenho aceitável, mas com inconsistências</label>
+      <label><input type="radio" name="comprometimento" value="Precisa melhorar – dificuldades evidentes de comprometimento ou entrega"> Precisa melhorar – dificuldades evidentes de comprometimento ou entrega</label>
+    </div>
+    <div class="error-msg" id="err-comprometimento">Selecione uma opção.</div>
+  </div>
+
+  <div class="field">
+    <label>2.2. Frequência e qualidade das reuniões de orientação <span class="req">*</span></label>
+    <div class="radio-group">
+      <label><input type="radio" name="reunioes" value="Regulares e produtivas"> Regulares e produtivas</label>
+      <label><input type="radio" name="reunioes" value="Regulares, mas pouco produtivas"> Regulares, mas pouco produtivas</label>
+      <label><input type="radio" name="reunioes" value="Irregulares, mas produtivas quando ocorreram"> Irregulares, mas produtivas quando ocorreram</label>
+      <label><input type="radio" name="reunioes" value="Irregulares e pouco produtivas"> Irregulares e pouco produtivas</label>
+      <label><input type="radio" name="reunioes" value="Raras – abaixo do esperado"> Raras – abaixo do esperado</label>
+    </div>
+    <div class="error-msg" id="err-reunioes">Selecione uma opção.</div>
+  </div>
+
+  <div class="field">
+    <label>2.3. Evolução percebida do projeto no semestre <span class="req">*</span></label>
+    <div class="radio-group">
+      <label><input type="radio" name="evolucao" value="Acima do esperado para o período"> Acima do esperado para o período</label>
+      <label><input type="radio" name="evolucao" value="Dentro do esperado para o período"> Dentro do esperado para o período</label>
+      <label><input type="radio" name="evolucao" value="Abaixo do esperado, mas com avanço parcial"> Abaixo do esperado, mas com avanço parcial</label>
+      <label><input type="radio" name="evolucao" value="Abaixo do esperado, com avanço mínimo"> Abaixo do esperado, com avanço mínimo</label>
+      <label><input type="radio" name="evolucao" value="Sem avanço perceptível"> Sem avanço perceptível</label>
+    </div>
+    <div class="error-msg" id="err-evolucao">Selecione uma opção.</div>
+  </div>
+
+  <div class="field">
+    <label>2.4. Principal preocupação em relação ao(à) discente <span class="req">*</span></label>
+    <div class="radio-group">
+      <label><input type="radio" name="preocupacao" value="Nenhuma preocupação relevante"> Nenhuma preocupação relevante</label>
+      <label><input type="radio" name="preocupacao" value="Ritmo de produção / baixa entrega de resultados"> Ritmo de produção / baixa entrega de resultados</label>
+      <label><input type="radio" name="preocupacao" value="Dificuldades acadêmicas (metodologia, escrita, análise)"> Dificuldades acadêmicas (metodologia, escrita, análise)</label>
+      <label><input type="radio" name="preocupacao" value="Comunicação ou comprometimento com a orientação"> Comunicação ou comprometimento com a orientação</label>
+      <label><input type="radio" name="preocupacao" value="Relação com a empresa ou parceiro do projeto"> Relação com a empresa ou parceiro do projeto</label>
+      <label><input type="radio" name="preocupacao" value="Questões pessoais ou profissionais que impactam o andamento"> Questões pessoais ou profissionais que impactam o andamento</label>
+      <label><input type="radio" name="preocupacao" value="Falta de clareza no rumo do projeto"> Falta de clareza no rumo do projeto</label>
+      <label><input type="radio" name="preocupacao" value="Risco de não conclusão no prazo regimental"> Risco de não conclusão no prazo regimental</label>
+    </div>
+    <div class="error-msg" id="err-preocupacao">Selecione uma opção.</div>
+  </div>
+
+  <!-- SEÇÃO 3 -->
+  <div class="section-title">3. Indicadores de Risco e Ações Propostas</div>
+
+  <div class="alert-box">
+    Preencha com base na sua avaliação geral do(a) discente no semestre. As informações são usadas pela coordenação para apoio preventivo e não são compartilhadas com o(a) aluno(a).
+  </div>
+
+  <div class="field">
+    <label>3.1. Indicadores de risco identificados <span class="req">*</span> <span class="hint">(marque todos que se aplicam)</span></label>
+    <div class="risk-item"><input type="checkbox" name="riscos" value="Baixa produtividade – pouco avanço em relação às metas do último semestre"><div><div class="risk-label">Baixa produtividade</div><div class="risk-desc">Pouco avanço em relação às metas do último semestre</div></div></div>
+    <div class="risk-item"><input type="checkbox" name="riscos" value="Dificuldades acadêmicas específicas (escrita, metodologia, análise)"><div><div class="risk-label">Dificuldades acadêmicas específicas</div><div class="risk-desc">Ex.: escrita, metodologia, análise de dados</div></div></div>
+    <div class="risk-item"><input type="checkbox" name="riscos" value="Frequência irregular nas reuniões de orientação"><div><div class="risk-label">Frequência irregular nas reuniões de orientação</div><div class="risk-desc">Ausências recorrentes ou contato esporádico</div></div></div>
+    <div class="risk-item"><input type="checkbox" name="riscos" value="Problemas de comunicação (não responde, evita feedback)"><div><div class="risk-label">Problemas de comunicação</div><div class="risk-desc">Ex.: não responde e-mails, evita feedback, não cumpre combinados</div></div></div>
+    <div class="risk-item"><input type="checkbox" name="riscos" value="Dificuldades com a empresa ou parceiro do projeto"><div><div class="risk-label">Dificuldades com a empresa ou parceiro</div><div class="risk-desc">Para projetos aplicados com empresa co-participante</div></div></div>
+    <div class="risk-item"><input type="checkbox" name="riscos" value="Questões pessoais ou profissionais que impactam o andamento"><div><div class="risk-label">Questões pessoais ou profissionais</div><div class="risk-desc">Situações externas que impactam o mestrado</div></div></div>
+    <div class="risk-item"><input type="checkbox" name="riscos" value="Falta de clareza sobre o rumo do projeto"><div><div class="risk-label">Falta de clareza sobre o rumo do projeto</div><div class="risk-desc">Tema, problema ou metodologia ainda inseguros</div></div></div>
+    <div class="risk-item"><input type="checkbox" name="riscos" value="Desmotivação ou desânimo aparente"><div><div class="risk-label">Desmotivação ou desânimo aparente</div><div class="risk-desc">Sinais de baixa motivação ou intenção de abandono</div></div></div>
+    <div class="risk-item"><input type="checkbox" name="riscos" value="Nenhum risco significativo identificado"><div><div class="risk-label">Nenhum risco significativo identificado</div><div class="risk-desc">O(a) discente apresenta desenvolvimento satisfatório</div></div></div>
+    <div class="error-msg" id="err-riscos">Marque ao menos uma opção.</div>
+  </div>
+
+  <div class="field">
+    <label>3.2. Grau de urgência das ações necessárias <span class="req">*</span></label>
+    <div class="radio-group">
+      <label><input type="radio" name="urgencia" value="Nenhuma ação especial necessária"> Nenhuma ação especial necessária</label>
+      <label><input type="radio" name="urgencia" value="Ação preventiva – monitorar com mais atenção no próximo semestre"> Ação preventiva – monitorar com mais atenção no próximo semestre</label>
+      <label><input type="radio" name="urgencia" value="Ação moderada – intervenção planejada nas próximas semanas"> Ação moderada – intervenção planejada nas próximas semanas</label>
+      <label><input type="radio" name="urgencia" value="Ação imediata – situação requer atenção da coordenação agora"> Ação imediata – situação requer atenção da coordenação agora</label>
+    </div>
+    <div class="error-msg" id="err-urgencia">Selecione uma opção.</div>
+  </div>
+
+  <div class="field">
+    <label>3.3. Ações interventivas propostas <span class="req">*</span> <span class="hint">(marque as que serão adotadas)</span></label>
+    <div class="check-group">
+      <label><input type="checkbox" name="acoes" value="Estabelecer reuniões quinzenais com pauta fixa"> Estabelecer reuniões quinzenais com pauta fixa</label>
+      <label><input type="checkbox" name="acoes" value="Elaborar micro-cronograma para as próximas 4 semanas"> Elaborar micro-cronograma para as próximas 4 semanas</label>
+      <label><input type="checkbox" name="acoes" value="Indicar curso ou capacitação específica ao(à) discente"> Indicar curso ou capacitação específica ao(à) discente</label>
+      <label><input type="checkbox" name="acoes" value="Agendar reunião tripartite com o gestor da empresa"> Agendar reunião tripartite com o gestor da empresa</label>
+      <label><input type="checkbox" name="acoes" value="Encaminhar à coordenação para orientação acadêmica adicional"> Encaminhar à coordenação para orientação acadêmica adicional</label>
+      <label><input type="checkbox" name="acoes" value="Encaminhar para suporte psicopedagógico ou serviço de apoio"> Encaminhar para suporte psicopedagógico ou serviço de apoio</label>
+      <label><input type="checkbox" name="acoes" value="Acionar suporte da biblioteca para metodologia / revisão"> Acionar suporte da biblioteca para metodologia / revisão</label>
+      <label><input type="checkbox" name="acoes" value="Nenhuma ação interventiva necessária"> Nenhuma ação interventiva necessária</label>
+    </div>
+    <div class="error-msg" id="err-acoes">Marque ao menos uma opção.</div>
+    <div class="field" style="margin-top:10px;margin-bottom:0">
+      <label style="font-weight:400;color:#666">Detalhe ou situação para a coordenação <span class="hint">(opcional)</span></label>
+      <textarea id="acoesDetalhe" placeholder="Descreva apenas se necessário ou se houver situação urgente." rows="3"></textarea>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 4 -->
+  <div class="section-title">4. Validação do Planejamento do(a) Discente</div>
+
+  <div class="field">
+    <label>4.1. As metas propostas pelo(a) discente para o próximo semestre são adequadas? <span class="req">*</span></label>
+    <div class="radio-group">
+      <label><input type="radio" name="metasOk" value="Sim, estão adequadas e foram acordadas"> Sim, estão adequadas e foram acordadas</label>
+      <label><input type="radio" name="metasOk" value="Foram ajustadas em conjunto durante a reunião de orientação"> Foram ajustadas em conjunto durante a reunião de orientação</label>
+      <label><input type="radio" name="metasOk" value="Precisam ser revistas – serão redefinidas em nova reunião"> Precisam ser revistas – serão redefinidas em nova reunião</label>
+    </div>
+    <div class="error-msg" id="err-metasOk">Selecione uma opção.</div>
+  </div>
+
+  <div class="field">
+    <label>4.2. Viabilidade de conclusão no prazo regimental <span class="req">*</span></label>
+    <div class="radio-group">
+      <label><input type="radio" name="prazo" value="No prazo – o(a) discente está dentro do cronograma esperado"> No prazo – o(a) discente está dentro do cronograma esperado</label>
+      <label><input type="radio" name="prazo" value="Risco leve – pequenos atrasos, mas recuperáveis"> Risco leve – pequenos atrasos, mas recuperáveis</label>
+      <label><input type="radio" name="prazo" value="Risco moderado – necessidade de aceleração significativa"> Risco moderado – necessidade de aceleração significativa</label>
+      <label><input type="radio" name="prazo" value="Risco alto – conclusão no prazo comprometida sem intervenção"> Risco alto – conclusão no prazo comprometida sem intervenção</label>
+    </div>
+    <div class="error-msg" id="err-prazo">Selecione uma opção.</div>
+  </div>
+
+  <!-- DECLARAÇÃO -->
+  <div class="section-title">Declaração</div>
+  <p style="font-size:13px;color:#444;line-height:1.7;">
+    Declaro que as informações prestadas são verídicas e que concordo com o planejamento e as metas estabelecidas para o próximo semestre com o(a) discente orientado(a).
+  </p>
+
+  <button class="submit-btn" id="btn-enviar" onclick="enviarFormulario()">Enviar avaliação do(a) orientador(a)</button>
+
+  <div class="msg-erro" id="msg-erro">
+    Ocorreu um erro ao enviar. Verifique sua conexão e tente novamente.
+  </div>
+
+</div>
+
+<script>
+  var WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzyXj6WCzi6iUbtmpNbIKshTejItAhyCEY-WcqqeoLWmb_zsSDIOvsYi2K4-SvKXnr7/exec';
+
+  function getChecked(name) {
+    var boxes = document.querySelectorAll('input[name="' + name + '"]:checked');
+    return Array.from(boxes).map(function(b){ return b.value; });
+  }
+  function getRadio(name) {
+    var el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : '';
+  }
+  function showError(id, show) {
+    var el = document.getElementById(id);
+    if (el) el.style.display = show ? 'block' : 'none';
+  }
+  function markError(id, show) {
+    var el = document.getElementById(id);
+    if (el) {
+      if (show) el.classList.add('field-error');
+      else el.classList.remove('field-error');
+    }
+  }
+
+  function validar() {
+    var ok = true;
+    ['nomeOrientador','nomeDiscente','matricula','dtPreenchimento'].forEach(function(id) {
+      var vazio = !document.getElementById(id).value.trim();
+      showError('err-' + id, vazio);
+      markError(id, vazio);
+      if (vazio) ok = false;
+    });
+    if (!document.getElementById('semestre').value) {
+      showError('err-semestre', true); ok = false;
+    } else { showError('err-semestre', false); }
+
+    ['comprometimento','reunioes','evolucao','preocupacao','urgencia','metasOk','prazo'].forEach(function(name) {
+      var val = getRadio(name);
+      showError('err-' + name, !val);
+      if (!val) ok = false;
+    });
+    ['riscos','acoes'].forEach(function(name) {
+      var val = getChecked(name);
+      showError('err-' + name, val.length === 0);
+      if (val.length === 0) ok = false;
+    });
+    return ok;
+  }
+
+  function enviarFormulario() {
+    document.getElementById('msg-erro').style.display = 'none';
+    if (!validar()) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+
+    var btn = document.getElementById('btn-enviar');
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    var dados = {
+      tipo:            'orientador',
+      semestre:        document.getElementById('semestre').value,
+      nomeOrientador:  document.getElementById('nomeOrientador').value.trim(),
+      nomeDiscente:    document.getElementById('nomeDiscente').value.trim(),
+      matricula:       document.getElementById('matricula').value.trim(),
+      dtPreenchimento: document.getElementById('dtPreenchimento').value,
+      comprometimento: getRadio('comprometimento'),
+      reunioes:        getRadio('reunioes'),
+      evolucao:        getRadio('evolucao'),
+      preocupacao:     getRadio('preocupacao'),
+      riscos:          getChecked('riscos'),
+      urgencia:        getRadio('urgencia'),
+      acoes:           getChecked('acoes'),
+      acoesDetalhe:    document.getElementById('acoesDetalhe').value.trim(),
+      metasOk:         getRadio('metasOk'),
+      prazo:           getRadio('prazo')
+    };
+
+    fetch(WEBAPP_URL, { method: 'POST', body: JSON.stringify(dados) })
+    .then(function(r){ return r.json(); })
+    .then(function(resp) {
+      if (resp.status === 'ok') {
+        document.querySelector('.container').innerHTML =
+          '<div style="text-align:center;padding:60px 20px">' +
+          '<div style="font-size:48px;margin-bottom:16px">✅</div>' +
+          '<h2 style="color:#3a1a6b;margin-bottom:10px">Avaliação enviada com sucesso!</h2>' +
+          '<p style="color:#555;font-size:14px">As respostas foram registradas e serão cruzadas com o relatório do(a) discente.<br>A coordenação do PPGEMIN agradece.</p>' +
+          '</div>';
+      } else { throw new Error(resp.mensagem); }
+    })
+    .catch(function() {
+      btn.disabled = false;
+      btn.textContent = 'Enviar avaliação do(a) orientador(a)';
+      document.getElementById('msg-erro').style.display = 'block';
+    });
+  }
+</script>
+</body>
+</html>
