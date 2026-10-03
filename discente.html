@@ -104,19 +104,25 @@
   }
 
   /* CAMPOS */
-  .campo { margin-bottom: 20px; }
-  .campo label {
+  .campo { margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--cinza-2); }
+  .campo:last-of-type { border-bottom: none; }
+  .campo > label {
     display: block;
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 700;
     color: var(--texto);
-    margin-bottom: 7px;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
   }
   .campo .sub {
     font-size: 12px;
     font-weight: 400;
     color: var(--cinza-3);
     margin-left: 4px;
+    display: block;
+    margin-top: 3px;
+    letter-spacing: 0;
   }
   .req { color: var(--alerta); margin-left: 2px; }
 
@@ -147,7 +153,7 @@
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
   /* OPÇÕES RADIO / CHECK */
-  .opcoes { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+  .opcoes { display: flex; flex-direction: column; gap: 7px; margin-top: 4px; }
   .opcao {
     display: flex;
     align-items: flex-start;
@@ -158,12 +164,13 @@
     cursor: pointer;
     transition: border-color 0.15s, background 0.15s;
     font-size: 13px;
-    color: var(--texto-leve);
+    font-weight: 400;
+    color: var(--cinza-3);
     line-height: 1.4;
   }
-  .opcao:hover { border-color: var(--azul-meio); background: var(--azul-claro); }
+  .opcao:hover { border-color: var(--azul-meio); background: var(--azul-claro); color: var(--texto-leve); }
   .opcao input { margin-top: 1px; flex-shrink: 0; accent-color: var(--azul); width: 15px; height: 15px; }
-  .opcao.selecionada { border-color: var(--azul); background: var(--azul-claro); color: var(--texto); font-weight: 500; }
+  .opcao.selecionada { border-color: var(--azul); background: var(--azul-claro); color: var(--texto); font-weight: 600; }
 
   /* ESCALA */
   .escala-wrap { margin-top: 4px; }
@@ -301,6 +308,24 @@
   /* SEPARADOR */
   .sep { height: 1px; background: var(--cinza-2); margin: 4px 0 20px; }
 
+  /* AVISO JÁ RESPONDIDO */
+  .aviso-respondido {
+    background: #FFF8E6;
+    border: 1.5px solid #F0A500;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 12px;
+    display: none;
+  }
+  .aviso-respondido .aviso-titulo { font-size: 14px; font-weight: 700; color: #7A5800; margin-bottom: 6px; }
+  .aviso-respondido .aviso-desc { font-size: 13px; color: #7A5800; line-height: 1.6; }
+  .btn-prosseguir { display: inline-block; margin-top: 10px; background: #7A5800; color: #fff; border: none; border-radius: 7px; padding: 8px 16px; font-size: 13px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; transition: background 0.15s; }
+  .btn-prosseguir:hover { background: #5a4000; }
+
+  /* TOAST */
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--texto); color: #fff; padding: 12px 22px; border-radius: 10px; font-size: 13px; font-weight: 500; box-shadow: 0 4px 16px rgba(0,0,0,0.2); z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
+  .toast.visivel { opacity: 1; }
+
   /* SUCESSO */
   .sucesso {
     text-align: center;
@@ -411,7 +436,7 @@
           </div>
           <div class="campo">
             <label>Semestre / Ano de referência <span class="req">*</span></label>
-            <select id="semestre">
+            <select id="semestre" onchange="verificarSemestreRespondido()">
               <option value="">Selecione</option>
               <option>1º semestre / 2025</option>
               <option>2º semestre / 2025</option>
@@ -421,6 +446,11 @@
               <option>2º semestre / 2027</option>
             </select>
             <div class="erro-msg" id="err-semestre">Selecione o semestre.</div>
+            <div class="aviso-respondido" id="aviso-respondido">
+              <div class="aviso-titulo">⚠️ Você já respondeu este semestre</div>
+              <div class="aviso-desc">Identificamos que você já enviou um relatório para este semestre. Se precisar corrigir alguma informação, pode prosseguir mesmo assim.</div>
+              <button class="btn-prosseguir" onclick="fecharAviso()">Entendi, quero prosseguir mesmo assim</button>
+            </div>
           </div>
         </div>
       </div>
@@ -814,6 +844,39 @@ function mostrar(id) {
   });
 }
 
+function chaveRespondido(mat, sem) {
+  return 'ppgemin_disc_' + mat + '_' + sem.replace(/\s|\//g,'_');
+}
+
+function marcarRespondido(mat, sem) {
+  try { localStorage.setItem(chaveRespondido(mat, sem), '1'); } catch(e) {}
+}
+
+function jaRespondeu(mat, sem) {
+  try { return localStorage.getItem(chaveRespondido(mat, sem)) === '1'; } catch(e) { return false; }
+}
+
+function verificarSemestreRespondido() {
+  var sem = document.getElementById('semestre').value;
+  var aviso = document.getElementById('aviso-respondido');
+  if (sem && discenteAtual && jaRespondeu(discenteAtual.matricula, sem)) {
+    aviso.style.display = 'block';
+  } else {
+    aviso.style.display = 'none';
+  }
+}
+
+function fecharAviso() {
+  document.getElementById('aviso-respondido').style.display = 'none';
+}
+
+function mostrarToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('visivel');
+  setTimeout(function(){ t.classList.remove('visivel'); }, 3000);
+}
+
 function getChecked(name) {
   return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map(function(b){ return b.value; });
 }
@@ -872,6 +935,7 @@ function enviarFormulario() {
   };
   fetch(WEBAPP_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dados) })
   .then(function() {
+    marcarRespondido(discenteAtual.matricula, dados.semestre);
     document.querySelector('.card').innerHTML =
       '<div class="sucesso">' +
       '<div class="sucesso-icone">✅</div>' +
@@ -888,5 +952,6 @@ function enviarFormulario() {
 // Iniciar no painel de matrícula
 mostrar('painel-matricula');
 </script>
+<div class="toast" id="toast"></div>
 </body>
 </html>

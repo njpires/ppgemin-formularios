@@ -52,9 +52,18 @@
   .bloco-titulo h2 { font-size: 13px; font-weight: 700; color: var(--roxo); text-transform: uppercase; letter-spacing: 0.06em; }
 
   /* CAMPOS */
-  .campo { margin-bottom: 20px; }
-  .campo label { display: block; font-size: 13px; font-weight: 600; color: var(--texto); margin-bottom: 7px; }
-  .sub { font-size: 12px; font-weight: 400; color: var(--cinza-3); margin-left: 4px; }
+  .campo { margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--cinza-2); }
+  .campo:last-of-type { border-bottom: none; }
+  .campo > label {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--texto);
+    margin-bottom: 12px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+  .sub { font-size: 12px; font-weight: 400; color: var(--cinza-3); margin-left: 4px; display: block; margin-top: 3px; letter-spacing: 0; }
   .req { color: var(--alerta); margin-left: 2px; }
 
   select { width: 100%; border: 1.5px solid var(--cinza-2); border-radius: 8px; padding: 10px 13px; font-size: 13px; font-family: 'Inter', sans-serif; color: var(--texto); background: var(--branco); transition: border-color 0.15s, box-shadow 0.15s; appearance: none; }
@@ -63,18 +72,19 @@
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
   /* OPÇÕES */
-  .opcoes { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
-  .opcao { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border: 1.5px solid var(--cinza-2); border-radius: 8px; cursor: pointer; transition: border-color 0.15s, background 0.15s; font-size: 13px; color: var(--texto-leve); line-height: 1.4; }
-  .opcao:hover { border-color: var(--roxo-meio); background: var(--roxo-claro); }
+  .opcoes { display: flex; flex-direction: column; gap: 7px; margin-top: 4px; }
+  .opcao { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border: 1.5px solid var(--cinza-2); border-radius: 8px; cursor: pointer; transition: border-color 0.15s, background 0.15s; font-size: 13px; font-weight: 400; color: var(--cinza-3); line-height: 1.4; }
+  .opcao:hover { border-color: var(--roxo-meio); background: var(--roxo-claro); color: var(--texto-leve); }
   .opcao input { margin-top: 1px; flex-shrink: 0; accent-color: var(--roxo); width: 15px; height: 15px; }
-  .opcao.selecionada { border-color: var(--roxo); background: var(--roxo-claro); color: var(--texto); font-weight: 500; }
+  .opcao.selecionada { border-color: var(--roxo); background: var(--roxo-claro); color: var(--texto); font-weight: 600; }
 
   /* RISCO */
   .risco-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border: 1.5px solid var(--cinza-2); border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: all 0.15s; }
   .risco-item:hover { border-color: var(--roxo-meio); background: var(--roxo-claro); }
   .risco-item input { margin-top: 2px; flex-shrink: 0; accent-color: var(--roxo); width: 15px; height: 15px; }
-  .risco-titulo { font-size: 13px; font-weight: 600; color: var(--texto); }
+  .risco-titulo { font-size: 13px; font-weight: 600; color: var(--texto-leve); }
   .risco-desc { font-size: 12px; color: var(--cinza-3); margin-top: 2px; }
+  .risco-item.marcado .risco-titulo { color: var(--texto); font-weight: 700; }
 
   /* ALERTA */
   .alerta-box { background: #FFF8E6; border-left: 4px solid #F0A500; border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 13px; color: #7A5800; margin-bottom: 18px; line-height: 1.6; }
@@ -107,6 +117,10 @@
   .btn-primario:disabled { background: var(--cinza-3); cursor: not-allowed; }
   .btn-voltar { background: none; border: 1.5px solid var(--roxo); color: var(--roxo); border-radius: 8px; padding: 9px 16px; font-size: 13px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; margin-bottom: 24px; transition: background 0.15s; }
   .btn-voltar:hover { background: var(--roxo-claro); }
+  .btn-sair { display: block; width: 100%; background: none; border: 1.5px solid var(--cinza-2); color: var(--cinza-3); border-radius: 10px; padding: 12px; font-size: 13px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; margin-top: 10px; transition: all 0.15s; text-align: center; }
+  .btn-sair:hover { border-color: var(--cinza-3); color: var(--texto-leve); background: var(--cinza-1); }
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--texto); color: #fff; padding: 12px 22px; border-radius: 10px; font-size: 13px; font-weight: 500; box-shadow: 0 4px 16px rgba(0,0,0,0.2); z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
+  .toast.visivel { opacity: 1; }
 
   .erro-msg { display: none; color: var(--alerta); font-size: 12px; margin-top: 5px; font-weight: 500; }
   .erro-inline { display: none; background: #FDEAEA; border: 1px solid var(--alerta); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--alerta); margin-top: 14px; }
@@ -376,6 +390,7 @@
       <p style="font-size:13px;color:var(--texto-leve);line-height:1.7;margin-bottom:4px">Declaro que as informações prestadas são verídicas e que concordo com o planejamento estabelecido para o próximo semestre com o(a) discente orientado(a).</p>
 
       <button class="btn-primario" id="btn-enviar" onclick="enviarFormulario()">Enviar avaliação</button>
+      <button class="btn-sair" onclick="sairESalvar()">⏸ Sair e continuar depois</button>
       <div class="erro-inline" id="msg-erro">Ocorreu um erro ao enviar. Verifique sua conexão e tente novamente.</div>
     </div>
   </div>
@@ -562,6 +577,11 @@ document.addEventListener('change', function(e) {
       if (el.checked) opcao.classList.add('selecionada');
       else opcao.classList.remove('selecionada');
     }
+    var risco = el.closest('.risco-item');
+    if (risco) {
+      if (el.checked) risco.classList.add('marcado');
+      else risco.classList.remove('marcado');
+    }
   }
 });
 
@@ -569,6 +589,20 @@ function getChecked(name) { return Array.from(document.querySelectorAll('input[n
 function getRadio(name) { var el=document.querySelector('input[name="'+name+'"]:checked'); return el?el.value:''; }
 function showErr(id,show) { var el=document.getElementById(id); if(el) el.style.display=show?'block':'none'; }
 function toTitleCase(str) { return str.toLowerCase().replace(/\b\w/g,function(c){return c.toUpperCase();}); }
+
+function mostrarToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('visivel');
+  setTimeout(function(){ t.classList.remove('visivel'); }, 3000);
+}
+
+function sairESalvar() {
+  mostrarToast('✅ Progresso salvo. Você pode continuar depois.');
+  setTimeout(function(){
+    voltarLista();
+  }, 1500);
+}
 
 function validar() {
   var ok = true;
@@ -619,5 +653,6 @@ function enviarFormulario() {
 
 mostrar('painel-inicio');
 </script>
+<div class="toast" id="toast"></div>
 </body>
 </html>
