@@ -52,9 +52,10 @@
   .bloco-titulo h2 { font-size: 13px; font-weight: 700; color: var(--roxo); text-transform: uppercase; letter-spacing: 0.06em; }
 
   /* CAMPOS */
-  .campo { margin-bottom: 20px; }
-  .campo label { display: block; font-size: 13px; font-weight: 600; color: var(--texto); margin-bottom: 7px; }
-  .sub { font-size: 12px; font-weight: 400; color: var(--cinza-3); margin-left: 4px; }
+  .campo { margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--cinza-2); }
+  .campo:last-of-type { border-bottom: none; }
+  .campo > label { display: block; font-size: 15px; font-weight: 700; color: var(--texto); margin-bottom: 12px; line-height: 1.4; letter-spacing: -0.01em; }
+  .sub { font-size: 12px; font-weight: 400; color: var(--cinza-3); margin-left: 4px; display: block; margin-top: 3px; }
   .req { color: var(--alerta); margin-left: 2px; }
 
   select { width: 100%; border: 1.5px solid var(--cinza-2); border-radius: 8px; padding: 10px 13px; font-size: 13px; font-family: 'Inter', sans-serif; color: var(--texto); background: var(--branco); transition: border-color 0.15s, box-shadow 0.15s; appearance: none; }
@@ -64,10 +65,10 @@
 
   /* OPÇÕES */
   .opcoes { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
-  .opcao { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border: 1.5px solid var(--cinza-2); border-radius: 8px; cursor: pointer; transition: border-color 0.15s, background 0.15s; font-size: 13px; color: var(--texto-leve); line-height: 1.4; }
+  .opcao { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border: 1.5px solid var(--cinza-2); border-radius: 8px; cursor: pointer; transition: border-color 0.15s, background 0.15s; font-size: 13px; font-weight: 400; color: var(--cinza-3); line-height: 1.4; }
   .opcao:hover { border-color: var(--roxo-meio); background: var(--roxo-claro); }
   .opcao input { margin-top: 1px; flex-shrink: 0; accent-color: var(--roxo); width: 15px; height: 15px; }
-  .opcao.selecionada { border-color: var(--roxo); background: var(--roxo-claro); color: var(--texto); font-weight: 500; }
+  .opcao.selecionada { border-color: var(--roxo); background: var(--roxo-claro); color: var(--texto); font-weight: 600; }
 
   /* RISCO */
   .risco-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border: 1.5px solid var(--cinza-2); border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: all 0.15s; }
