@@ -485,7 +485,7 @@
       $('err-chave').style.display = 'none';
       $('input-chave').value = '';
       mostrar('painel-inicio');
-      if (!estado.cadastroOk) carregarCadastro();
+      carregarCadastro();
     } else {
       $('err-chave').style.display = 'block';
       $('input-chave').focus();
@@ -493,8 +493,9 @@
   }
 
   // ---------- CADASTRO (planilha CONTROLE DADOS PPGEMIN) ----------
-  function carregarCadastro() {
+  function carregarCadastro(callback) {
     var sel = $('select-orientador');
+    var selecionado = estado.orientador || sel.value;
     sel.disabled = true;
     sel.innerHTML = '<option value="">Carregando cadastro…</option>';
     $('erro-cadastro').style.display = 'none';
@@ -502,6 +503,7 @@
       if (!dados || dados.status !== 'ok' || !Array.isArray(dados.discentes)) {
         sel.innerHTML = '<option value="">Cadastro indisponível</option>';
         $('erro-cadastro').style.display = 'block';
+        if (callback) callback(false);
         return;
       }
       if (dados.semestre) { estado.semestre = dados.semestre; exibirSemestre(); }
@@ -522,7 +524,9 @@
         op.textContent = nome;
         sel.appendChild(op);
       });
+      if (selecionado && mapa[selecionado]) sel.value = selecionado;
       sel.disabled = false;
+      if (callback) callback(true);
     });
   }
 
@@ -556,6 +560,17 @@
         estado.erroStatus = true;
       }
       renderizarLista();
+    });
+  }
+
+  // Recarrega a lista de alunos (cadastro) e, em seguida, o status das respostas
+  function atualizarTudo() {
+    if (!estado.orientador || estado.carregando) return;
+    estado.carregando = true;
+    renderizarLista();
+    carregarCadastro(function () {
+      estado.carregando = false;
+      atualizarStatus();
     });
   }
 
@@ -757,9 +772,9 @@
   $('btn-chave').addEventListener('click', verificarChave);
   $('input-chave').addEventListener('keydown', function (e) { if (e.key === 'Enter') verificarChave(); });
   $('btn-entrar').addEventListener('click', entrar);
-  $('btn-recarregar-cad').addEventListener('click', carregarCadastro);
-  $('btn-atualizar').addEventListener('click', atualizarStatus);
-  $('btn-tentar-status').addEventListener('click', atualizarStatus);
+  $('btn-recarregar-cad').addEventListener('click', function () { carregarCadastro(); });
+  $('btn-atualizar').addEventListener('click', atualizarTudo);
+  $('btn-tentar-status').addEventListener('click', atualizarTudo);
   $('btn-voltar').addEventListener('click', voltarLista);
   $('btn-enviar').addEventListener('click', enviar);
   $('btn-reentrar').addEventListener('click', function () { mostrar('painel-chave'); });
@@ -813,7 +828,7 @@
 
   // Ao voltar para a aba, revalida o status com a planilha
   document.addEventListener('visibilitychange', function () {
-    if (document.visibilityState === 'visible' && visivel('painel-selecao')) atualizarStatus();
+    if (document.visibilityState === 'visible' && visivel('painel-selecao')) atualizarTudo();
   });
 
   limparCacheAntigo();
