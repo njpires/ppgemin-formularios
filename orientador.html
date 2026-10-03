@@ -548,7 +548,7 @@ function sincronizarComPlanilha() {
 function carregarRespondidos(ori) {
   // Lê cache local imediatamente para resposta rápida
   try {
-    var k = 'ppgemin_ori_' + ori.replace(/\W/g,'_');
+    var k = 'ppgemin_ori_' + ori.replace(/[^a-zA-Z0-9]/g,'_');
     var s = localStorage.getItem(k);
     return s ? JSON.parse(s) : {};
   } catch(e) { return {}; }
@@ -556,7 +556,7 @@ function carregarRespondidos(ori) {
 
 function salvarRespondido(ori, mat) {
   try {
-    var k = 'ppgemin_ori_' + ori.replace(/\W/g,'_');
+    var k = 'ppgemin_ori_' + ori.replace(/[^a-zA-Z0-9]/g,'_');
     respondidos[mat] = true;
     localStorage.setItem(k, JSON.stringify(respondidos));
   } catch(e) {}
@@ -670,7 +670,7 @@ document.addEventListener('change', function(e) {
 function getChecked(name) { return Array.from(document.querySelectorAll('input[name="'+name+'"]:checked')).map(function(b){return b.value;}); }
 function getRadio(name) { var el=document.querySelector('input[name="'+name+'"]:checked'); return el?el.value:''; }
 function showErr(id,show) { var el=document.getElementById(id); if(el) el.style.display=show?'block':'none'; }
-function toTitleCase(str) { return str.toLowerCase().replace(/\b\w/g,function(c){return c.toUpperCase();}); }
+function toTitleCase(str) { return str.toLowerCase().replace(/\b[a-zA-Z]/g,function(c){return c.toUpperCase();}); }
 
 function mostrarToast(msg) {
   var t = document.getElementById('toast');
