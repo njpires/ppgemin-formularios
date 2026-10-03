@@ -41,10 +41,12 @@
   .meta-table td input[type="text"] { border: none; padding: 4px 6px; font-size: 13px; box-shadow: none; }
   .meta-table td input[type="text"]:focus { outline: none; background: #f8faff; }
   .meta-table td select { border: none; padding: 4px 6px; font-size: 13px; box-shadow: none; }
-  .months-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 8px; }
-  .month-box { background: #f8faff; border: 1px solid #dde3ef; border-radius: 5px; padding: 8px; }
-  .month-box label { display: block; font-size: 11px; font-weight: 700; color: #1a3a6b; margin-bottom: 5px; }
-  .month-box select { width: 100%; border: 1px solid #dde3ef; border-radius: 4px; padding: 4px 5px; font-size: 11px; color: #333; background: #fff; }
+  .months-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; }
+  .month-box { background: #f8faff; border: 1px solid #dde3ef; border-radius: 6px; padding: 10px 12px; }
+  .month-box .month-title { font-size: 12px; font-weight: 700; color: #1a3a6b; margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px solid #dde3ef; }
+  .month-box .check-group { gap: 5px; }
+  .month-box .check-group label { font-size: 12px; }
+  @media (max-width: 600px) { .months-grid { grid-template-columns: repeat(2, 1fr); } }
   .submit-btn { display: block; width: 100%; background: #1a3a6b; color: #fff; border: none; border-radius: 6px; padding: 14px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 36px; letter-spacing: 0.02em; transition: background 0.2s; }
   .submit-btn:hover { background: #143060; }
   .submit-btn:disabled { background: #aaa; cursor: not-allowed; }
@@ -328,12 +330,84 @@
     <div class="field">
       <label>4.2. Cronograma previsto – atividade principal por mês <span class="req">*</span></label>
       <div class="months-grid">
-        <div class="month-box"><label>Mês 1</label><select id="mes1"><option value="">—</option><option>Revisão bibliográfica</option><option>Coleta / desenvolvimento</option><option>Análise de dados</option><option>Escrita de capítulos</option><option>Artigo científico</option><option>Qualificação</option><option>Defesa / finalização</option><option>Outra atividade</option></select></div>
-        <div class="month-box"><label>Mês 2</label><select id="mes2"><option value="">—</option><option>Revisão bibliográfica</option><option>Coleta / desenvolvimento</option><option>Análise de dados</option><option>Escrita de capítulos</option><option>Artigo científico</option><option>Qualificação</option><option>Defesa / finalização</option><option>Outra atividade</option></select></div>
-        <div class="month-box"><label>Mês 3</label><select id="mes3"><option value="">—</option><option>Revisão bibliográfica</option><option>Coleta / desenvolvimento</option><option>Análise de dados</option><option>Escrita de capítulos</option><option>Artigo científico</option><option>Qualificação</option><option>Defesa / finalização</option><option>Outra atividade</option></select></div>
-        <div class="month-box"><label>Mês 4</label><select id="mes4"><option value="">—</option><option>Revisão bibliográfica</option><option>Coleta / desenvolvimento</option><option>Análise de dados</option><option>Escrita de capítulos</option><option>Artigo científico</option><option>Qualificação</option><option>Defesa / finalização</option><option>Outra atividade</option></select></div>
-        <div class="month-box"><label>Mês 5</label><select id="mes5"><option value="">—</option><option>Revisão bibliográfica</option><option>Coleta / desenvolvimento</option><option>Análise de dados</option><option>Escrita de capítulos</option><option>Artigo científico</option><option>Qualificação</option><option>Defesa / finalização</option><option>Outra atividade</option></select></div>
-        <div class="month-box"><label>Mês 6</label><select id="mes6"><option value="">—</option><option>Revisão bibliográfica</option><option>Coleta / desenvolvimento</option><option>Análise de dados</option><option>Escrita de capítulos</option><option>Artigo científico</option><option>Qualificação</option><option>Defesa / finalização</option><option>Outra atividade</option></select></div>
+        <div class="month-box">
+          <div class="month-title">Mês 1</div>
+          <div class="check-group">
+            <label><input type="checkbox" name="mes1" value="Revisão bibliográfica"> Revisão bibliográfica</label>
+            <label><input type="checkbox" name="mes1" value="Coleta / desenvolvimento"> Coleta / desenvolvimento</label>
+            <label><input type="checkbox" name="mes1" value="Análise de dados"> Análise de dados</label>
+            <label><input type="checkbox" name="mes1" value="Escrita de capítulos"> Escrita de capítulos</label>
+            <label><input type="checkbox" name="mes1" value="Artigo científico"> Artigo científico</label>
+            <label><input type="checkbox" name="mes1" value="Qualificação"> Qualificação</label>
+            <label><input type="checkbox" name="mes1" value="Defesa / finalização"> Defesa / finalização</label>
+            <label><input type="checkbox" name="mes1" value="Outra atividade"> Outra atividade</label>
+          </div>
+        </div>
+        <div class="month-box">
+          <div class="month-title">Mês 2</div>
+          <div class="check-group">
+            <label><input type="checkbox" name="mes2" value="Revisão bibliográfica"> Revisão bibliográfica</label>
+            <label><input type="checkbox" name="mes2" value="Coleta / desenvolvimento"> Coleta / desenvolvimento</label>
+            <label><input type="checkbox" name="mes2" value="Análise de dados"> Análise de dados</label>
+            <label><input type="checkbox" name="mes2" value="Escrita de capítulos"> Escrita de capítulos</label>
+            <label><input type="checkbox" name="mes2" value="Artigo científico"> Artigo científico</label>
+            <label><input type="checkbox" name="mes2" value="Qualificação"> Qualificação</label>
+            <label><input type="checkbox" name="mes2" value="Defesa / finalização"> Defesa / finalização</label>
+            <label><input type="checkbox" name="mes2" value="Outra atividade"> Outra atividade</label>
+          </div>
+        </div>
+        <div class="month-box">
+          <div class="month-title">Mês 3</div>
+          <div class="check-group">
+            <label><input type="checkbox" name="mes3" value="Revisão bibliográfica"> Revisão bibliográfica</label>
+            <label><input type="checkbox" name="mes3" value="Coleta / desenvolvimento"> Coleta / desenvolvimento</label>
+            <label><input type="checkbox" name="mes3" value="Análise de dados"> Análise de dados</label>
+            <label><input type="checkbox" name="mes3" value="Escrita de capítulos"> Escrita de capítulos</label>
+            <label><input type="checkbox" name="mes3" value="Artigo científico"> Artigo científico</label>
+            <label><input type="checkbox" name="mes3" value="Qualificação"> Qualificação</label>
+            <label><input type="checkbox" name="mes3" value="Defesa / finalização"> Defesa / finalização</label>
+            <label><input type="checkbox" name="mes3" value="Outra atividade"> Outra atividade</label>
+          </div>
+        </div>
+        <div class="month-box">
+          <div class="month-title">Mês 4</div>
+          <div class="check-group">
+            <label><input type="checkbox" name="mes4" value="Revisão bibliográfica"> Revisão bibliográfica</label>
+            <label><input type="checkbox" name="mes4" value="Coleta / desenvolvimento"> Coleta / desenvolvimento</label>
+            <label><input type="checkbox" name="mes4" value="Análise de dados"> Análise de dados</label>
+            <label><input type="checkbox" name="mes4" value="Escrita de capítulos"> Escrita de capítulos</label>
+            <label><input type="checkbox" name="mes4" value="Artigo científico"> Artigo científico</label>
+            <label><input type="checkbox" name="mes4" value="Qualificação"> Qualificação</label>
+            <label><input type="checkbox" name="mes4" value="Defesa / finalização"> Defesa / finalização</label>
+            <label><input type="checkbox" name="mes4" value="Outra atividade"> Outra atividade</label>
+          </div>
+        </div>
+        <div class="month-box">
+          <div class="month-title">Mês 5</div>
+          <div class="check-group">
+            <label><input type="checkbox" name="mes5" value="Revisão bibliográfica"> Revisão bibliográfica</label>
+            <label><input type="checkbox" name="mes5" value="Coleta / desenvolvimento"> Coleta / desenvolvimento</label>
+            <label><input type="checkbox" name="mes5" value="Análise de dados"> Análise de dados</label>
+            <label><input type="checkbox" name="mes5" value="Escrita de capítulos"> Escrita de capítulos</label>
+            <label><input type="checkbox" name="mes5" value="Artigo científico"> Artigo científico</label>
+            <label><input type="checkbox" name="mes5" value="Qualificação"> Qualificação</label>
+            <label><input type="checkbox" name="mes5" value="Defesa / finalização"> Defesa / finalização</label>
+            <label><input type="checkbox" name="mes5" value="Outra atividade"> Outra atividade</label>
+          </div>
+        </div>
+        <div class="month-box">
+          <div class="month-title">Mês 6</div>
+          <div class="check-group">
+            <label><input type="checkbox" name="mes6" value="Revisão bibliográfica"> Revisão bibliográfica</label>
+            <label><input type="checkbox" name="mes6" value="Coleta / desenvolvimento"> Coleta / desenvolvimento</label>
+            <label><input type="checkbox" name="mes6" value="Análise de dados"> Análise de dados</label>
+            <label><input type="checkbox" name="mes6" value="Escrita de capítulos"> Escrita de capítulos</label>
+            <label><input type="checkbox" name="mes6" value="Artigo científico"> Artigo científico</label>
+            <label><input type="checkbox" name="mes6" value="Qualificação"> Qualificação</label>
+            <label><input type="checkbox" name="mes6" value="Defesa / finalização"> Defesa / finalização</label>
+            <label><input type="checkbox" name="mes6" value="Outra atividade"> Outra atividade</label>
+          </div>
+        </div>
       </div>
       <div class="error-msg" id="err-cronograma">Preencha ao menos o Mês 1.</div>
     </div>
@@ -515,7 +589,7 @@ function validar() {
   var dific = getChecked('dificuldades'); showError('err-dific', dific.length===0); if (dific.length===0) ok = false;
   var clar = getRadio('clareza'); showError('err-clareza', !clar); if (!clar) ok = false;
   var mp1 = document.getElementById('metaProx1').value.trim(); showError('err-metaProx1', !mp1); markError('metaProx1', !mp1); if (!mp1) ok = false;
-  var mes1 = document.getElementById('mes1').value; showError('err-cronograma', !mes1); if (!mes1) ok = false;
+  var ativ_mes1 = getChecked('mes1'); showError('err-cronograma', ativ_mes1.length===0); if (ativ_mes1.length===0) ok = false;
   var rec = getChecked('recursos'); showError('err-recursos', rec.length===0); if (rec.length===0) ok = false;
   return ok;
 }
@@ -551,9 +625,12 @@ function enviarFormulario() {
     metaProx2: document.getElementById('metaProx2').value.trim(),
     metaProx3: document.getElementById('metaProx3').value.trim(),
     cronograma: [
-      document.getElementById('mes1').value, document.getElementById('mes2').value,
-      document.getElementById('mes3').value, document.getElementById('mes4').value,
-      document.getElementById('mes5').value, document.getElementById('mes6').value
+      'Mês 1: ' + (getChecked('mes1').join(', ') || '—'),
+      'Mês 2: ' + (getChecked('mes2').join(', ') || '—'),
+      'Mês 3: ' + (getChecked('mes3').join(', ') || '—'),
+      'Mês 4: ' + (getChecked('mes4').join(', ') || '—'),
+      'Mês 5: ' + (getChecked('mes5').join(', ') || '—'),
+      'Mês 6: ' + (getChecked('mes6').join(', ') || '—')
     ],
     recursos: getChecked('recursos'),
     recursosOutro: document.getElementById('recursosOutro').value.trim()
