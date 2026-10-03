@@ -201,7 +201,12 @@
     <div id="painel-selecao">
       <div class="ori-box" id="box-ori-nome"></div>
       <div class="progresso-wrap">
-        <div class="progresso-label" id="prog-label">0 de 0 relatórios respondidos</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div class="progresso-label" id="prog-label">0 de 0 relatórios respondidos</div>
+          <button onclick="sincronizarComPlanilha()" title="Atualizar status da planilha"
+            style="background:none;border:none;cursor:pointer;font-size:16px;color:var(--cinza-3);padding:2px 6px;border-radius:5px;transition:color 0.15s"
+            onmouseover="this.style.color='var(--roxo)'" onmouseout="this.style.color='var(--cinza-3)'">🔄</button>
+        </div>
         <div class="progresso-bar"><div class="progresso-fill" id="prog-fill" style="width:0%"></div></div>
       </div>
       <div class="bloco-titulo" style="margin-top:20px"><div class="bloco-num">→</div><h2>Selecione o(a) discente</h2></div>
@@ -540,13 +545,17 @@ function consultarRespondidosNaPlanilha(ori, semestre, callback) {
 function sincronizarComPlanilha() {
   var sem = semestreAtual || '';
   if (!sem || !orientadorAtual) return;
-  document.getElementById('prog-label').textContent = 'Verificando respostas...';
+  document.getElementById('prog-label').textContent = '🔄 Verificando respostas na base de dados...';
   consultarRespondidosNaPlanilha(orientadorAtual, sem, function(mapaServidor) {
-    if (Object.keys(mapaServidor).length > 0) {
-      Object.keys(mapaServidor).forEach(function(mat) {
+    var keys = Object.keys(mapaServidor);
+    if (keys.length > 0) {
+      keys.forEach(function(mat) {
         respondidos[mat] = true;
         salvarRespondido(orientadorAtual, mat);
       });
+      console.log('Sincronizado: ' + keys.length + ' respondidos encontrados na planilha');
+    } else {
+      console.log('Sincronização: nenhum respondido encontrado na planilha para este semestre/orientador');
     }
     renderizarLista();
   });
