@@ -16,14 +16,15 @@
   .section-title { font-size: 12px; font-weight: 700; color: #1a3a6b; text-transform: uppercase; letter-spacing: 0.07em; border-bottom: 2px solid #1a3a6b; padding-bottom: 5px; margin: 32px 0 18px; }
   .field { margin-bottom: 18px; }
   .field label { display: block; font-size: 13px; font-weight: 600; color: #333; margin-bottom: 6px; }
-  .field label .req { color: #c0392b; }
-  .field label .hint { font-weight: 400; color: #888; font-size: 12px; }
+  .req { color: #c0392b; }
+  .hint { font-weight: 400; color: #888; font-size: 12px; }
   input[type="text"], input[type="date"], select, textarea {
     width: 100%; border: 1px solid #ccc; border-radius: 5px;
     padding: 9px 11px; font-size: 13px; color: #222;
     transition: border 0.15s; background: #fff;
   }
   input:focus, select:focus, textarea:focus { outline: none; border-color: #1a3a6b; box-shadow: 0 0 0 3px rgba(26,58,107,0.08); }
+  input[readonly], select[disabled] { background: #f5f5f5; color: #555; cursor: not-allowed; }
   textarea { resize: vertical; min-height: 70px; }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .radio-group, .check-group { display: flex; flex-direction: column; gap: 8px; margin-top: 5px; }
@@ -34,7 +35,6 @@
   .scale-group label { display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 12px; color: #555; font-weight: 400; cursor: pointer; min-width: 48px; }
   .scale-group input { accent-color: #1a3a6b; }
   .scale-labels { display: flex; justify-content: space-between; font-size: 11px; color: #888; margin-top: 4px; }
-  .note { font-size: 12px; color: #888; margin-top: 7px; font-style: italic; }
   .meta-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
   .meta-table th { font-size: 12px; color: #555; font-weight: 600; text-align: left; padding: 8px 10px; background: #f0f4fa; border: 1px solid #dde3ef; }
   .meta-table td { padding: 6px 8px; border: 1px solid #dde3ef; vertical-align: middle; }
@@ -48,12 +48,33 @@
   .submit-btn { display: block; width: 100%; background: #1a3a6b; color: #fff; border: none; border-radius: 6px; padding: 14px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 36px; letter-spacing: 0.02em; transition: background 0.2s; }
   .submit-btn:hover { background: #143060; }
   .submit-btn:disabled { background: #aaa; cursor: not-allowed; }
-  .msg-sucesso { display: none; background: #eafaf1; border: 1px solid #27ae60; border-radius: 6px; padding: 18px 20px; text-align: center; margin-top: 24px; }
-  .msg-sucesso h3 { color: #1e8449; font-size: 16px; margin-bottom: 6px; }
-  .msg-sucesso p { color: #555; font-size: 13px; }
+  .btn-confirmar { display: block; width: 100%; background: #1a3a6b; color: #fff; border: none; border-radius: 6px; padding: 12px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 16px; transition: background 0.2s; }
+  .btn-confirmar:hover { background: #143060; }
+  .btn-corrigir { display: block; width: 100%; background: none; border: 1px solid #1a3a6b; color: #1a3a6b; border-radius: 6px; padding: 10px; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 8px; transition: all 0.2s; }
+  .btn-corrigir:hover { background: #f0f4fa; }
   .msg-erro { display: none; background: #fdeaea; border: 1px solid #e74c3c; border-radius: 6px; padding: 14px 16px; margin-top: 16px; color: #922b21; font-size: 13px; }
-  .field-error { border-color: #e74c3c !important; }
   .error-msg { color: #e74c3c; font-size: 12px; margin-top: 4px; display: none; }
+  .field-error { border-color: #e74c3c !important; }
+  .note { font-size: 12px; color: #888; margin-top: 7px; font-style: italic; }
+
+  /* PAINÉIS */
+  #painel-matricula { display: block; }
+  #painel-confirmacao { display: none; }
+  #painel-formulario { display: none; }
+
+  /* CAIXA DE CONFIRMAÇÃO */
+  .confirmacao-box { background: #f0f4fa; border: 2px solid #1a3a6b; border-radius: 10px; padding: 24px; margin-top: 16px; }
+  .confirmacao-box .titulo { font-size: 13px; font-weight: 700; color: #1a3a6b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+  .confirmacao-linha { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
+  .confirmacao-rotulo { font-size: 12px; color: #666; font-weight: 600; min-width: 100px; padding-top: 2px; }
+  .confirmacao-valor { font-size: 14px; color: #222; font-weight: 700; }
+
+  /* BADGE DO DISCENTE NO FORMULÁRIO */
+  .discente-id-box { background: #eafaf1; border: 1px solid #a8d8b9; border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; }
+  .discente-id-box .label { font-size: 11px; color: #666; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  .discente-id-box .nome { font-size: 16px; color: #1e8449; font-weight: 700; margin-top: 4px; }
+  .discente-id-box .detalhe { font-size: 12px; color: #666; margin-top: 3px; }
+
   @media (max-width: 600px) {
     .container { padding: 24px 18px; }
     .grid-2 { grid-template-columns: 1fr; }
@@ -72,496 +93,496 @@
     </div>
   </div>
 
-  <div class="form-desc">
-    Preencha com atenção. Este relatório é confidencial e será cruzado com a avaliação do(a) orientador(a) para apoio personalizado ao seu desenvolvimento acadêmico. Campos com <span style="color:#c0392b">*</span> são obrigatórios.
-  </div>
-
-  <!-- SEÇÃO 1 -->
-  <div class="section-title">1. Identificação</div>
-
-  <div class="grid-2">
-    <div class="field">
-      <label>Nome completo <span class="req">*</span></label>
-      <input type="text" id="nome" placeholder="Seu nome completo">
-      <div class="error-msg" id="err-nome">Campo obrigatório.</div>
+  <!-- PAINEL 1: MATRÍCULA -->
+  <div id="painel-matricula">
+    <div class="form-desc">
+      Para iniciar o preenchimento, digite sua matrícula. O sistema identificará seus dados automaticamente.
     </div>
     <div class="field">
-      <label>Matrícula <span class="req">*</span></label>
-      <input type="text" id="matricula" placeholder="Ex.: 2024XXXXXX">
-      <div class="error-msg" id="err-matricula">Campo obrigatório.</div>
+      <label>Digite sua matrícula <span class="req">*</span></label>
+      <input type="text" id="input-matricula" placeholder="Ex.: 20255003744" maxlength="20"
+        oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+        onkeydown="if(event.key==='Enter') buscarMatricula()">
+      <div class="error-msg" id="err-matricula-busca">Matrícula não encontrada. Verifique o número e tente novamente.</div>
     </div>
+    <div class="field" style="margin-top:16px">
+      <label>Seu e-mail <span class="req">*</span></label>
+      <input type="email" id="input-email" placeholder="seuemail@exemplo.com">
+      <div class="error-msg" id="err-email-busca">Informe um e-mail válido.</div>
+    </div>
+    <button class="btn-confirmar" onclick="buscarMatricula()">Buscar →</button>
   </div>
 
-  <div class="grid-2">
+  <!-- PAINEL 2: CONFIRMAÇÃO -->
+  <div id="painel-confirmacao">
+    <div class="form-desc">
+      Encontramos seu cadastro. Confirme se os dados abaixo são os seus antes de prosseguir.
+    </div>
+    <div class="confirmacao-box">
+      <div class="titulo">📋 Seus dados cadastrais</div>
+      <div class="confirmacao-linha">
+        <span class="confirmacao-rotulo">Matrícula</span>
+        <span class="confirmacao-valor" id="conf-matricula"></span>
+      </div>
+      <div class="confirmacao-linha">
+        <span class="confirmacao-rotulo">Nome</span>
+        <span class="confirmacao-valor" id="conf-nome"></span>
+      </div>
+      <div class="confirmacao-linha">
+        <span class="confirmacao-rotulo">Orientador(a)</span>
+        <span class="confirmacao-valor" id="conf-orientador"></span>
+      </div>
+      <div class="confirmacao-linha">
+        <span class="confirmacao-rotulo">E-mail</span>
+        <span class="confirmacao-valor" id="conf-email"></span>
+      </div>
+    </div>
+    <button class="btn-confirmar" onclick="confirmarDados()">✅ Sim, esses são meus dados — Continuar</button>
+    <button class="btn-corrigir" onclick="voltarMatricula()">← Não, quero corrigir a matrícula</button>
+  </div>
+
+  <!-- PAINEL 3: FORMULÁRIO -->
+  <div id="painel-formulario">
+
+    <div class="discente-id-box">
+      <div class="label">Preenchendo como</div>
+      <div class="nome" id="badge-nome"></div>
+      <div class="detalhe" id="badge-detalhe"></div>
+    </div>
+
+    <div class="section-title">1. Identificação</div>
+
+    <div class="grid-2">
+      <div class="field">
+        <label>Nome completo</label>
+        <input type="text" id="nome" readonly>
+      </div>
+      <div class="field">
+        <label>Matrícula</label>
+        <input type="text" id="matricula" readonly>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="field">
+        <label>Nome do(a) orientador(a)</label>
+        <input type="text" id="orientador" readonly>
+      </div>
+      <div class="field">
+        <label>Semestre / Ano de referência <span class="req">*</span></label>
+        <select id="semestre">
+          <option value="">Selecione</option>
+          <option>1º semestre / 2025</option>
+          <option>2º semestre / 2025</option>
+          <option>1º semestre / 2026</option>
+          <option>2º semestre / 2026</option>
+          <option>1º semestre / 2027</option>
+          <option>2º semestre / 2027</option>
+        </select>
+        <div class="error-msg" id="err-semestre">Campo obrigatório.</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="field">
+        <label>Data de início da orientação <span class="req">*</span></label>
+        <input type="date" id="dtInicio">
+        <div class="error-msg" id="err-dtInicio">Campo obrigatório.</div>
+      </div>
+      <div class="field">
+        <label>Data de preenchimento <span class="req">*</span></label>
+        <input type="date" id="dtPreenchimento">
+        <div class="error-msg" id="err-dtPreenchimento">Campo obrigatório.</div>
+      </div>
+    </div>
+
+    <div class="section-title">2. Situação do Projeto de Dissertação / Produto Final</div>
+
     <div class="field">
-      <label>Nome do(a) orientador(a) <span class="req">*</span></label>
-      <input type="text" id="orientador" placeholder="Nome completo">
-      <div class="error-msg" id="err-orientador">Campo obrigatório.</div>
+      <label>2.1. Título provisório ou definitivo do projeto <span class="req">*</span></label>
+      <input type="text" id="titulo" placeholder="Digite o título do seu projeto">
+      <div class="error-msg" id="err-titulo">Campo obrigatório.</div>
+    </div>
+
+    <div class="field">
+      <label>2.2. Etapa atual do trabalho <span class="req">*</span> <span class="hint">(marque a principal etapa em andamento)</span></label>
+      <div class="radio-group">
+        <label><input type="radio" name="etapa" value="Definição do tema e problema de pesquisa"> Definição do tema e problema de pesquisa</label>
+        <label><input type="radio" name="etapa" value="Elaboração do projeto (pré-projeto)"> Elaboração do projeto (pré-projeto)</label>
+        <label><input type="radio" name="etapa" value="Submissão / aprovação do comitê de ética"> Submissão / aprovação do comitê de ética</label>
+        <label><input type="radio" name="etapa" value="Revisão bibliográfica em andamento"> Revisão bibliográfica em andamento</label>
+        <label><input type="radio" name="etapa" value="Coleta / aplicação de dados / desenvolvimento do produto"> Coleta / aplicação de dados / desenvolvimento do produto</label>
+        <label><input type="radio" name="etapa" value="Análise de dados / validação do produto"> Análise de dados / validação do produto</label>
+        <label><input type="radio" name="etapa" value="Escrita dos capítulos"> Escrita dos capítulos</label>
+        <label><input type="radio" name="etapa" value="Finalização e revisão do texto final"> Finalização e revisão do texto final</label>
+        <label><input type="radio" name="etapa" value="Elaboração de artigo(s) científico(s)"> Elaboração de artigo(s) científico(s)</label>
+      </div>
+      <div class="error-msg" id="err-etapa">Selecione uma etapa.</div>
+    </div>
+
+    <div class="field">
+      <label>2.3. Status das metas do semestre anterior <span class="req">*</span></label>
+      <p class="note">Para cada meta do relatório anterior, informe a descrição e o grau de cumprimento.</p>
+      <table class="meta-table">
+        <thead>
+          <tr>
+            <th style="width:55%">Descrição da meta</th>
+            <th style="width:45%">Status de cumprimento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" id="meta1Desc" placeholder="Meta 1"></td>
+            <td><select id="meta1Status"><option value="">Selecione</option><option>Totalmente alcançada</option><option>Parcialmente alcançada</option><option>Não alcançada</option><option>Não havia meta definida (1º semestre)</option></select></td>
+          </tr>
+          <tr>
+            <td><input type="text" id="meta2Desc" placeholder="Meta 2 (se houver)"></td>
+            <td><select id="meta2Status"><option value="">Selecione</option><option>Totalmente alcançada</option><option>Parcialmente alcançada</option><option>Não alcançada</option><option>Não havia meta definida (1º semestre)</option></select></td>
+          </tr>
+          <tr>
+            <td><input type="text" id="meta3Desc" placeholder="Meta 3 (se houver)"></td>
+            <td><select id="meta3Status"><option value="">Selecione</option><option>Totalmente alcançada</option><option>Parcialmente alcançada</option><option>Não alcançada</option><option>Não havia meta definida (1º semestre)</option></select></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="error-msg" id="err-meta1">Preencha ao menos a Meta 1.</div>
+    </div>
+
+    <div class="field">
+      <label>2.4. Atividades realizadas no semestre <span class="req">*</span> <span class="hint">(marque todas que se aplicam)</span></label>
+      <div class="check-group">
+        <label><input type="checkbox" name="atividades" value="Leitura e fichamento de artigos / referências bibliográficas"> Leitura e fichamento de artigos / referências bibliográficas</label>
+        <label><input type="checkbox" name="atividades" value="Participação em disciplinas do programa"> Participação em disciplinas do programa</label>
+        <label><input type="checkbox" name="atividades" value="Realização de curso(s) complementar(es) / capacitação técnica"> Realização de curso(s) complementar(es) / capacitação técnica</label>
+        <label><input type="checkbox" name="atividades" value="Coleta de dados em campo ou laboratório"> Coleta de dados em campo ou laboratório</label>
+        <label><input type="checkbox" name="atividades" value="Desenvolvimento / prototipagem do produto técnico"> Desenvolvimento / prototipagem do produto técnico</label>
+        <label><input type="checkbox" name="atividades" value="Análise de dados ou modelagem"> Análise de dados ou modelagem</label>
+        <label><input type="checkbox" name="atividades" value="Escrita ou revisão de capítulos / relatórios"> Escrita ou revisão de capítulos / relatórios</label>
+        <label><input type="checkbox" name="atividades" value="Submissão ou publicação de artigo científico"> Submissão ou publicação de artigo científico</label>
+        <label><input type="checkbox" name="atividades" value="Apresentação em evento científico"> Apresentação em evento científico</label>
+        <label><input type="checkbox" name="atividades" value="Reuniões de orientação regulares"> Reuniões de orientação regulares</label>
+        <label><input type="checkbox" name="atividades" value="Reuniões com empresa / parceiro do projeto"> Reuniões com empresa / parceiro do projeto</label>
+        <label><input type="checkbox" name="atividades" value="Qualificação do projeto"> Qualificação do projeto</label>
+      </div>
+      <div class="error-msg" id="err-atividades">Marque ao menos uma atividade.</div>
+    </div>
+
+    <div class="section-title">3. Autoavaliação</div>
+
+    <div class="field">
+      <label>3.1. Satisfação com o andamento do trabalho <span class="req">*</span></label>
+      <div class="scale-wrap">
+        <div class="scale-group">
+          <label><input type="radio" name="satisfacao" value="1">1</label>
+          <label><input type="radio" name="satisfacao" value="2">2</label>
+          <label><input type="radio" name="satisfacao" value="3">3</label>
+          <label><input type="radio" name="satisfacao" value="4">4</label>
+          <label><input type="radio" name="satisfacao" value="5">5</label>
+        </div>
+        <div class="scale-labels"><span>Muito insatisfeito(a)</span><span>Muito satisfeito(a)</span></div>
+      </div>
+      <div class="error-msg" id="err-satisfacao">Selecione um valor.</div>
+    </div>
+
+    <div class="field">
+      <label>3.2. Principais dificuldades encontradas <span class="req">*</span> <span class="hint">(marque todas que se aplicam)</span></label>
+      <div class="check-group">
+        <label><input type="checkbox" name="dificuldades" value="Gestão do tempo / conciliação trabalho e estudo"> Gestão do tempo / conciliação trabalho e estudo</label>
+        <label><input type="checkbox" name="dificuldades" value="Dificuldade com a metodologia de pesquisa"> Dificuldade com a metodologia de pesquisa</label>
+        <label><input type="checkbox" name="dificuldades" value="Dificuldade com escrita acadêmica"> Dificuldade com escrita acadêmica</label>
+        <label><input type="checkbox" name="dificuldades" value="Dificuldade com ferramentas / softwares"> Dificuldade com ferramentas / softwares</label>
+        <label><input type="checkbox" name="dificuldades" value="Acesso a dados ou materiais necessários"> Acesso a dados ou materiais necessários</label>
+        <label><input type="checkbox" name="dificuldades" value="Relação / comunicação com empresa ou parceiro"> Relação / comunicação com empresa ou parceiro</label>
+        <label><input type="checkbox" name="dificuldades" value="Questões pessoais ou de saúde"> Questões pessoais ou de saúde</label>
+        <label><input type="checkbox" name="dificuldades" value="Falta de clareza no rumo do projeto"> Falta de clareza no rumo do projeto</label>
+        <label><input type="checkbox" name="dificuldades" value="Dificuldade na relação com o(a) orientador(a)"> Dificuldade na relação com o(a) orientador(a)</label>
+        <label><input type="checkbox" name="dificuldades" value="Nenhuma dificuldade relevante"> Nenhuma dificuldade relevante</label>
+      </div>
+      <div class="error-msg" id="err-dific">Marque ao menos uma opção.</div>
+      <div class="field" style="margin-top:10px;margin-bottom:0">
+        <label style="font-weight:400;color:#666">Situação específica não listada <span class="hint">(opcional)</span></label>
+        <textarea id="difOutro" placeholder="Descreva apenas se necessário." rows="2"></textarea>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>3.3. Clareza sobre os próximos passos do projeto <span class="req">*</span></label>
+      <div class="scale-wrap">
+        <div class="scale-group">
+          <label><input type="radio" name="clareza" value="1">1</label>
+          <label><input type="radio" name="clareza" value="2">2</label>
+          <label><input type="radio" name="clareza" value="3">3</label>
+          <label><input type="radio" name="clareza" value="4">4</label>
+          <label><input type="radio" name="clareza" value="5">5</label>
+        </div>
+        <div class="scale-labels"><span>Totalmente perdido(a)</span><span>Totalmente claro</span></div>
+      </div>
+      <div class="error-msg" id="err-clareza">Selecione um valor.</div>
+    </div>
+
+    <div class="section-title">4. Planejamento – Próximo Semestre</div>
+
+    <div class="field">
+      <label>Meta 1 para o próximo semestre <span class="req">*</span></label>
+      <input type="text" id="metaProx1" placeholder="Descreva a meta principal">
+      <div class="error-msg" id="err-metaProx1">Campo obrigatório.</div>
     </div>
     <div class="field">
-      <label>Semestre / Ano de referência <span class="req">*</span></label>
-      <select id="semestre">
-        <option value="">Selecione</option>
-        <option>1º semestre / 2025</option>
-        <option>2º semestre / 2025</option>
-        <option>1º semestre / 2026</option>
-        <option>2º semestre / 2026</option>
-        <option>1º semestre / 2027</option>
-        <option>2º semestre / 2027</option>
-      </select>
-      <div class="error-msg" id="err-semestre">Campo obrigatório.</div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="field">
-      <label>Data de início da orientação <span class="req">*</span></label>
-      <input type="date" id="dtInicio">
-      <div class="error-msg" id="err-dtInicio">Campo obrigatório.</div>
+      <label>Meta 2 <span class="hint">(opcional)</span></label>
+      <input type="text" id="metaProx2" placeholder="Segunda meta (se houver)">
     </div>
     <div class="field">
-      <label>Data de preenchimento <span class="req">*</span></label>
-      <input type="date" id="dtPreenchimento">
-      <div class="error-msg" id="err-dtPreenchimento">Campo obrigatório.</div>
+      <label>Meta 3 <span class="hint">(opcional)</span></label>
+      <input type="text" id="metaProx3" placeholder="Terceira meta (se houver)">
     </div>
-  </div>
 
-  <!-- SEÇÃO 2 -->
-  <div class="section-title">2. Situação do Projeto de Dissertação / Produto Final</div>
-
-  <div class="field">
-    <label>2.1. Título provisório ou definitivo do projeto <span class="req">*</span></label>
-    <input type="text" id="titulo" placeholder="Digite o título do seu projeto">
-    <div class="error-msg" id="err-titulo">Campo obrigatório.</div>
-  </div>
-
-  <div class="field">
-    <label>2.2. Etapa atual do trabalho <span class="req">*</span> <span class="hint">(marque a principal etapa em andamento)</span></label>
-    <div class="radio-group" id="etapa-group">
-      <label><input type="radio" name="etapa" value="Definição do tema e problema de pesquisa"> Definição do tema e problema de pesquisa</label>
-      <label><input type="radio" name="etapa" value="Elaboração do projeto (pré-projeto)"> Elaboração do projeto (pré-projeto)</label>
-      <label><input type="radio" name="etapa" value="Submissão / aprovação do comitê de ética"> Submissão / aprovação do comitê de ética</label>
-      <label><input type="radio" name="etapa" value="Revisão bibliográfica em andamento"> Revisão bibliográfica em andamento</label>
-      <label><input type="radio" name="etapa" value="Coleta / aplicação de dados / desenvolvimento do produto"> Coleta / aplicação de dados / desenvolvimento do produto</label>
-      <label><input type="radio" name="etapa" value="Análise de dados / validação do produto"> Análise de dados / validação do produto</label>
-      <label><input type="radio" name="etapa" value="Escrita dos capítulos"> Escrita dos capítulos</label>
-      <label><input type="radio" name="etapa" value="Finalização e revisão do texto final"> Finalização e revisão do texto final</label>
-      <label><input type="radio" name="etapa" value="Elaboração de artigo(s) científico(s)"> Elaboração de artigo(s) científico(s)</label>
+    <div class="field">
+      <label>4.2. Cronograma previsto – atividade principal por mês <span class="req">*</span></label>
+      <div class="months-grid">
+        <div class="month-box"><label>Mês 1</label><select id="mes1"><option value="">—</option><option>Revisão bibliográfica</option><option>Coleta / desenvolvimento</option><option>Análise de dados</option><option>Escrita de capítulos</option><option>Artigo científico</option><option>Qualificação</option><option>Defesa / finalização</option><option>Outra atividade</option></select></div>
+        <div class="month-box"><label>Mês 2</label><select id="mes2"><option value="">—</option><option>Revisão bibliográfica</option><option>Coleta / desenvolvimento</option><option>Análise de dados</option><option>Escrita de capítulos</option><option>Artigo científico</option><option>Qualificação</option><option>Defesa / finalização</option><option>Outra atividade</option></select></div>
+        <div class="month-box"><label>Mês 3</label><select id="mes3"><option value="">—</option><option>Revisão bibliográfica</option><option>Coleta / desenvolvimento</option><option>Análise de dados</option><option>Escrita de capítulos</option><option>Artigo científico</option><option>Qualificação</option><option>Defesa / finalização</option><option>Outra atividade</option></select></div>
+        <div class="month-box"><label>Mês 4</label><select id="mes4"><option value="">—</option><option>Revisão bibliográfica</option><option>Coleta / desenvolvimento</option><option>Análise de dados</option><option>Escrita de capítulos</option><option>Artigo científico</option><option>Qualificação</option><option>Defesa / finalização</option><option>Outra atividade</option></select></div>
+        <div class="month-box"><label>Mês 5</label><select id="mes5"><option value="">—</option><option>Revisão bibliográfica</option><option>Coleta / desenvolvimento</option><option>Análise de dados</option><option>Escrita de capítulos</option><option>Artigo científico</option><option>Qualificação</option><option>Defesa / finalização</option><option>Outra atividade</option></select></div>
+        <div class="month-box"><label>Mês 6</label><select id="mes6"><option value="">—</option><option>Revisão bibliográfica</option><option>Coleta / desenvolvimento</option><option>Análise de dados</option><option>Escrita de capítulos</option><option>Artigo científico</option><option>Qualificação</option><option>Defesa / finalização</option><option>Outra atividade</option></select></div>
+      </div>
+      <div class="error-msg" id="err-cronograma">Preencha ao menos o Mês 1.</div>
     </div>
-    <div class="error-msg" id="err-etapa">Selecione uma etapa.</div>
-  </div>
 
-  <div class="field">
-    <label>2.3. Status das metas do semestre anterior <span class="req">*</span></label>
-    <p class="note">Para cada meta do relatório anterior, informe a descrição e o grau de cumprimento.</p>
-    <table class="meta-table">
-      <thead>
-        <tr>
-          <th style="width:55%">Descrição da meta</th>
-          <th style="width:45%">Status de cumprimento</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type="text" id="meta1Desc" placeholder="Meta 1"></td>
-          <td>
-            <select id="meta1Status">
-              <option value="">Selecione</option>
-              <option>Totalmente alcançada</option>
-              <option>Parcialmente alcançada</option>
-              <option>Não alcançada</option>
-              <option>Não havia meta definida (1º semestre)</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td><input type="text" id="meta2Desc" placeholder="Meta 2 (se houver)"></td>
-          <td>
-            <select id="meta2Status">
-              <option value="">Selecione</option>
-              <option>Totalmente alcançada</option>
-              <option>Parcialmente alcançada</option>
-              <option>Não alcançada</option>
-              <option>Não havia meta definida (1º semestre)</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td><input type="text" id="meta3Desc" placeholder="Meta 3 (se houver)"></td>
-          <td>
-            <select id="meta3Status">
-              <option value="">Selecione</option>
-              <option>Totalmente alcançada</option>
-              <option>Parcialmente alcançada</option>
-              <option>Não alcançada</option>
-              <option>Não havia meta definida (1º semestre)</option>
-            </select>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="error-msg" id="err-meta1">Preencha ao menos a Meta 1.</div>
-  </div>
-
-  <div class="field">
-    <label>2.4. Atividades realizadas no semestre <span class="req">*</span> <span class="hint">(marque todas que se aplicam)</span></label>
-    <div class="check-group" id="atividades-group">
-      <label><input type="checkbox" name="atividades" value="Leitura e fichamento de artigos / referências bibliográficas"> Leitura e fichamento de artigos / referências bibliográficas</label>
-      <label><input type="checkbox" name="atividades" value="Participação em disciplinas do programa"> Participação em disciplinas do programa</label>
-      <label><input type="checkbox" name="atividades" value="Realização de curso(s) complementar(es) / capacitação técnica"> Realização de curso(s) complementar(es) / capacitação técnica</label>
-      <label><input type="checkbox" name="atividades" value="Coleta de dados em campo ou laboratório"> Coleta de dados em campo ou laboratório</label>
-      <label><input type="checkbox" name="atividades" value="Desenvolvimento / prototipagem do produto técnico"> Desenvolvimento / prototipagem do produto técnico</label>
-      <label><input type="checkbox" name="atividades" value="Análise de dados ou modelagem"> Análise de dados ou modelagem</label>
-      <label><input type="checkbox" name="atividades" value="Escrita ou revisão de capítulos / relatórios"> Escrita ou revisão de capítulos / relatórios</label>
-      <label><input type="checkbox" name="atividades" value="Submissão ou publicação de artigo científico"> Submissão ou publicação de artigo científico</label>
-      <label><input type="checkbox" name="atividades" value="Apresentação em evento científico"> Apresentação em evento científico</label>
-      <label><input type="checkbox" name="atividades" value="Reuniões de orientação regulares"> Reuniões de orientação regulares</label>
-      <label><input type="checkbox" name="atividades" value="Reuniões com empresa / parceiro do projeto"> Reuniões com empresa / parceiro do projeto</label>
-      <label><input type="checkbox" name="atividades" value="Qualificação do projeto"> Qualificação do projeto</label>
-    </div>
-    <div class="error-msg" id="err-atividades">Marque ao menos uma atividade.</div>
-  </div>
-
-  <!-- SEÇÃO 3 -->
-  <div class="section-title">3. Autoavaliação</div>
-
-  <div class="field">
-    <label>3.1. Satisfação com o andamento do trabalho <span class="req">*</span></label>
-    <div class="scale-wrap">
-      <div class="scale-group">
-        <label><input type="radio" name="satisfacao" value="1">1</label>
-        <label><input type="radio" name="satisfacao" value="2">2</label>
-        <label><input type="radio" name="satisfacao" value="3">3</label>
-        <label><input type="radio" name="satisfacao" value="4">4</label>
-        <label><input type="radio" name="satisfacao" value="5">5</label>
+    <div class="field">
+      <label>4.3. Recursos ou apoio necessários <span class="req">*</span> <span class="hint">(marque todos que se aplicam)</span></label>
+      <div class="check-group">
+        <label><input type="checkbox" name="recursos" value="Acesso a equipamentos ou laboratórios"> Acesso a equipamentos ou laboratórios</label>
+        <label><input type="checkbox" name="recursos" value="Curso ou capacitação técnica específica"> Curso ou capacitação técnica específica</label>
+        <label><input type="checkbox" name="recursos" value="Apoio da biblioteca (revisão sistemática, normas)"> Apoio da biblioteca (revisão sistemática, normas)</label>
+        <label><input type="checkbox" name="recursos" value="Maior frequência nas reuniões de orientação"> Maior frequência nas reuniões de orientação</label>
+        <label><input type="checkbox" name="recursos" value="Contato / mediação com empresa parceira"> Contato / mediação com empresa parceira</label>
+        <label><input type="checkbox" name="recursos" value="Acesso a bases de dados ou softwares"> Acesso a bases de dados ou softwares</label>
+        <label><input type="checkbox" name="recursos" value="Suporte de tradução / revisão em língua estrangeira"> Suporte de tradução / revisão em língua estrangeira</label>
+        <label><input type="checkbox" name="recursos" value="Nenhum recurso adicional necessário"> Nenhum recurso adicional necessário</label>
       </div>
-      <div class="scale-labels"><span>Muito insatisfeito(a)</span><span>Muito satisfeito(a)</span></div>
-    </div>
-    <div class="error-msg" id="err-satisfacao">Selecione um valor.</div>
-  </div>
-
-  <div class="field">
-    <label>3.2. Principais dificuldades encontradas <span class="req">*</span> <span class="hint">(marque todas que se aplicam)</span></label>
-    <div class="check-group" id="dific-group">
-      <label><input type="checkbox" name="dificuldades" value="Gestão do tempo / conciliação trabalho e estudo"> Gestão do tempo / conciliação trabalho e estudo</label>
-      <label><input type="checkbox" name="dificuldades" value="Dificuldade com a metodologia de pesquisa"> Dificuldade com a metodologia de pesquisa</label>
-      <label><input type="checkbox" name="dificuldades" value="Dificuldade com escrita acadêmica"> Dificuldade com escrita acadêmica</label>
-      <label><input type="checkbox" name="dificuldades" value="Dificuldade com ferramentas / softwares"> Dificuldade com ferramentas / softwares</label>
-      <label><input type="checkbox" name="dificuldades" value="Acesso a dados ou materiais necessários"> Acesso a dados ou materiais necessários</label>
-      <label><input type="checkbox" name="dificuldades" value="Relação / comunicação com empresa ou parceiro"> Relação / comunicação com empresa ou parceiro</label>
-      <label><input type="checkbox" name="dificuldades" value="Questões pessoais ou de saúde"> Questões pessoais ou de saúde</label>
-      <label><input type="checkbox" name="dificuldades" value="Falta de clareza no rumo do projeto"> Falta de clareza no rumo do projeto</label>
-      <label><input type="checkbox" name="dificuldades" value="Dificuldade na relação com o(a) orientador(a)"> Dificuldade na relação com o(a) orientador(a)</label>
-      <label><input type="checkbox" name="dificuldades" value="Nenhuma dificuldade relevante"> Nenhuma dificuldade relevante</label>
-    </div>
-    <div class="error-msg" id="err-dific">Marque ao menos uma opção.</div>
-    <div class="field" style="margin-top:10px;margin-bottom:0">
-      <label style="font-weight:400;color:#666">Situação específica não listada acima <span class="hint">(opcional)</span></label>
-      <textarea id="difOutro" placeholder="Descreva apenas se necessário." rows="2"></textarea>
-    </div>
-  </div>
-
-  <div class="field">
-    <label>3.3. Clareza sobre os próximos passos do projeto <span class="req">*</span></label>
-    <div class="scale-wrap">
-      <div class="scale-group">
-        <label><input type="radio" name="clareza" value="1">1</label>
-        <label><input type="radio" name="clareza" value="2">2</label>
-        <label><input type="radio" name="clareza" value="3">3</label>
-        <label><input type="radio" name="clareza" value="4">4</label>
-        <label><input type="radio" name="clareza" value="5">5</label>
-      </div>
-      <div class="scale-labels"><span>Totalmente perdido(a)</span><span>Totalmente claro</span></div>
-    </div>
-    <div class="error-msg" id="err-clareza">Selecione um valor.</div>
-  </div>
-
-  <!-- SEÇÃO 4 -->
-  <div class="section-title">4. Planejamento – Próximo Semestre</div>
-
-  <div class="field">
-    <label>Meta 1 para o próximo semestre <span class="req">*</span></label>
-    <input type="text" id="metaProx1" placeholder="Descreva a meta principal">
-    <div class="error-msg" id="err-metaProx1">Campo obrigatório.</div>
-  </div>
-  <div class="field">
-    <label>Meta 2 <span class="hint">(opcional)</span></label>
-    <input type="text" id="metaProx2" placeholder="Segunda meta (se houver)">
-  </div>
-  <div class="field">
-    <label>Meta 3 <span class="hint">(opcional)</span></label>
-    <input type="text" id="metaProx3" placeholder="Terceira meta (se houver)">
-  </div>
-
-  <div class="field">
-    <label>4.2. Cronograma previsto – atividade principal por mês <span class="req">*</span></label>
-    <div class="months-grid">
-      <div class="month-box"><label>Mês 1</label>
-        <select id="mes1">
-          <option value="">—</option>
-          <option>Revisão bibliográfica</option>
-          <option>Coleta / desenvolvimento</option>
-          <option>Análise de dados</option>
-          <option>Escrita de capítulos</option>
-          <option>Artigo científico</option>
-          <option>Qualificação</option>
-          <option>Defesa / finalização</option>
-          <option>Outra atividade</option>
-        </select>
-      </div>
-      <div class="month-box"><label>Mês 2</label>
-        <select id="mes2">
-          <option value="">—</option>
-          <option>Revisão bibliográfica</option>
-          <option>Coleta / desenvolvimento</option>
-          <option>Análise de dados</option>
-          <option>Escrita de capítulos</option>
-          <option>Artigo científico</option>
-          <option>Qualificação</option>
-          <option>Defesa / finalização</option>
-          <option>Outra atividade</option>
-        </select>
-      </div>
-      <div class="month-box"><label>Mês 3</label>
-        <select id="mes3">
-          <option value="">—</option>
-          <option>Revisão bibliográfica</option>
-          <option>Coleta / desenvolvimento</option>
-          <option>Análise de dados</option>
-          <option>Escrita de capítulos</option>
-          <option>Artigo científico</option>
-          <option>Qualificação</option>
-          <option>Defesa / finalização</option>
-          <option>Outra atividade</option>
-        </select>
-      </div>
-      <div class="month-box"><label>Mês 4</label>
-        <select id="mes4">
-          <option value="">—</option>
-          <option>Revisão bibliográfica</option>
-          <option>Coleta / desenvolvimento</option>
-          <option>Análise de dados</option>
-          <option>Escrita de capítulos</option>
-          <option>Artigo científico</option>
-          <option>Qualificação</option>
-          <option>Defesa / finalização</option>
-          <option>Outra atividade</option>
-        </select>
-      </div>
-      <div class="month-box"><label>Mês 5</label>
-        <select id="mes5">
-          <option value="">—</option>
-          <option>Revisão bibliográfica</option>
-          <option>Coleta / desenvolvimento</option>
-          <option>Análise de dados</option>
-          <option>Escrita de capítulos</option>
-          <option>Artigo científico</option>
-          <option>Qualificação</option>
-          <option>Defesa / finalização</option>
-          <option>Outra atividade</option>
-        </select>
-      </div>
-      <div class="month-box"><label>Mês 6</label>
-        <select id="mes6">
-          <option value="">—</option>
-          <option>Revisão bibliográfica</option>
-          <option>Coleta / desenvolvimento</option>
-          <option>Análise de dados</option>
-          <option>Escrita de capítulos</option>
-          <option>Artigo científico</option>
-          <option>Qualificação</option>
-          <option>Defesa / finalização</option>
-          <option>Outra atividade</option>
-        </select>
+      <div class="error-msg" id="err-recursos">Marque ao menos uma opção.</div>
+      <div class="field" style="margin-top:10px;margin-bottom:0">
+        <label style="font-weight:400;color:#666">Recurso específico não listado <span class="hint">(opcional)</span></label>
+        <textarea id="recursosOutro" placeholder="Descreva apenas se necessário." rows="2"></textarea>
       </div>
     </div>
-    <div class="error-msg" id="err-cronograma">Preencha ao menos o Mês 1.</div>
-  </div>
 
-  <div class="field">
-    <label>4.3. Recursos ou apoio necessários <span class="req">*</span> <span class="hint">(marque todos que se aplicam)</span></label>
-    <div class="check-group">
-      <label><input type="checkbox" name="recursos" value="Acesso a equipamentos ou laboratórios"> Acesso a equipamentos ou laboratórios</label>
-      <label><input type="checkbox" name="recursos" value="Curso ou capacitação técnica específica"> Curso ou capacitação técnica específica</label>
-      <label><input type="checkbox" name="recursos" value="Apoio da biblioteca (revisão sistemática, normas)"> Apoio da biblioteca (revisão sistemática, normas)</label>
-      <label><input type="checkbox" name="recursos" value="Maior frequência nas reuniões de orientação"> Maior frequência nas reuniões de orientação</label>
-      <label><input type="checkbox" name="recursos" value="Contato / mediação com empresa parceira"> Contato / mediação com empresa parceira</label>
-      <label><input type="checkbox" name="recursos" value="Acesso a bases de dados ou softwares"> Acesso a bases de dados ou softwares</label>
-      <label><input type="checkbox" name="recursos" value="Suporte de tradução / revisão em língua estrangeira"> Suporte de tradução / revisão em língua estrangeira</label>
-      <label><input type="checkbox" name="recursos" value="Nenhum recurso adicional necessário"> Nenhum recurso adicional necessário</label>
-    </div>
-    <div class="error-msg" id="err-recursos">Marque ao menos uma opção.</div>
-    <div class="field" style="margin-top:10px;margin-bottom:0">
-      <label style="font-weight:400;color:#666">Recurso específico não listado <span class="hint">(opcional)</span></label>
-      <textarea id="recursosOutro" placeholder="Descreva apenas se necessário." rows="2"></textarea>
-    </div>
-  </div>
+    <div class="section-title">Declaração</div>
+    <p style="font-size:13px;color:#444;line-height:1.7;">Declaro que as informações prestadas neste relatório são verídicas e que concordo com o planejamento e as metas estabelecidas para o próximo semestre.</p>
 
-  <!-- DECLARAÇÃO -->
-  <div class="section-title">Declaração</div>
-  <p style="font-size:13px;color:#444;line-height:1.7;">
-    Declaro que as informações prestadas neste relatório são verídicas e que concordo com o planejamento e as metas estabelecidas para o próximo semestre.
-  </p>
+    <button class="submit-btn" id="btn-enviar" onclick="enviarFormulario()">Enviar relatório semestral</button>
+    <div class="msg-erro" id="msg-erro">Ocorreu um erro ao enviar. Verifique sua conexão e tente novamente.</div>
 
-  <button class="submit-btn" id="btn-enviar" onclick="enviarFormulario()">Enviar relatório semestral</button>
-
-  <div class="msg-erro" id="msg-erro">
-    Ocorreu um erro ao enviar. Verifique sua conexão e tente novamente.
-  </div>
-  <div class="msg-sucesso" id="msg-sucesso">
-    <h3>✅ Relatório enviado com sucesso!</h3>
-    <p>Suas respostas foram registradas. A coordenação do PPGEMIN agradece sua colaboração.</p>
-  </div>
-
+  </div><!-- fim painel-formulario -->
 </div>
 
 <script>
-  var WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzyXj6WCzi6iUbtmpNbIKshTejItAhyCEY-WcqqeoLWmb_zsSDIOvsYi2K4-SvKXnr7/exec';
+var WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzyXj6WCzi6iUbtmpNbIKshTejItAhyCEY-WcqqeoLWmb_zsSDIOvsYi2K4-SvKXnr7/exec';
 
-  function getChecked(name) {
-    var boxes = document.querySelectorAll('input[name="' + name + '"]:checked');
-    return Array.from(boxes).map(function(b){ return b.value; });
-  }
+var DISCENTES = {
+  "20255003744": {"nome": "ADRIANO CECHIN", "orientador": "Profª. Drª. Michelly dos Santos Oliveira"},
+  "20265003560": {"nome": "ALISSON LEONÍDIA CAMPOS", "orientador": "Prof. Dr. Leandro Henrique Santos"},
+  "20255010355": {"nome": "ANA LUÍZA MONTEIRO DE AVILA", "orientador": "Profª. Drª. Ticiane Schivittez Elacoste"},
+  "20255003735": {"nome": "ANGÉLICA MARCELINA DE SOUZA GOMES", "orientador": "Prof. Dr. Augusto César Da Silva Bezerra"},
+  "20265003579": {"nome": "ANNA LETÍCIA DA MATA ARAÚJO", "orientador": "Prof. Dr. Armando Belato Pereira"},
+  "20245007300": {"nome": "ARTUR RAMOS SIMÕES", "orientador": "Prof. Dr. Thiago Bomjardim Porto"},
+  "20265003588": {"nome": "BÁRBARA LIZANDRA NASCIMENTO", "orientador": "Prof. Dr. Armando Belato Pereira"},
+  "20255010364": {"nome": "BRENO ALMADA JÚNIOR", "orientador": "Prof. Dr. Fábio de São José"},
+  "20255010373": {"nome": "BRUNO RAFAEL LOBO ALVES", "orientador": "Prof. Dr. Leandro Henrique Santos"},
+  "20245007409": {"nome": "CAIO TORRES DE CASTRO", "orientador": "Prof. Dr. Fábio de São José"},
+  "20265009410": {"nome": "CLAUDIO HENRIQUE CARDOSO SOARES BARBOSA", "orientador": "Prof. Dr. Thiago Bomjardim Porto"},
+  "20245007310": {"nome": "DANIEL DOS SANTOS RODRIGUES", "orientador": "Prof. Dr. Mario Guimaraes Junior"},
+  "20255003790": {"nome": "DANIEL ELIAS CAMPOS SILVA", "orientador": "Prof. Dr. Thiago Bomjardim Porto"},
+  "20265008314": {"nome": "DANIEL GONÇALVES LEIJÔTO", "orientador": "Prof. Dr. Marcos Túlio Fernandes"},
+  "20265003597": {"nome": "DIEGO LAGE GONÇALVES", "orientador": "Prof. Dr. Armando Belato Pereira"},
+  "20245007418": {"nome": "EDIRLEY BICALHO DE SOUZA", "orientador": "Prof. Dr. Fábio de São José"},
+  "20245007427": {"nome": "ELIZANGELA GABRIELA NUNES", "orientador": "Prof. Dr. Natal Junio Pires"},
+  "20255010382": {"nome": "EULLER DA CONCEIÇÃO TAVARES", "orientador": "Prof. Dr. Michel Melo Oliveira"},
+  "20265003603": {"nome": "FELIPE VASCONCELOS DA SILVA", "orientador": "Prof. Dr. Natal Junio Pires"},
+  "20265009429": {"nome": "GERSON DA ROCHA IZIDORO", "orientador": "Prof. Dr. Armando Belato Pereira"},
+  "20265003612": {"nome": "GUSTAVO LUCAS DE SORDI", "orientador": "Prof. Dr. Leandro Henrique Santos"},
+  "20245007347": {"nome": "HUGO DE MOURA RONER", "orientador": "Prof. Dr. Thiago Bomjardim Porto"},
+  "20255003673": {"nome": "IVAN FLÁVIO FERREIRA", "orientador": "Profª. Drª. Hersília de Andrade e Santos"},
+  "20265009438": {"nome": "IVAN SILVA PEREIRA", "orientador": "Prof. Dr. Leandro Henrique Santos"},
+  "20265003621": {"nome": "JACKSON TEIXEIRA DE OLIVEIRA", "orientador": "Prof. Dr. Natal Junio Pires"},
+  "20265003630": {"nome": "JAIRO VINÍCIUS DE OLIVEIRA", "orientador": "Prof. Dr. Marcélio Prado Fontes"},
+  "20265008332": {"nome": "JOÃO MARCOS RIBEIRO MIQUILINO", "orientador": "Prof. Dr. Armando Belato Pereira"},
+  "20255003682": {"nome": "JOÃO PEDRO PEREIRA NETO", "orientador": "Prof. Dr. Marcélio Prado Fontes"},
+  "20255003780": {"nome": "JOSE MARIA DOS SANTOS JUNIOR", "orientador": "Prof. Dr. Michel Melo Oliveira"},
+  "20265008341": {"nome": "JULIANA EDUARDA LACERDA", "orientador": "Profª. Drª. Hersília de Andrade e Santos"},
+  "20255010426": {"nome": "KETELIN RÚBIA ALMEIDA SILVA", "orientador": "Prof. Dr. Domingos Sávio De Resende"},
+  "20245007356": {"nome": "LARISSA CAROLINE SILVA", "orientador": "Profª. Drª. Michelly dos Santos Oliveira"},
+  "20255010453": {"nome": "LAYNARA PIRES DE SÁ", "orientador": "Profª. Drª. Ticiane Schivittez Elacoste"},
+  "20255003762": {"nome": "LEANDRO OLIVEIRA LIMA", "orientador": "Prof. Dr. Natal Junio Pires"},
+  "20265003640": {"nome": "LEONARDO VAZ DE FARIA FERNANDES", "orientador": "Profª. Drª. Hersília de Andrade e Santos"},
+  "20265009447": {"nome": "LEÔNIDAS ANGELO DE OLIVEIRA", "orientador": "Profª. Drª. Silvania Alves Braga de Castro"},
+  "20265003659": {"nome": "LUCAS ALVES CORREA", "orientador": "Prof. Dr. Michel Melo Oliveira"},
+  "20265008350": {"nome": "LUCAS DE SOUZA SOTTI", "orientador": "Profª. Drª. Michelly dos Santos Oliveira"},
+  "20255010462": {"nome": "LUÍZA CARDOSO CAVALCANTI", "orientador": "Profª. Drª. Hersília de Andrade e Santos"},
+  "20255010515": {"nome": "MARCELLA COSTA DE SOUZA GARCIA", "orientador": "Profª. Drª. Ticiane Schivittez Elacoste"},
+  "20265005635": {"nome": "MARCÍLIO RIBEIRO DE MELO", "orientador": "Prof. Dr. Leandro Henrique Santos"},
+  "20265009456": {"nome": "MÁRCIO EUSTÁQUIO DE SOUZA FILHO", "orientador": "Prof. Dr. Leandro Henrique Santos"},
+  "20255010542": {"nome": "MATHEUS BULDAIN D'ORNELLAS", "orientador": "Profª. Drª. Ticiane Schivittez Elacoste"},
+  "20255003815": {"nome": "MAURO GABRIEL DURÃES ALVES", "orientador": "Profª. Drª. Michelly dos Santos Oliveira"},
+  "20265008360": {"nome": "MIKHAELA SALIVEROS ALDERETE", "orientador": "Prof. Dr. Thiago Bomjardim Porto"},
+  "20255010570": {"nome": "NAJILLA DE OLIVEIRA SOUSA GONÇALVES", "orientador": "Profª. Drª. Michelly dos Santos Oliveira"},
+  "20265003677": {"nome": "NATHIEGAN SILVA SOUZA", "orientador": "Prof. Dr. Domingos Sávio De Resende"},
+  "20255010589": {"nome": "NAYLA GONCALVES DA SILVA", "orientador": "Prof. Dr. Natal Junio Pires"},
+  "20265003668": {"nome": "OTÁVIO DOS SANTOS AMARAL", "orientador": "Prof. Dr. Leandro Henrique Santos"},
+  "20265003775": {"nome": "PÂMELA LOPES SOARES", "orientador": "Prof. Dr. Domingos Sávio De Resende"},
+  "20255010598": {"nome": "PEDRO DIAMANTE MIRANDA", "orientador": "Prof. Dr. Domingos Sávio De Resende"},
+  "20265003784": {"nome": "PEDRO HENRIQUE DOMINGOS MEIJON SOUZA", "orientador": "Profª. Drª. Michelly dos Santos Oliveira"},
+  "20265008379": {"nome": "PEDRO HENRIQUE GOMES DO NASCIMENTO", "orientador": "Prof. Dr. Marcélio Prado Fontes"},
+  "20255003726": {"nome": "PHILIPPE HENRIQUE BARBOSA PEREIRA", "orientador": "Prof. Dr. Natal Junio Pires"},
+  "202650009465": {"nome": "RAFAEL DIAS BORGES", "orientador": "Profª. Drª. Michelly dos Santos Oliveira"},
+  "20265003793": {"nome": "RAFAEL RODRIGUES SILVA", "orientador": "Prof. Dr. Domingos Sávio De Resende"},
+  "20265003819": {"nome": "RAÍSSA KETURA DA SILVA", "orientador": "Prof. Dr. Domingos Sávio De Resende"},
+  "20265008388": {"nome": "RENATO CARDOSO LIMA", "orientador": "Prof. Dr. Mario Guimaraes Junior"},
+  "20265003846": {"nome": "RODRIGO FERRAZ LOPES", "orientador": "Prof. Dr. Armando Belato Pereira"},
+  "202610001100": {"nome": "TESTE DA SILVA", "orientador": "Prof. Dr. Natal Junio Pires"},
+  "20235008449": {"nome": "THAÍS DE MENEZES RIOS", "orientador": "Profª. Drª. Marcela M. N. de Souza Soares"},
+  "20245007383": {"nome": "THAYNÁ VALERIANO SANTOS TORRES", "orientador": "Prof. Dr. Thiago Bomjardim Porto"},
+  "20265009474": {"nome": "THIAGO CORDEIRO BALDISSERI", "orientador": "Prof. Dr. Mario Guimaraes Junior"},
+  "20255003717": {"nome": "THIAGO GARCIA SARAIVA", "orientador": "Prof. Dr. Michel Melo Oliveira"},
+  "20255003824": {"nome": "VINICIUS CALÁCIO DA SILVA", "orientador": "Prof. Dr. Natal Junio Pires"},
+  "20255003691": {"nome": "WALLISSON RAFAEL SANTOS", "orientador": "Prof. Dr. Mario Guimaraes Junior"},
+  "20255003708": {"nome": "WARLEI GONÇALVES XAVIER RODRIGUES", "orientador": "Profª. Drª. Michelly dos Santos Oliveira"},
+  "20255003771": {"nome": "WILLIAM BORGES DIAS", "orientador": "Prof. Dr. Marcélio Prado Fontes"},
+  "20255010613": {"nome": "WILSON ARAÚJO DE OLIVEIRA JÚNIOR", "orientador": "Prof. Dr. Michel Melo Oliveira"},
+};
 
-  function getRadio(name) {
-    var el = document.querySelector('input[name="' + name + '"]:checked');
-    return el ? el.value : '';
-  }
+var discenteAtual = null;
 
-  function showError(id, show) {
-    var el = document.getElementById(id);
-    if (el) el.style.display = show ? 'block' : 'none';
-  }
+function buscarMatricula() {
+  var mat = document.getElementById('input-matricula').value.trim();
+  var email = document.getElementById('input-email').value.trim();
+  var errMat = document.getElementById('err-matricula-busca');
+  var errEmail = document.getElementById('err-email-busca');
+  var emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  errEmail.style.display = emailValido ? 'none' : 'block';
+  if (!mat) { errMat.style.display = 'block'; return; }
+  var dados = DISCENTES[mat];
+  if (!dados) { errMat.style.display = 'block'; if (!emailValido) return; return; }
+  if (!dados) { errMat.style.display = 'block'; return; }
+  errMat.style.display = 'none';
+  if (!emailValido) return;
+  discenteAtual = { matricula: mat, nome: dados.nome, orientador: dados.orientador, email: email };
+  document.getElementById('conf-matricula').textContent = mat;
+  document.getElementById('conf-nome').textContent = dados.nome;
+  document.getElementById('conf-orientador').textContent = dados.orientador;
+  document.getElementById('conf-email').textContent = email;
+  document.getElementById('painel-matricula').style.display = 'none';
+  document.getElementById('painel-confirmacao').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-  function markError(id, show) {
-    var el = document.getElementById(id);
-    if (el) {
-      if (show) el.classList.add('field-error');
-      else el.classList.remove('field-error');
-    }
-  }
+function confirmarDados() {
+  document.getElementById('painel-confirmacao').style.display = 'none';
+  document.getElementById('painel-formulario').style.display = 'block';
+  document.getElementById('nome').value = discenteAtual.nome;
+  document.getElementById('matricula').value = discenteAtual.matricula;
+  document.getElementById('orientador').value = discenteAtual.orientador;
+  document.getElementById('badge-nome').textContent = discenteAtual.nome;
+  document.getElementById('badge-detalhe').textContent =
+    'Matrícula: ' + discenteAtual.matricula + ' · Orientador(a): ' + discenteAtual.orientador;
+  document.getElementById('badge-detalhe').textContent +=
+    ' · E-mail: ' + discenteAtual.email;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-  function validar() {
-    var ok = true;
-    var campos = ['nome','matricula','orientador','semestre','dtInicio','dtPreenchimento','titulo'];
-    campos.forEach(function(id) {
-      var val = document.getElementById(id).value.trim();
-      var vazio = val === '';
-      showError('err-' + id, vazio);
-      markError(id, vazio);
-      if (vazio) ok = false;
-    });
+function voltarMatricula() {
+  document.getElementById('painel-confirmacao').style.display = 'none';
+  document.getElementById('painel-matricula').style.display = 'block';
+  discenteAtual = null;
+}
 
-    var etapa = getRadio('etapa');
-    showError('err-etapa', !etapa);
-    if (!etapa) ok = false;
+function getChecked(name) {
+  return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map(function(b){ return b.value; });
+}
+function getRadio(name) {
+  var el = document.querySelector('input[name="' + name + '"]:checked');
+  return el ? el.value : '';
+}
+function showError(id, show) {
+  var el = document.getElementById(id);
+  if (el) el.style.display = show ? 'block' : 'none';
+}
+function markError(id, show) {
+  var el = document.getElementById(id);
+  if (el) { if (show) el.classList.add('field-error'); else el.classList.remove('field-error'); }
+}
 
-    var meta1 = document.getElementById('meta1Desc').value.trim();
-    showError('err-meta1', !meta1);
-    if (!meta1) ok = false;
+function validar() {
+  var ok = true;
+  ['semestre','dtInicio','dtPreenchimento','titulo'].forEach(function(id) {
+    var vazio = !document.getElementById(id).value.trim();
+    showError('err-' + id, vazio); markError(id, vazio); if (vazio) ok = false;
+  });
+  var etapa = getRadio('etapa'); showError('err-etapa', !etapa); if (!etapa) ok = false;
+  var meta1 = document.getElementById('meta1Desc').value.trim(); showError('err-meta1', !meta1); if (!meta1) ok = false;
+  var ativ = getChecked('atividades'); showError('err-atividades', ativ.length===0); if (ativ.length===0) ok = false;
+  var sat = getRadio('satisfacao'); showError('err-satisfacao', !sat); if (!sat) ok = false;
+  var dific = getChecked('dificuldades'); showError('err-dific', dific.length===0); if (dific.length===0) ok = false;
+  var clar = getRadio('clareza'); showError('err-clareza', !clar); if (!clar) ok = false;
+  var mp1 = document.getElementById('metaProx1').value.trim(); showError('err-metaProx1', !mp1); markError('metaProx1', !mp1); if (!mp1) ok = false;
+  var mes1 = document.getElementById('mes1').value; showError('err-cronograma', !mes1); if (!mes1) ok = false;
+  var rec = getChecked('recursos'); showError('err-recursos', rec.length===0); if (rec.length===0) ok = false;
+  return ok;
+}
 
-    var ativ = getChecked('atividades');
-    showError('err-atividades', ativ.length === 0);
-    if (ativ.length === 0) ok = false;
-
-    var sat = getRadio('satisfacao');
-    showError('err-satisfacao', !sat);
-    if (!sat) ok = false;
-
-    var dific = getChecked('dificuldades');
-    showError('err-dific', dific.length === 0);
-    if (dific.length === 0) ok = false;
-
-    var clar = getRadio('clareza');
-    showError('err-clareza', !clar);
-    if (!clar) ok = false;
-
-    var mp1 = document.getElementById('metaProx1').value.trim();
-    showError('err-metaProx1', !mp1);
-    markError('metaProx1', !mp1);
-    if (!mp1) ok = false;
-
-    var mes1 = document.getElementById('mes1').value;
-    showError('err-cronograma', !mes1);
-    if (!mes1) ok = false;
-
-    var rec = getChecked('recursos');
-    showError('err-recursos', rec.length === 0);
-    if (rec.length === 0) ok = false;
-
-    return ok;
-  }
-
-  function enviarFormulario() {
-    document.getElementById('msg-erro').style.display = 'none';
-    if (!validar()) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-
-    var btn = document.getElementById('btn-enviar');
-    btn.disabled = true;
-    btn.textContent = 'Enviando...';
-
-    var dados = {
-      tipo: 'discente',
-      semestre:        document.getElementById('semestre').value,
-      nome:            document.getElementById('nome').value.trim(),
-      matricula:       document.getElementById('matricula').value.trim(),
-      orientador:      document.getElementById('orientador').value.trim(),
-      dtInicio:        document.getElementById('dtInicio').value,
-      dtPreenchimento: document.getElementById('dtPreenchimento').value,
-      titulo:          document.getElementById('titulo').value.trim(),
-      etapa:           getRadio('etapa'),
-      meta1Desc:       document.getElementById('meta1Desc').value.trim(),
-      meta1Status:     document.getElementById('meta1Status').value,
-      meta2Desc:       document.getElementById('meta2Desc').value.trim(),
-      meta2Status:     document.getElementById('meta2Status').value,
-      meta3Desc:       document.getElementById('meta3Desc').value.trim(),
-      meta3Status:     document.getElementById('meta3Status').value,
-      atividades:      getChecked('atividades'),
-      satisfacao:      getRadio('satisfacao'),
-      dificuldades:    getChecked('dificuldades'),
-      difOutro:        document.getElementById('difOutro').value.trim(),
-      clareza:         getRadio('clareza'),
-      metaProx1:       document.getElementById('metaProx1').value.trim(),
-      metaProx2:       document.getElementById('metaProx2').value.trim(),
-      metaProx3:       document.getElementById('metaProx3').value.trim(),
-      cronograma:      [
-        document.getElementById('mes1').value,
-        document.getElementById('mes2').value,
-        document.getElementById('mes3').value,
-        document.getElementById('mes4').value,
-        document.getElementById('mes5').value,
-        document.getElementById('mes6').value
-      ],
-      recursos:        getChecked('recursos'),
-      recursosOutro:   document.getElementById('recursosOutro').value.trim()
-    };
-
-    fetch(WEBAPP_URL, {
-      method: 'POST',
-      body: JSON.stringify(dados)
-    })
-    .then(function(r){ return r.json(); })
-    .then(function(resp) {
-      if (resp.status === 'ok') {
-        document.querySelector('.container').innerHTML =
-          '<div style="text-align:center;padding:60px 20px">' +
-          '<div style="font-size:48px;margin-bottom:16px">✅</div>' +
-          '<h2 style="color:#1a3a6b;margin-bottom:10px">Relatório enviado com sucesso!</h2>' +
-          '<p style="color:#555;font-size:14px">Suas respostas foram registradas.<br>A coordenação do PPGEMIN agradece sua colaboração.</p>' +
-          '</div>';
-      } else {
-        throw new Error(resp.mensagem || 'Erro desconhecido');
-      }
-    })
-    .catch(function(err) {
-      btn.disabled = false;
-      btn.textContent = 'Enviar relatório semestral';
-      document.getElementById('msg-erro').style.display = 'block';
-    });
-  }
+function enviarFormulario() {
+  document.getElementById('msg-erro').style.display = 'none';
+  if (!validar()) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+  var btn = document.getElementById('btn-enviar');
+  btn.disabled = true; btn.textContent = 'Enviando...';
+  var dados = {
+    tipo: 'discente',
+    emailDiscente: discenteAtual.email,
+    semestre: document.getElementById('semestre').value,
+    nome: discenteAtual.nome,
+    matricula: discenteAtual.matricula,
+    orientador: discenteAtual.orientador,
+    dtInicio: document.getElementById('dtInicio').value,
+    dtPreenchimento: document.getElementById('dtPreenchimento').value,
+    titulo: document.getElementById('titulo').value.trim(),
+    etapa: getRadio('etapa'),
+    meta1Desc: document.getElementById('meta1Desc').value.trim(),
+    meta1Status: document.getElementById('meta1Status').value,
+    meta2Desc: document.getElementById('meta2Desc').value.trim(),
+    meta2Status: document.getElementById('meta2Status').value,
+    meta3Desc: document.getElementById('meta3Desc').value.trim(),
+    meta3Status: document.getElementById('meta3Status').value,
+    atividades: getChecked('atividades'),
+    satisfacao: getRadio('satisfacao'),
+    dificuldades: getChecked('dificuldades'),
+    difOutro: document.getElementById('difOutro').value.trim(),
+    clareza: getRadio('clareza'),
+    metaProx1: document.getElementById('metaProx1').value.trim(),
+    metaProx2: document.getElementById('metaProx2').value.trim(),
+    metaProx3: document.getElementById('metaProx3').value.trim(),
+    cronograma: [
+      document.getElementById('mes1').value, document.getElementById('mes2').value,
+      document.getElementById('mes3').value, document.getElementById('mes4').value,
+      document.getElementById('mes5').value, document.getElementById('mes6').value
+    ],
+    recursos: getChecked('recursos'),
+    recursosOutro: document.getElementById('recursosOutro').value.trim()
+  };
+  fetch(WEBAPP_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dados) })
+  .then(function() {
+    document.querySelector('.container').innerHTML =
+      '<div style="text-align:center;padding:60px 20px">' +
+      '<div style="font-size:48px;margin-bottom:16px">✅</div>' +
+      '<h2 style="color:#1a3a6b;margin-bottom:10px">Relatório enviado com sucesso!</h2>' +
+      '<p style="color:#555;font-size:14px">Suas respostas foram registradas.<br>A coordenação do PPGEMIN agradece sua colaboração.</p>' +
+      '</div>';
+  })
+  .catch(function() {
+    btn.disabled = false; btn.textContent = 'Enviar relatório semestral';
+    document.getElementById('msg-erro').style.display = 'block';
+  });
+}
 </script>
 </body>
 </html>
