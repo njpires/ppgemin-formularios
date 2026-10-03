@@ -103,7 +103,10 @@
   .disc-mat { font-size: 12px; color: var(--cinza-3); margin-top: 2px; }
   .btn-responder { background: var(--roxo); color: #fff; border: none; border-radius: 7px; padding: 8px 16px; font-size: 13px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; transition: background 0.15s; white-space: nowrap; margin-left: 12px; flex-shrink: 0; }
   .btn-responder:hover { background: #2d1558; }
-  .badge-respondido { background: var(--verde); color: #fff; border-radius: 7px; padding: 7px 12px; font-size: 12px; font-weight: 600; margin-left: 12px; white-space: nowrap; flex-shrink: 0; }
+  .badge-respondido { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; margin-left: 12px; flex-shrink: 0; }
+  .badge-respondido-tag { background: var(--verde); color: #fff; border-radius: 7px; padding: 6px 12px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .badge-responder-novo { background: none; border: none; color: var(--cinza-3); font-size: 11px; font-weight: 500; font-family: 'Inter', sans-serif; cursor: pointer; padding: 0; text-decoration: underline; text-underline-offset: 2px; transition: color 0.15s; white-space: nowrap; }
+  .badge-responder-novo:hover { color: var(--roxo); }
 
   /* BADGE DISCENTE NO FORMULÁRIO */
   .disc-selecionado { background: var(--verde-bg); border: 1.5px solid #A8D8C2; border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 14px; }
@@ -623,6 +626,14 @@ function abrirFormulario(mat, nome) {
   limparFormulario();
   mostrar('painel-formulario');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function reabrirFormulario(mat, nome) {
+  // Confirma antes de reabrir
+  if (!confirm('Você já respondeu para ' + toTitleCase(nome) + ' neste semestre.
+
+Deseja responder novamente? A nova resposta será adicionada à planilha.')) return;
+  abrirFormulario(mat, nome);
 }
 
 function voltarLista() { mostrar('painel-selecao'); discenteAtual = null; window.scrollTo({ top: 0, behavior: 'smooth' }); }
