@@ -81,7 +81,16 @@
   .alerta-box { background: #FFF8E6; border-left: 4px solid #F0A500; border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 13px; color: #7A5800; margin-bottom: 18px; line-height: 1.6; }
 
   /* PAINEL SELEÇÃO */
-  #painel-inicio, #painel-selecao, #painel-formulario { display: none; }
+  #painel-chave, #painel-inicio, #painel-selecao, #painel-formulario { display: none; }
+
+  /* TELA DE CHAVE */
+  .chave-wrap { text-align: center; padding: 8px 0 24px; }
+  .chave-icone { font-size: 48px; margin-bottom: 16px; }
+  .chave-titulo { font-size: 18px; font-weight: 700; color: var(--roxo); margin-bottom: 8px; }
+  .chave-desc { font-size: 13px; color: var(--texto-leve); line-height: 1.7; margin-bottom: 24px; }
+  .chave-input { width: 100%; border: 2px solid var(--cinza-2); border-radius: 10px; padding: 13px 16px; font-size: 16px; font-family: 'Inter', monospace; font-weight: 700; letter-spacing: 0.12em; text-align: center; color: var(--roxo); transition: border 0.15s; }
+  .chave-input:focus { outline: none; border-color: var(--roxo); box-shadow: 0 0 0 3px rgba(91,61,174,0.12); }
+  .chave-erro { display: none; color: var(--alerta); font-size: 13px; font-weight: 600; margin-top: 10px; }
   .ori-box { background: var(--roxo-claro); border: 1.5px solid var(--roxo); border-radius: 10px; padding: 14px 18px; margin-bottom: 20px; font-size: 14px; font-weight: 700; color: var(--roxo); }
   .progresso-wrap { margin: 16px 0; }
   .progresso-label { font-size: 12px; color: var(--cinza-3); margin-bottom: 6px; font-weight: 500; }
@@ -134,10 +143,29 @@
         <p>Mestrado Profissional em Engenharia de Minas · CEFET-MG Araxá · Orientador(a)</p>
       </div>
     </div>
-    <div class="header-desc">Preencha após a leitura do relatório do(a) discente. Suas respostas são confidenciais e subsidiam as decisões da coordenação.</div>
+    <div class="header-desc">Preencha com atenção. Suas respostas são confidenciais e ficarão disponíveis exclusivamente para a coordenação do PPGEMIN. Os discentes também serão consultados separadamente, por meio de formulário próprio.</div>
   </div>
 
   <div class="body">
+
+    <!-- PAINEL 0: CHAVE DE ACESSO -->
+    <div id="painel-chave">
+      <div class="chave-wrap">
+        <div class="chave-icone">🔐</div>
+        <div class="chave-titulo">Área restrita — Orientadores</div>
+        <div class="chave-desc">
+          Este formulário é de uso exclusivo dos(as) orientadores(as) do PPGEMIN.<br>
+          Digite a chave de acesso fornecida pela coordenação para continuar.
+        </div>
+        <input class="chave-input" type="text" id="input-chave"
+          placeholder="PPGEMIN-XXXX-XXXX"
+          maxlength="16"
+          oninput="formatarChave(this)"
+          onkeydown="if(event.key==='Enter') verificarChave()">
+        <div class="chave-erro" id="err-chave">Chave incorreta. Verifique com a coordenação do PPGEMIN.</div>
+        <button class="btn-primario" onclick="verificarChave()" style="margin-top:20px">Acessar →</button>
+      </div>
+    </div>
 
     <!-- PAINEL 1: SELEÇÃO DO ORIENTADOR -->
     <div id="painel-inicio">
@@ -302,7 +330,7 @@
       <!-- BLOCO 4: INDICADORES DE RISCO -->
       <div class="bloco">
         <div class="bloco-titulo"><div class="bloco-num">4</div><h2>Indicadores de risco</h2></div>
-        <div class="alerta-box">Preencha com base na sua avaliação geral do(a) discente. As informações são usadas pela coordenação para apoio preventivo e não são compartilhadas com o(a) aluno(a).</div>
+        <div class="alerta-box">Preencha com base na sua avaliação geral do(a) discente. As informações são de uso exclusivo da coordenação do PPGEMIN para fins de acompanhamento acadêmico e apoio preventivo.</div>
 
         <div class="campo">
           <label>Riscos identificados <span class="req">*</span> <span class="sub">(marque todos que se aplicam)</span></label>
@@ -374,7 +402,7 @@
       </div>
 
       <div class="sep"></div>
-      <p style="font-size:13px;color:var(--texto-leve);line-height:1.7;margin-bottom:4px">Declaro que as informações prestadas são verídicas e que concordo com o planejamento estabelecido para o próximo semestre com o(a) discente orientado(a).</p>
+      <p style="font-size:13px;color:var(--texto-leve);line-height:1.7;margin-bottom:4px">Declaro que as informações prestadas são verídicas. Estou ciente de que este relatório é de uso exclusivo da coordenação do PPGEMIN.</p>
 
       <button class="btn-primario" id="btn-enviar" onclick="enviarFormulario()">Enviar avaliação</button>
       <div class="erro-inline" id="msg-erro">Ocorreu um erro ao enviar. Verifique sua conexão e tente novamente.</div>
@@ -442,14 +470,95 @@ function atualizarSelectOrientadores() {
 }
 
 
+var CHAVE_ACESSO = 'PPGEMIN-W7TF-X6CC';
 var orientadorAtual = '';
 var discenteAtual = null;
 var respondidos = {};
 
+function formatarChave(el) {
+  // Remove tudo que não é letra ou número
+  var v = el.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+  // Aplica formato XXXXXXXX-XXXX-XXXX
+  var resultado = '';
+  if (v.length > 0)  resultado = v.substring(0, Math.min(7, v.length));
+  if (v.length > 7)  resultado += '-' + v.substring(7, Math.min(11, v.length));
+  if (v.length > 11) resultado += '-' + v.substring(11, Math.min(15, v.length));
+  el.value = resultado;
+}
+
+function verificarChave() {
+  var digitada = document.getElementById('input-chave').value.trim().toUpperCase();
+  var errEl    = document.getElementById('err-chave');
+  if (digitada === CHAVE_ACESSO) {
+    errEl.style.display = 'none';
+    mostrar('painel-inicio');
+    // Pré-carrega cadastro em background
+    carregarCadastroOrientador(function() {
+      console.log('Cadastro pronto!');
+    });
+  } else {
+    errEl.style.display = 'block';
+    document.getElementById('input-chave').focus();
+  }
+}
+
 function mostrar(id) {
-  ['painel-inicio','painel-selecao','painel-formulario'].forEach(function(p){
+  ['painel-chave','painel-inicio','painel-selecao','painel-formulario'].forEach(function(p){
     document.getElementById(p).style.display = p === id ? 'block' : 'none';
   });
+}
+
+function consultarRespondidosNaPlanilha(ori, semestre, callback) {
+  var cbName = 'ppgemin_cb_' + Date.now();
+  var script = document.createElement('script');
+  var timeout = setTimeout(function() {
+    try { delete window[cbName]; } catch(e) {}
+    if (script.parentNode) script.parentNode.removeChild(script);
+    callback({});
+  }, 8000);
+  window[cbName] = function(data) {
+    clearTimeout(timeout);
+    try { delete window[cbName]; } catch(e) {}
+    if (script.parentNode) script.parentNode.removeChild(script);
+    if (data && data.status === 'ok' && Array.isArray(data.respondidos)) {
+      var mapa = {};
+      data.respondidos.forEach(function(mat) { mapa[mat] = true; });
+      callback(mapa);
+    } else {
+      callback({});
+    }
+  };
+  var url = WEBAPP_URL
+    + '?acao=respondidos'
+    + '&orientador=' + encodeURIComponent(ori)
+    + '&semestre='   + encodeURIComponent(semestre)
+    + '&callback='   + cbName;
+  script.src = url;
+  document.head.appendChild(script);
+}
+
+function sincronizarComPlanilha() {
+  var sem = semestreAtual || '';
+  if (!sem || !orientadorAtual) return;
+  document.getElementById('prog-label').textContent = 'Verificando respostas...';
+  consultarRespondidosNaPlanilha(orientadorAtual, sem, function(mapaServidor) {
+    if (Object.keys(mapaServidor).length > 0) {
+      Object.keys(mapaServidor).forEach(function(mat) {
+        respondidos[mat] = true;
+        salvarRespondido(orientadorAtual, mat);
+      });
+    }
+    renderizarLista();
+  });
+}
+
+function atualizarSemestre() {
+  semestreAtual = document.getElementById('select-semestre').value;
+  if (orientadorAtual && semestreAtual) {
+    respondidos = carregarRespondidos(orientadorAtual);
+    renderizarLista();
+    sincronizarComPlanilha();
+  }
 }
 
 function selecionarOrientador() {
@@ -461,6 +570,7 @@ function selecionarOrientador() {
   renderizarLista();
   mostrar('painel-selecao');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  sincronizarComPlanilha();
 }
 
 function carregarRespondidos(ori) {
@@ -589,6 +699,7 @@ function enviarFormulario() {
     mostrar('painel-selecao');
     renderizarLista();
     window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(function(){ sincronizarComPlanilha(); }, 2000);
   })
   .catch(function() {
     btn.disabled=false; btn.textContent='Enviar avaliação';
@@ -596,11 +707,7 @@ function enviarFormulario() {
   });
 }
 
-mostrar('painel-inicio');
-// Pré-carrega cadastro em background
-carregarCadastroOrientador(function() {
-  console.log('Cadastro orientador pronto!');
-});
+mostrar('painel-chave');
 </script>
 </body>
 </html>
