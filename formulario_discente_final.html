@@ -183,18 +183,7 @@
       </div>
     </div>
 
-    <div class="grid-2">
-      <div class="field">
-        <label>Data de início da orientação <span class="req">*</span></label>
-        <input type="date" id="dtInicio">
-        <div class="error-msg" id="err-dtInicio">Campo obrigatório.</div>
-      </div>
-      <div class="field">
-        <label>Data de preenchimento <span class="req">*</span></label>
-        <input type="date" id="dtPreenchimento">
-        <div class="error-msg" id="err-dtPreenchimento">Campo obrigatório.</div>
-      </div>
-    </div>
+
 
     <div class="section-title">2. Situação do Projeto de Dissertação / Produto Final</div>
 
@@ -515,7 +504,7 @@ function markError(id, show) {
 
 function validar() {
   var ok = true;
-  ['semestre','dtInicio','dtPreenchimento','titulo'].forEach(function(id) {
+  ['semestre','titulo'].forEach(function(id) {
     var vazio = !document.getElementById(id).value.trim();
     showError('err-' + id, vazio); markError(id, vazio); if (vazio) ok = false;
   });
@@ -543,8 +532,8 @@ function enviarFormulario() {
     nome: discenteAtual.nome,
     matricula: discenteAtual.matricula,
     orientador: discenteAtual.orientador,
-    dtInicio: document.getElementById('dtInicio').value,
-    dtPreenchimento: document.getElementById('dtPreenchimento').value,
+
+
     titulo: document.getElementById('titulo').value.trim(),
     etapa: getRadio('etapa'),
     meta1Desc: document.getElementById('meta1Desc').value.trim(),
