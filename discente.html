@@ -691,77 +691,37 @@
 <script>
 var WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzyXj6WCzi6iUbtmpNbIKshTejItAhyCEY-WcqqeoLWmb_zsSDIOvsYi2K4-SvKXnr7/exec';
 
-var DISCENTES = {
-  "20255003744": {"nome": "ADRIANO CECHIN", "orientador": "Profª. Drª. Michelly dos Santos Oliveira"},
-  "20265003560": {"nome": "ALISSON LEONÍDIA CAMPOS", "orientador": "Prof. Dr. Leandro Henrique Santos"},
-  "20255010355": {"nome": "ANA LUÍZA MONTEIRO DE AVILA", "orientador": "Profª. Drª. Ticiane Schivittez Elacoste"},
-  "20255003735": {"nome": "ANGÉLICA MARCELINA DE SOUZA GOMES", "orientador": "Prof. Dr. Augusto César Da Silva Bezerra"},
-  "20265003579": {"nome": "ANNA LETÍCIA DA MATA ARAÚJO", "orientador": "Prof. Dr. Armando Belato Pereira"},
-  "20245007300": {"nome": "ARTUR RAMOS SIMÕES", "orientador": "Prof. Dr. Thiago Bomjardim Porto"},
-  "20265003588": {"nome": "BÁRBARA LIZANDRA NASCIMENTO", "orientador": "Prof. Dr. Armando Belato Pereira"},
-  "20255010364": {"nome": "BRENO ALMADA JÚNIOR", "orientador": "Prof. Dr. Fábio de São José"},
-  "20255010373": {"nome": "BRUNO RAFAEL LOBO ALVES", "orientador": "Prof. Dr. Leandro Henrique Santos"},
-  "20245007409": {"nome": "CAIO TORRES DE CASTRO", "orientador": "Prof. Dr. Fábio de São José"},
-  "20265009410": {"nome": "CLAUDIO HENRIQUE CARDOSO SOARES BARBOSA", "orientador": "Prof. Dr. Thiago Bomjardim Porto"},
-  "20245007310": {"nome": "DANIEL DOS SANTOS RODRIGUES", "orientador": "Prof. Dr. Mario Guimaraes Junior"},
-  "20255003790": {"nome": "DANIEL ELIAS CAMPOS SILVA", "orientador": "Prof. Dr. Thiago Bomjardim Porto"},
-  "20265008314": {"nome": "DANIEL GONÇALVES LEIJÔTO", "orientador": "Prof. Dr. Marcos Túlio Fernandes"},
-  "20265003597": {"nome": "DIEGO LAGE GONÇALVES", "orientador": "Prof. Dr. Armando Belato Pereira"},
-  "20245007418": {"nome": "EDIRLEY BICALHO DE SOUZA", "orientador": "Prof. Dr. Fábio de São José"},
-  "20245007427": {"nome": "ELIZANGELA GABRIELA NUNES", "orientador": "Prof. Dr. Natal Junio Pires"},
-  "20255010382": {"nome": "EULLER DA CONCEIÇÃO TAVARES", "orientador": "Prof. Dr. Michel Melo Oliveira"},
-  "20265003603": {"nome": "FELIPE VASCONCELOS DA SILVA", "orientador": "Prof. Dr. Natal Junio Pires"},
-  "20265009429": {"nome": "GERSON DA ROCHA IZIDORO", "orientador": "Prof. Dr. Armando Belato Pereira"},
-  "20265003612": {"nome": "GUSTAVO LUCAS DE SORDI", "orientador": "Prof. Dr. Leandro Henrique Santos"},
-  "20245007347": {"nome": "HUGO DE MOURA RONER", "orientador": "Prof. Dr. Thiago Bomjardim Porto"},
-  "20255003673": {"nome": "IVAN FLÁVIO FERREIRA", "orientador": "Profª. Drª. Hersília de Andrade e Santos"},
-  "20265009438": {"nome": "IVAN SILVA PEREIRA", "orientador": "Prof. Dr. Leandro Henrique Santos"},
-  "20265003621": {"nome": "JACKSON TEIXEIRA DE OLIVEIRA", "orientador": "Prof. Dr. Natal Junio Pires"},
-  "20265003630": {"nome": "JAIRO VINÍCIUS DE OLIVEIRA", "orientador": "Prof. Dr. Marcélio Prado Fontes"},
-  "20265008332": {"nome": "JOÃO MARCOS RIBEIRO MIQUILINO", "orientador": "Prof. Dr. Armando Belato Pereira"},
-  "20255003682": {"nome": "JOÃO PEDRO PEREIRA NETO", "orientador": "Prof. Dr. Marcélio Prado Fontes"},
-  "20255003780": {"nome": "JOSE MARIA DOS SANTOS JUNIOR", "orientador": "Prof. Dr. Michel Melo Oliveira"},
-  "20265008341": {"nome": "JULIANA EDUARDA LACERDA", "orientador": "Profª. Drª. Hersília de Andrade e Santos"},
-  "20255010426": {"nome": "KETELIN RÚBIA ALMEIDA SILVA", "orientador": "Prof. Dr. Domingos Sávio De Resende"},
-  "20245007356": {"nome": "LARISSA CAROLINE SILVA", "orientador": "Profª. Drª. Michelly dos Santos Oliveira"},
-  "20255010453": {"nome": "LAYNARA PIRES DE SÁ", "orientador": "Profª. Drª. Ticiane Schivittez Elacoste"},
-  "20255003762": {"nome": "LEANDRO OLIVEIRA LIMA", "orientador": "Prof. Dr. Natal Junio Pires"},
-  "20265003640": {"nome": "LEONARDO VAZ DE FARIA FERNANDES", "orientador": "Profª. Drª. Hersília de Andrade e Santos"},
-  "20265009447": {"nome": "LEÔNIDAS ANGELO DE OLIVEIRA", "orientador": "Profª. Drª. Silvania Alves Braga de Castro"},
-  "20265003659": {"nome": "LUCAS ALVES CORREA", "orientador": "Prof. Dr. Michel Melo Oliveira"},
-  "20265008350": {"nome": "LUCAS DE SOUZA SOTTI", "orientador": "Profª. Drª. Michelly dos Santos Oliveira"},
-  "20255010462": {"nome": "LUÍZA CARDOSO CAVALCANTI", "orientador": "Profª. Drª. Hersília de Andrade e Santos"},
-  "20255010515": {"nome": "MARCELLA COSTA DE SOUZA GARCIA", "orientador": "Profª. Drª. Ticiane Schivittez Elacoste"},
-  "20265005635": {"nome": "MARCÍLIO RIBEIRO DE MELO", "orientador": "Prof. Dr. Leandro Henrique Santos"},
-  "20265009456": {"nome": "MÁRCIO EUSTÁQUIO DE SOUZA FILHO", "orientador": "Prof. Dr. Leandro Henrique Santos"},
-  "20255010542": {"nome": "MATHEUS BULDAIN D'ORNELLAS", "orientador": "Profª. Drª. Ticiane Schivittez Elacoste"},
-  "20255003815": {"nome": "MAURO GABRIEL DURÃES ALVES", "orientador": "Profª. Drª. Michelly dos Santos Oliveira"},
-  "20265008360": {"nome": "MIKHAELA SALIVEROS ALDERETE", "orientador": "Prof. Dr. Thiago Bomjardim Porto"},
-  "20255010570": {"nome": "NAJILLA DE OLIVEIRA SOUSA GONÇALVES", "orientador": "Profª. Drª. Michelly dos Santos Oliveira"},
-  "20265003677": {"nome": "NATHIEGAN SILVA SOUZA", "orientador": "Prof. Dr. Domingos Sávio De Resende"},
-  "20255010589": {"nome": "NAYLA GONCALVES DA SILVA", "orientador": "Prof. Dr. Natal Junio Pires"},
-  "20265003668": {"nome": "OTÁVIO DOS SANTOS AMARAL", "orientador": "Prof. Dr. Leandro Henrique Santos"},
-  "20265003775": {"nome": "PÂMELA LOPES SOARES", "orientador": "Prof. Dr. Domingos Sávio De Resende"},
-  "20255010598": {"nome": "PEDRO DIAMANTE MIRANDA", "orientador": "Prof. Dr. Domingos Sávio De Resende"},
-  "20265003784": {"nome": "PEDRO HENRIQUE DOMINGOS MEIJON SOUZA", "orientador": "Profª. Drª. Michelly dos Santos Oliveira"},
-  "20265008379": {"nome": "PEDRO HENRIQUE GOMES DO NASCIMENTO", "orientador": "Prof. Dr. Marcélio Prado Fontes"},
-  "20255003726": {"nome": "PHILIPPE HENRIQUE BARBOSA PEREIRA", "orientador": "Prof. Dr. Natal Junio Pires"},
-  "202650009465": {"nome": "RAFAEL DIAS BORGES", "orientador": "Profª. Drª. Michelly dos Santos Oliveira"},
-  "20265003793": {"nome": "RAFAEL RODRIGUES SILVA", "orientador": "Prof. Dr. Domingos Sávio De Resende"},
-  "20265003819": {"nome": "RAÍSSA KETURA DA SILVA", "orientador": "Prof. Dr. Domingos Sávio De Resende"},
-  "20265008388": {"nome": "RENATO CARDOSO LIMA", "orientador": "Prof. Dr. Mario Guimaraes Junior"},
-  "20265003846": {"nome": "RODRIGO FERRAZ LOPES", "orientador": "Prof. Dr. Armando Belato Pereira"},
-  "202610001100": {"nome": "TESTE DA SILVA", "orientador": "Prof. Dr. Natal Junio Pires"},
-  "20235008449": {"nome": "THAÍS DE MENEZES RIOS", "orientador": "Profª. Drª. Marcela M. N. de Souza Soares"},
-  "20245007383": {"nome": "THAYNÁ VALERIANO SANTOS TORRES", "orientador": "Prof. Dr. Thiago Bomjardim Porto"},
-  "20265009474": {"nome": "THIAGO CORDEIRO BALDISSERI", "orientador": "Prof. Dr. Mario Guimaraes Junior"},
-  "20255003717": {"nome": "THIAGO GARCIA SARAIVA", "orientador": "Prof. Dr. Michel Melo Oliveira"},
-  "20255003824": {"nome": "VINICIUS CALÁCIO DA SILVA", "orientador": "Prof. Dr. Natal Junio Pires"},
-  "20255003691": {"nome": "WALLISSON RAFAEL SANTOS", "orientador": "Prof. Dr. Mario Guimaraes Junior"},
-  "20255003708": {"nome": "WARLEI GONÇALVES XAVIER RODRIGUES", "orientador": "Profª. Drª. Michelly dos Santos Oliveira"},
-  "20255003771": {"nome": "WILLIAM BORGES DIAS", "orientador": "Prof. Dr. Marcélio Prado Fontes"},
-  "20255010613": {"nome": "WILSON ARAÚJO DE OLIVEIRA JÚNIOR", "orientador": "Prof. Dr. Michel Melo Oliveira"},
-};
+var DISCENTES = {}; // Carregado dinamicamente da planilha
+var CADASTRO_CARREGADO = false;
+
+function carregarCadastro(callback) {
+  if (CADASTRO_CARREGADO) { callback(); return; }
+  var cbName = 'ppgemin_cad_' + Date.now();
+  var script = document.createElement('script');
+  var timeout = setTimeout(function() {
+    try { delete window[cbName]; } catch(e) {}
+    if (script.parentNode) script.parentNode.removeChild(script);
+    console.warn('Timeout ao carregar cadastro — usando dados em cache');
+    callback();
+  }, 10000);
+  window[cbName] = function(data) {
+    clearTimeout(timeout);
+    try { delete window[cbName]; } catch(e) {}
+    if (script.parentNode) script.parentNode.removeChild(script);
+    if (data && data.status === 'ok' && Array.isArray(data.discentes)) {
+      DISCENTES = {};
+      data.discentes.forEach(function(d) {
+        DISCENTES[d.matricula] = { nome: d.nome, orientador: d.orientador };
+      });
+      CADASTRO_CARREGADO = true;
+      console.log('Cadastro carregado: ' + data.total + ' discentes ativos');
+    }
+    callback();
+  };
+  script.src = WEBAPP_URL + '?acao=cadastro&callback=' + cbName;
+  document.head.appendChild(script);
+}
+
 
 var ATIVIDADES_MES = ['Revisão bibliográfica','Coleta / desenvolvimento','Análise de dados','Escrita de capítulos','Artigo científico','Qualificação','Defesa / finalização','Outra atividade'];
 
@@ -808,6 +768,20 @@ function selecionarEscala(nome, val, el) {
 var discenteAtual = null;
 
 function buscarMatricula() {
+  // Se cadastro ainda não carregou, carrega primeiro
+  if (!CADASTRO_CARREGADO) {
+    var btn = document.querySelector('.btn-primario');
+    if (btn) { btn.textContent = 'Carregando cadastro...'; btn.disabled = true; }
+    carregarCadastro(function() {
+      if (btn) { btn.textContent = 'Continuar →'; btn.disabled = false; }
+      _buscarMatricula();
+    });
+    return;
+  }
+  _buscarMatricula();
+}
+
+function _buscarMatricula() {
   var mat = document.getElementById('input-matricula').value.trim();
   var email = document.getElementById('input-email').value.trim();
   var errMat = document.getElementById('err-matricula-busca');
@@ -836,7 +810,11 @@ function confirmarDados() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function voltarMatricula() { mostrar('painel-matricula'); }
+function voltarMatricula() { mostrar('painel-matricula');
+// Pré-carrega o cadastro em background assim que a página abre
+carregarCadastro(function() {
+  console.log('Cadastro pré-carregado com sucesso!');
+}); }
 
 function mostrar(id) {
   ['painel-matricula','painel-confirmacao','painel-formulario'].forEach(function(p){
@@ -951,6 +929,10 @@ function enviarFormulario() {
 
 // Iniciar no painel de matrícula
 mostrar('painel-matricula');
+// Pré-carrega o cadastro em background assim que a página abre
+carregarCadastro(function() {
+  console.log('Cadastro pré-carregado com sucesso!');
+});
 </script>
 <div class="toast" id="toast"></div>
 </body>

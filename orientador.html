@@ -385,102 +385,62 @@
 <script>
 var WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbzyXj6WCzi6iUbtmpNbIKshTejItAhyCEY-WcqqeoLWmb_zsSDIOvsYi2K4-SvKXnr7/exec';
 
-var ORIENTACOES = {
-  "Prof. Dr. Armando Belato Pereira": [
-    {"matricula": "20265003579", "nome": "ANNA LETÍCIA DA MATA ARAÚJO"},
-    {"matricula": "20265003588", "nome": "BÁRBARA LIZANDRA NASCIMENTO"},
-    {"matricula": "20265003597", "nome": "DIEGO LAGE GONÇALVES"},
-    {"matricula": "20265009429", "nome": "GERSON DA ROCHA IZIDORO"},
-    {"matricula": "20265008332", "nome": "JOÃO MARCOS RIBEIRO MIQUILINO"},
-    {"matricula": "20265003846", "nome": "RODRIGO FERRAZ LOPES"},
-  ],
-  "Prof. Dr. Augusto César Da Silva Bezerra": [{"matricula": "20255003735", "nome": "ANGÉLICA MARCELINA DE SOUZA GOMES"}],
-  "Prof. Dr. Domingos Sávio De Resende": [
-    {"matricula": "20255010426", "nome": "KETELIN RÚBIA ALMEIDA SILVA"},
-    {"matricula": "20265003677", "nome": "NATHIEGAN SILVA SOUZA"},
-    {"matricula": "20255010598", "nome": "PEDRO DIAMANTE MIRANDA"},
-    {"matricula": "20265003775", "nome": "PÂMELA LOPES SOARES"},
-    {"matricula": "20265003793", "nome": "RAFAEL RODRIGUES SILVA"},
-    {"matricula": "20265003819", "nome": "RAÍSSA KETURA DA SILVA"},
-  ],
-  "Prof. Dr. Fábio de São José": [
-    {"matricula": "20255010364", "nome": "BRENO ALMADA JÚNIOR"},
-    {"matricula": "20245007409", "nome": "CAIO TORRES DE CASTRO"},
-    {"matricula": "20245007418", "nome": "EDIRLEY BICALHO DE SOUZA"},
-  ],
-  "Prof. Dr. Leandro Henrique Santos": [
-    {"matricula": "20265003560", "nome": "ALISSON LEONÍDIA CAMPOS"},
-    {"matricula": "20255010373", "nome": "BRUNO RAFAEL LOBO ALVES"},
-    {"matricula": "20265003612", "nome": "GUSTAVO LUCAS DE SORDI"},
-    {"matricula": "20265009438", "nome": "IVAN SILVA PEREIRA"},
-    {"matricula": "20265005635", "nome": "MARCÍLIO RIBEIRO DE MELO"},
-    {"matricula": "20265009456", "nome": "MÁRCIO EUSTÁQUIO DE SOUZA FILHO"},
-    {"matricula": "20265003668", "nome": "OTÁVIO DOS SANTOS AMARAL"},
-  ],
-  "Prof. Dr. Marcélio Prado Fontes": [
-    {"matricula": "20265003630", "nome": "JAIRO VINÍCIUS DE OLIVEIRA"},
-    {"matricula": "20255003682", "nome": "JOÃO PEDRO PEREIRA NETO"},
-    {"matricula": "20265008379", "nome": "PEDRO HENRIQUE GOMES DO NASCIMENTO"},
-    {"matricula": "20255003771", "nome": "WILLIAM BORGES DIAS"},
-  ],
-  "Prof. Dr. Marcos Túlio Fernandes": [{"matricula": "20265008314", "nome": "DANIEL GONÇALVES LEIJÔTO"}],
-  "Prof. Dr. Mario Guimaraes Junior": [
-    {"matricula": "20245007310", "nome": "DANIEL DOS SANTOS RODRIGUES"},
-    {"matricula": "20265008388", "nome": "RENATO CARDOSO LIMA"},
-    {"matricula": "20265009474", "nome": "THIAGO CORDEIRO BALDISSERI"},
-    {"matricula": "20255003691", "nome": "WALLISSON RAFAEL SANTOS"},
-  ],
-  "Prof. Dr. Michel Melo Oliveira": [
-    {"matricula": "20255010382", "nome": "EULLER DA CONCEIÇÃO TAVARES"},
-    {"matricula": "20255003780", "nome": "JOSE MARIA DOS SANTOS JUNIOR"},
-    {"matricula": "20265003659", "nome": "LUCAS ALVES CORREA"},
-    {"matricula": "20255003717", "nome": "THIAGO GARCIA SARAIVA"},
-    {"matricula": "20255010613", "nome": "WILSON ARAÚJO DE OLIVEIRA JÚNIOR"},
-  ],
-  "Prof. Dr. Natal Junio Pires": [
-    {"matricula": "20245007427", "nome": "ELIZANGELA GABRIELA NUNES"},
-    {"matricula": "20265003603", "nome": "FELIPE VASCONCELOS DA SILVA"},
-    {"matricula": "20265003621", "nome": "JACKSON TEIXEIRA DE OLIVEIRA"},
-    {"matricula": "20255003762", "nome": "LEANDRO OLIVEIRA LIMA"},
-    {"matricula": "20255010589", "nome": "NAYLA GONCALVES DA SILVA"},
-    {"matricula": "20255003726", "nome": "PHILIPPE HENRIQUE BARBOSA PEREIRA"},
-    {"matricula": "202610001100", "nome": "TESTE DA SILVA"},
-    {"matricula": "20255003824", "nome": "VINICIUS CALÁCIO DA SILVA"},
-  ],
-  "Prof. Dr. Thiago Bomjardim Porto": [
-    {"matricula": "20245007300", "nome": "ARTUR RAMOS SIMÕES"},
-    {"matricula": "20265009410", "nome": "CLAUDIO HENRIQUE CARDOSO SOARES BARBOSA"},
-    {"matricula": "20255003790", "nome": "DANIEL ELIAS CAMPOS SILVA"},
-    {"matricula": "20245007347", "nome": "HUGO DE MOURA RONER"},
-    {"matricula": "20265008360", "nome": "MIKHAELA SALIVEROS ALDERETE"},
-    {"matricula": "20245007383", "nome": "THAYNÁ VALERIANO SANTOS TORRES"},
-  ],
-  "Profª. Drª. Dayana Keitty Carmo Gonçalves": [],
-  "Profª. Drª. Hersília de Andrade e Santos": [
-    {"matricula": "20255003673", "nome": "IVAN FLÁVIO FERREIRA"},
-    {"matricula": "20265008341", "nome": "JULIANA EDUARDA LACERDA"},
-    {"matricula": "20265003640", "nome": "LEONARDO VAZ DE FARIA FERNANDES"},
-    {"matricula": "20255010462", "nome": "LUÍZA CARDOSO CAVALCANTI"},
-  ],
-  "Profª. Drª. Marcela M. N. de Souza Soares": [{"matricula": "20235008449", "nome": "THAÍS DE MENEZES RIOS"}],
-  "Profª. Drª. Michelly dos Santos Oliveira": [
-    {"matricula": "20255003744", "nome": "ADRIANO CECHIN"},
-    {"matricula": "20245007356", "nome": "LARISSA CAROLINE SILVA"},
-    {"matricula": "20265008350", "nome": "LUCAS DE SOUZA SOTTI"},
-    {"matricula": "20255003815", "nome": "MAURO GABRIEL DURÃES ALVES"},
-    {"matricula": "20255010570", "nome": "NAJILLA DE OLIVEIRA SOUSA GONÇALVES"},
-    {"matricula": "20265003784", "nome": "PEDRO HENRIQUE DOMINGOS MEIJON SOUZA"},
-    {"matricula": "202650009465", "nome": "RAFAEL DIAS BORGES"},
-    {"matricula": "20255003708", "nome": "WARLEI GONÇALVES XAVIER RODRIGUES"},
-  ],
-  "Profª. Drª. Silvania Alves Braga de Castro": [{"matricula": "20265009447", "nome": "LEÔNIDAS ANGELO DE OLIVEIRA"}],
-  "Profª. Drª. Ticiane Schivittez Elacoste": [
-    {"matricula": "20255010355", "nome": "ANA LUÍZA MONTEIRO DE AVILA"},
-    {"matricula": "20255010453", "nome": "LAYNARA PIRES DE SÁ"},
-    {"matricula": "20255010515", "nome": "MARCELLA COSTA DE SOUZA GARCIA"},
-    {"matricula": "20255010542", "nome": "MATHEUS BULDAIN D'ORNELLAS"},
-  ],
-};
+var ORIENTACOES = {}; // Carregado dinamicamente da planilha
+var CADASTRO_ORI_CARREGADO = false;
+
+function carregarCadastroOrientador(callback) {
+  if (CADASTRO_ORI_CARREGADO) { callback(); return; }
+  var cbName = 'ppgemin_cado_' + Date.now();
+  var script = document.createElement('script');
+  var timeout = setTimeout(function() {
+    try { delete window[cbName]; } catch(e) {}
+    if (script.parentNode) script.parentNode.removeChild(script);
+    callback();
+  }, 10000);
+  window[cbName] = function(data) {
+    clearTimeout(timeout);
+    try { delete window[cbName]; } catch(e) {}
+    if (script.parentNode) script.parentNode.removeChild(script);
+    if (data && data.status === 'ok' && Array.isArray(data.discentes)) {
+      // Montar ORIENTACOES agrupado por orientador
+      ORIENTACOES = {};
+      data.discentes.forEach(function(d) {
+        if (!ORIENTACOES[d.orientador]) ORIENTACOES[d.orientador] = [];
+        ORIENTACOES[d.orientador].push({ matricula: d.matricula, nome: d.nome });
+      });
+      // Ordenar alunos por nome em cada orientador
+      Object.keys(ORIENTACOES).forEach(function(k) {
+        ORIENTACOES[k].sort(function(a,b){ return a.nome.localeCompare(b.nome); });
+      });
+      // Atualizar select de orientadores
+      atualizarSelectOrientadores();
+      CADASTRO_ORI_CARREGADO = true;
+      console.log('Cadastro orientador carregado: ' + data.total + ' discentes');
+    }
+    callback();
+  };
+  script.src = WEBAPP_URL + '?acao=cadastro&callback=' + cbName;
+  document.head.appendChild(script);
+}
+
+function atualizarSelectOrientadores() {
+  var sel = document.getElementById('select-orientador');
+  if (!sel) return;
+  var valorAtual = sel.value;
+  // Manter primeira opção
+  while (sel.options.length > 1) sel.remove(1);
+  // Adicionar orientadores do cadastro
+  var orientadores = Object.keys(ORIENTACOES).sort();
+  orientadores.forEach(function(nome) {
+    var opt = document.createElement('option');
+    opt.value = nome;
+    opt.textContent = nome;
+    sel.appendChild(opt);
+  });
+  // Restaurar seleção anterior se ainda existir
+  if (valorAtual) sel.value = valorAtual;
+}
+
 
 var orientadorAtual = '';
 var discenteAtual = null;
@@ -632,6 +592,10 @@ function enviarFormulario() {
 }
 
 mostrar('painel-inicio');
+// Pré-carrega cadastro em background
+carregarCadastroOrientador(function() {
+  console.log('Cadastro orientador pronto!');
+});
 </script>
 </body>
 </html>
