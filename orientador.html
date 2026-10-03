@@ -542,7 +542,12 @@ document.addEventListener('change', function(e) {
 function getChecked(name) { return Array.from(document.querySelectorAll('input[name="'+name+'"]:checked')).map(function(b){return b.value;}); }
 function getRadio(name) { var el=document.querySelector('input[name="'+name+'"]:checked'); return el?el.value:''; }
 function showErr(id,show) { var el=document.getElementById(id); if(el) el.style.display=show?'block':'none'; }
-function toTitleCase(str) { return str.toLowerCase().replace(/\b\w/g,function(c){return c.toUpperCase();}); }
+function toTitleCase(str) {
+  if (!str) return '';
+  return str.toLowerCase().replace(/(^|\s)(\S)/g, function(m, space, letra) {
+    return space + letra.toUpperCase();
+  });
+}
 
 function validar() {
   var ok = true;

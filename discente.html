@@ -879,7 +879,10 @@ function validar() {
 }
 
 function toTitleCase(str) {
-  return str.toLowerCase().replace(/\b\w/g, function(c){ return c.toUpperCase(); });
+  if (!str) return '';
+  return str.toLowerCase().replace(/(^|\s)(\S)/g, function(m, space, letra) {
+    return space + letra.toUpperCase();
+  });
 }
 
 function enviarFormulario() {
