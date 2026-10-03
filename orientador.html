@@ -157,6 +157,18 @@
       <div class="bloco">
         <div class="bloco-titulo"><div class="bloco-num">→</div><h2>Identificação</h2></div>
         <div class="campo">
+          <label>Semestre / Ano de referência <span class="req">*</span></label>
+          <select id="select-semestre" onchange="atualizarSemestre()">
+            <option value="">— Selecione o semestre —</option>
+            <option>1º semestre / 2025</option>
+            <option>2º semestre / 2025</option>
+            <option>1º semestre / 2026</option>
+            <option>2º semestre / 2026</option>
+            <option>1º semestre / 2027</option>
+            <option>2º semestre / 2027</option>
+          </select>
+        </div>
+        <div class="campo">
           <label>Selecione seu nome <span class="req">*</span></label>
           <select id="select-orientador" onchange="selecionarOrientador()">
             <option value="">— Selecione o(a) orientador(a) —</option>
@@ -209,17 +221,8 @@
       <div class="bloco">
         <div class="bloco-titulo"><div class="bloco-num">1</div><h2>Identificação</h2></div>
         <div class="campo">
-          <label>Semestre / Ano de referência <span class="req">*</span></label>
-          <select id="semestre">
-            <option value="">Selecione</option>
-            <option>1º semestre / 2025</option>
-            <option>2º semestre / 2025</option>
-            <option>1º semestre / 2026</option>
-            <option>2º semestre / 2026</option>
-            <option>1º semestre / 2027</option>
-            <option>2º semestre / 2027</option>
-          </select>
-          <div class="erro-msg" id="err-semestre">Campo obrigatório.</div>
+          <label>Semestre de referência</label>
+          <input type="text" id="semestre-display" readonly style="background:var(--cinza-1);color:var(--texto-leve);cursor:default;border:1.5px solid var(--cinza-2);border-radius:8px;padding:10px 13px;font-size:13px;font-family:Inter,sans-serif;width:100%">
         </div>
       </div>
 
@@ -497,6 +500,7 @@ var ORIENTACOES = {
 };
 
 var orientadorAtual = '';
+var semestreAtual = '';
 var discenteAtual = null;
 var respondidos = {};
 
@@ -510,18 +514,83 @@ function selecionarOrientador() {
   var sel = document.getElementById('select-orientador').value;
   if (!sel) return;
   orientadorAtual = sel;
+  // Começa com cache local para resposta imediata
   respondidos = carregarRespondidos(sel);
   document.getElementById('box-ori-nome').textContent = '👤 ' + sel;
   renderizarLista();
   mostrar('painel-selecao');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Busca o semestre selecionado no formulário (se já tiver)
+  sincronizarComPlanilha();
+}
+
+function sincronizarComPlanilha() {
+  var sem = semestreAtual || '';
+  if (!sem || !orientadorAtual) return;
+  document.getElementById('prog-label').textContent = 'Verificando respostas na base de dados...';
+  consultarRespondidosNaPlanilha(orientadorAtual, sem, function(mapaServidor) {
+    if (Object.keys(mapaServidor).length > 0) {
+      // Mescla: local + servidor
+      Object.keys(mapaServidor).forEach(function(mat) {
+        respondidos[mat] = true;
+        salvarRespondido(orientadorAtual, mat);
+      });
+      renderizarLista();
+    } else {
+      renderizarLista();
+    }
+  });
 }
 
 function carregarRespondidos(ori) {
-  try { var k='ppgemin_ori_'+ori.replace(/\s/g,'_'); var s=localStorage.getItem(k); return s?JSON.parse(s):{}; } catch(e){return {};}
+  // Lê cache local imediatamente para resposta rápida
+  try {
+    var k = 'ppgemin_ori_' + ori.replace(/\W/g,'_');
+    var s = localStorage.getItem(k);
+    return s ? JSON.parse(s) : {};
+  } catch(e) { return {}; }
 }
+
 function salvarRespondido(ori, mat) {
-  try { var k='ppgemin_ori_'+ori.replace(/\s/g,'_'); respondidos[mat]=true; localStorage.setItem(k,JSON.stringify(respondidos)); } catch(e){}
+  try {
+    var k = 'ppgemin_ori_' + ori.replace(/\W/g,'_');
+    respondidos[mat] = true;
+    localStorage.setItem(k, JSON.stringify(respondidos));
+  } catch(e) {}
+}
+
+function consultarRespondidosNaPlanilha(ori, semestre, callback) {
+  // Consulta o Web App via JSONP (contorna CORS do GitHub Pages)
+  var cbName = 'ppgemin_cb_' + Date.now();
+  var script = document.createElement('script');
+  var timeout = setTimeout(function() {
+    // Se demorar mais de 8s, usa só o cache local
+    try { delete window[cbName]; } catch(e) {}
+    if (script.parentNode) script.parentNode.removeChild(script);
+    callback({});
+  }, 8000);
+
+  window[cbName] = function(data) {
+    clearTimeout(timeout);
+    try { delete window[cbName]; } catch(e) {}
+    if (script.parentNode) script.parentNode.removeChild(script);
+    if (data && data.status === 'ok' && Array.isArray(data.respondidos)) {
+      var mapa = {};
+      data.respondidos.forEach(function(mat) { mapa[mat] = true; });
+      callback(mapa);
+    } else {
+      callback({});
+    }
+  };
+
+  var url = WEBAPP_URL
+    + '?acao=respondidos'
+    + '&orientador=' + encodeURIComponent(ori)
+    + '&semestre='   + encodeURIComponent(semestre)
+    + '&callback='   + cbName;
+
+  script.src = url;
+  document.head.appendChild(script);
 }
 
 function renderizarLista() {
@@ -549,6 +618,8 @@ function abrirFormulario(mat, nome) {
   discenteAtual = { matricula: mat, nome: nome };
   document.getElementById('sel-nome').textContent = toTitleCase(nome);
   document.getElementById('sel-detalhe').textContent = 'Matrícula: ' + mat + ' · ' + orientadorAtual;
+  var disp = document.getElementById('semestre-display');
+  if (disp) disp.value = semestreAtual;
   limparFormulario();
   mostrar('painel-formulario');
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -604,9 +675,20 @@ function sairESalvar() {
   }, 1500);
 }
 
+function atualizarSemestre() {
+  semestreAtual = document.getElementById('select-semestre').value;
+  // Se orientador já selecionado, recarrega com novo semestre
+  if (orientadorAtual && semestreAtual) {
+    respondidos = carregarRespondidos(orientadorAtual);
+    renderizarLista();
+    sincronizarComPlanilha();
+  }
+}
+
 function validar() {
   var ok = true;
-  if (!document.getElementById('semestre').value) { showErr('err-semestre',true); ok=false; } else showErr('err-semestre',false);
+  // semestre vem da tela inicial, sempre preenchido
+  if (!semestreAtual) { ok = false; }
   ['reunioes','qualidade-reunioes','autonomia','comprometimento','evolucao','escrita','contexto','urgencia','prazo','estimativa','intervencao'].forEach(function(n){
     var v=getRadio(n); showErr('err-'+n,!v); if(!v) ok=false;
   });
@@ -621,7 +703,7 @@ function enviarFormulario() {
   btn.disabled=true; btn.textContent='Enviando...';
   var dados = {
     tipo: 'orientador',
-    semestre: document.getElementById('semestre').value,
+    semestre: semestreAtual,
     nomeOrientador: orientadorAtual,
     nomeDiscente: discenteAtual.nome,
     matricula: discenteAtual.matricula,
@@ -644,6 +726,8 @@ function enviarFormulario() {
     mostrar('painel-selecao');
     renderizarLista();
     window.scrollTo({top:0,behavior:'smooth'});
+    // Sincroniza com planilha para garantir consistência entre dispositivos
+    setTimeout(function(){ sincronizarComPlanilha(); }, 2000);
   })
   .catch(function() {
     btn.disabled=false; btn.textContent='Enviar avaliação';
