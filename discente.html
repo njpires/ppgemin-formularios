@@ -16,7 +16,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 14px; color: var(--texto); background: var(--cinza-1); min-height: 100vh; padding: 32px 16px 48px; line-height: 1.6; }
-  .card { max-width: 720px; margin: 0 auto; background: var(--branco); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; }
+  .card { max-width: 760px; margin: 0 auto; background: var(--branco); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; }
 
   .header { background: linear-gradient(135deg, var(--azul) 0%, var(--azul-meio) 100%); padding: 32px 40px; color: #fff; }
   .header-top { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
@@ -28,7 +28,7 @@
   .body { padding: 36px 40px; }
   .painel { display: none; }
 
-  .bloco { margin-bottom: 36px; }
+  .bloco { margin-bottom: 40px; }
   .bloco-titulo { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--cinza-2); }
   .bloco-num { background: var(--azul); color: #fff; font-size: 11px; font-weight: 700; border-radius: 6px; padding: 3px 9px; flex-shrink: 0; }
   .bloco-titulo h2 { font-size: 13px; font-weight: 700; color: var(--azul); text-transform: uppercase; letter-spacing: 0.06em; }
@@ -39,28 +39,46 @@
   .sub { font-size: 12px; font-weight: 400; color: var(--cinza-3); display: block; margin-top: 3px; letter-spacing: 0; }
   .req { color: var(--alerta); margin-left: 2px; }
 
-  input[type="text"], input[type="email"] { width: 100%; border: 1.5px solid var(--cinza-2); border-radius: 8px; padding: 11px 13px; font-size: 14px; font-family: inherit; color: var(--texto); background: var(--branco); }
-  input[type="text"]:focus, input[type="email"]:focus { outline: none; border-color: var(--azul-meio); box-shadow: 0 0 0 3px rgba(42,82,152,0.12); }
+  input[type="text"], input[type="email"], select, textarea { width: 100%; border: 1.5px solid var(--cinza-2); border-radius: 8px; padding: 11px 13px; font-size: 14px; font-family: inherit; color: var(--texto); background: var(--branco); }
+  input[type="text"]:focus, input[type="email"]:focus, select:focus, textarea:focus { outline: none; border-color: var(--azul-meio); box-shadow: 0 0 0 3px rgba(42,82,152,0.12); }
+  textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
 
   .opcoes { display: flex; flex-direction: column; gap: 7px; }
   .opcao { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border: 1.5px solid var(--cinza-2); border-radius: 8px; cursor: pointer; transition: border-color .15s, background .15s; font-size: 13px; font-weight: 400; color: var(--texto-leve); line-height: 1.45; }
   .opcao:hover { border-color: var(--azul-meio); background: var(--azul-claro); }
   .opcao input { margin-top: 2px; flex-shrink: 0; accent-color: var(--azul); width: 15px; height: 15px; }
   .opcao.selecionada { border-color: var(--azul); background: var(--azul-claro); color: var(--texto); font-weight: 600; }
+  .opcao.desabilitada { opacity: .45; cursor: not-allowed; }
+  .opcao.desabilitada:hover { border-color: var(--cinza-2); background: none; }
 
   .escala { display: flex; gap: 8px; }
-  .escala-item { flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px 6px; border: 1.5px solid var(--cinza-2); border-radius: 8px; cursor: pointer; transition: all .15s; font-size: 16px; font-weight: 700; color: var(--azul); }
+  .escala-item { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px 6px; border: 1.5px solid var(--cinza-2); border-radius: 8px; cursor: pointer; transition: all .15s; font-size: 16px; font-weight: 700; color: var(--azul); text-align: center; }
+  .escala-item.na { flex: 2; font-size: 12px; font-weight: 600; }
   .escala-item:hover { border-color: var(--azul-meio); background: var(--azul-claro); }
   .escala-item input { position: absolute; opacity: 0; pointer-events: none; }
   .escala-item.selecionada { background: var(--azul); border-color: var(--azul); color: #fff; }
   .escala-legenda { display: flex; justify-content: space-between; font-size: 11px; color: var(--cinza-3); margin-top: 6px; }
+  .sub-pergunta { font-size: 13px; font-weight: 600; color: var(--texto-leve); margin: 18px 0 8px; }
+  .sub-pergunta:first-of-type { margin-top: 0; }
 
-  .meses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  .mes-box { border: 1.5px solid var(--cinza-2); border-radius: 8px; overflow: hidden; }
-  .mes-header { background: var(--azul); color: #fff; font-size: 12px; font-weight: 700; padding: 7px 12px; }
-  .mes-body { padding: 8px 10px; display: flex; flex-direction: column; gap: 5px; }
-  .mes-opcao { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--texto-leve); cursor: pointer; }
-  .mes-opcao input { accent-color: var(--azul); width: 13px; height: 13px; flex-shrink: 0; }
+  /* Matriz de progresso */
+  .matriz { border: 1.5px solid var(--cinza-2); border-radius: 10px; overflow: hidden; }
+  .matriz-linha { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--cinza-2); }
+  .matriz-linha:last-child { border-bottom: none; }
+  .matriz-linha.falta { background: #FFF5F5; }
+  .matriz-etapa { font-size: 13px; font-weight: 600; color: var(--texto); flex: 1; }
+  .segmentos { display: flex; gap: 4px; flex-shrink: 0; }
+  .seg { position: relative; padding: 6px 10px; border: 1.5px solid var(--cinza-2); border-radius: 7px; font-size: 12px; font-weight: 600; color: var(--texto-leve); cursor: pointer; white-space: nowrap; text-align: center; transition: all .15s; }
+  .seg input { position: absolute; opacity: 0; pointer-events: none; }
+  .seg:hover { border-color: var(--azul-meio); }
+  .seg.selecionada[data-s="Não iniciada"] { background: #EEF0F4; border-color: var(--cinza-3); color: var(--texto); }
+  .seg.selecionada[data-s="Em andamento"] { background: #FFF4DB; border-color: #E0A100; color: #7A5800; }
+  .seg.selecionada[data-s="Concluída"] { background: var(--verde-bg); border-color: var(--verde); color: var(--verde); }
+
+  /* Produção */
+  .producao { display: grid; grid-template-columns: 1fr auto; gap: 10px 16px; align-items: center; }
+  .producao span { font-size: 13px; color: var(--texto-leve); }
+  .producao select { width: 120px; padding: 8px 10px; font-size: 13px; }
 
   .sem-info { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--azul-claro); border: 1.5px solid #C9D7F0; border-radius: 10px; padding: 12px 16px; margin-bottom: 24px; font-size: 13px; color: var(--texto-leve); }
   .sem-info strong { color: var(--azul); font-size: 14px; }
@@ -76,6 +94,7 @@
   .aviso-respondido { display: none; background: #FFF8E6; border: 1.5px solid #F0A500; border-radius: 10px; padding: 14px 18px; margin-top: 16px; }
   .aviso-respondido strong { display: block; font-size: 14px; color: #7A5800; margin-bottom: 4px; }
   .aviso-respondido span { font-size: 13px; color: #7A5800; line-height: 1.6; }
+  .nota-sigilo { font-size: 12px; color: var(--cinza-3); margin-top: 8px; }
 
   .badge-discente { background: var(--verde-bg); border: 1.5px solid #A8D8C2; border-radius: 10px; padding: 16px 20px; margin-bottom: 28px; display: flex; align-items: center; gap: 14px; }
   .badge-icon { font-size: 26px; }
@@ -104,9 +123,12 @@
     .header { padding: 24px 20px; }
     .header-top { flex-direction: column; align-items: flex-start; gap: 10px; }
     .body { padding: 24px 18px; }
-    .meses-grid { grid-template-columns: repeat(2, 1fr); }
     .sem-info { flex-direction: column; align-items: flex-start; }
     .conf-linha { flex-direction: column; gap: 2px; }
+    .matriz-linha { flex-direction: column; align-items: stretch; gap: 8px; }
+    .seg { flex: 1; padding: 7px 4px; }
+    .escala { gap: 5px; }
+    .escala-item.na { font-size: 11px; }
   }
 </style>
 </head>
@@ -120,7 +142,7 @@
         <p>Mestrado Profissional em Engenharia de Minas · CEFET-MG Araxá · Discente</p>
       </div>
     </div>
-    <div class="header-desc">Preencha com atenção. Suas respostas são confidenciais e ficarão disponíveis exclusivamente para a coordenação do PPGEMIN. Seu(sua) orientador(a) também responde a uma avaliação própria.</div>
+    <div class="header-desc">Este relatório ajuda a coordenação a oferecer o apoio certo no momento certo e a aprimorar o programa. Suas respostas são confidenciais e ficarão disponíveis exclusivamente para a coordenação do PPGEMIN. Seu(sua) orientador(a) também responde a uma avaliação própria.</div>
   </div>
 
   <div class="body" id="corpo">
@@ -172,58 +194,158 @@
         </div>
       </div>
 
+      <!-- 1. SITUAÇÃO DO PROJETO -->
       <div class="bloco">
         <div class="bloco-titulo"><div class="bloco-num">1</div><h2>Situação do projeto</h2></div>
         <div class="campo">
           <label for="titulo">Título provisório ou definitivo do projeto <span class="req">*</span></label>
-          <input type="text" id="titulo" placeholder="Digite o título do seu projeto">
+          <input type="text" id="titulo" maxlength="300" placeholder="Digite o título do seu projeto">
           <div class="erro-msg" id="err-titulo">Campo obrigatório.</div>
         </div>
         <div class="campo">
-          <span class="pergunta">Etapa(s) do trabalho em andamento <span class="req">*</span><span class="sub">Marque todas as etapas que você está desenvolvendo neste momento</span></span>
+          <span class="pergunta">Houve mudança no tema ou nos objetivos do projeto neste semestre? <span class="req">*</span></span>
           <div class="opcoes">
-            <label class="opcao"><input type="checkbox" name="etapa" value="Definição do tema e problema de pesquisa"> Definição do tema e problema de pesquisa</label>
-            <label class="opcao"><input type="checkbox" name="etapa" value="Elaboração do projeto (pré-projeto)"> Elaboração do projeto (pré-projeto)</label>
-            <label class="opcao"><input type="checkbox" name="etapa" value="Revisão bibliográfica"> Revisão bibliográfica</label>
-            <label class="opcao"><input type="checkbox" name="etapa" value="Coleta / aplicação de dados / desenvolvimento do produto"> Coleta / aplicação de dados / desenvolvimento do produto</label>
-            <label class="opcao"><input type="checkbox" name="etapa" value="Análise de dados / validação do produto"> Análise de dados / validação do produto</label>
-            <label class="opcao"><input type="checkbox" name="etapa" value="Escrita dos capítulos"> Escrita dos capítulos</label>
-            <label class="opcao"><input type="checkbox" name="etapa" value="Finalização e revisão do texto final"> Finalização e revisão do texto final</label>
-            <label class="opcao"><input type="checkbox" name="etapa" value="Elaboração de artigo(s) científico(s)"> Elaboração de artigo(s) científico(s)</label>
+            <label class="opcao"><input type="radio" name="mudanca-tema" value="Não houve mudança"> Não houve mudança</label>
+            <label class="opcao"><input type="radio" name="mudanca-tema" value="Ajustes pontuais"> Ajustes pontuais</label>
+            <label class="opcao"><input type="radio" name="mudanca-tema" value="Mudança significativa de tema ou objetivos"> Mudança significativa de tema ou objetivos</label>
+            <label class="opcao"><input type="radio" name="mudanca-tema" value="O tema ainda não estava definido"> O tema ainda não estava definido</label>
           </div>
-          <div class="erro-msg" id="err-etapa">Marque ao menos uma etapa.</div>
+          <div class="erro-msg" id="err-mudanca-tema">Selecione uma opção.</div>
         </div>
         <div class="campo">
-          <span class="pergunta">Quantas reuniões de orientação ocorreram neste semestre? <span class="req">*</span></span>
-          <div class="opcoes">
-            <label class="opcao"><input type="radio" name="reunioes" value="Nenhuma"> Nenhuma</label>
-            <label class="opcao"><input type="radio" name="reunioes" value="1 a 2 reuniões"> 1 a 2 reuniões</label>
-            <label class="opcao"><input type="radio" name="reunioes" value="3 a 4 reuniões"> 3 a 4 reuniões</label>
-            <label class="opcao"><input type="radio" name="reunioes" value="5 ou mais reuniões"> 5 ou mais reuniões</label>
-          </div>
-          <div class="erro-msg" id="err-reunioes">Selecione uma opção.</div>
-        </div>
-        <div class="campo">
-          <span class="pergunta">Entregas concretas realizadas neste semestre <span class="req">*</span><span class="sub">Marque todas que se aplicam</span></span>
-          <div class="opcoes">
-            <label class="opcao"><input type="checkbox" name="entrega" value="Leituras e fichamentos"> Leituras e fichamentos</label>
-            <label class="opcao"><input type="checkbox" name="entrega" value="Projeto / pré-projeto elaborado"> Projeto / pré-projeto elaborado</label>
-            <label class="opcao"><input type="checkbox" name="entrega" value="Coleta de dados iniciada ou concluída"> Coleta de dados iniciada ou concluída</label>
-            <label class="opcao"><input type="checkbox" name="entrega" value="Análise de dados realizada"> Análise de dados realizada</label>
-            <label class="opcao"><input type="checkbox" name="entrega" value="Capítulo(s) escrito(s)"> Capítulo(s) escrito(s)</label>
-            <label class="opcao"><input type="checkbox" name="entrega" value="Artigo submetido ou publicado"> Artigo submetido ou publicado</label>
-            <label class="opcao"><input type="checkbox" name="entrega" value="Qualificação realizada"> Qualificação realizada</label>
-            <label class="opcao"><input type="checkbox" name="entrega" value="Defesa realizada"> Defesa realizada</label>
-            <label class="opcao"><input type="checkbox" name="entrega" value="Nenhuma entrega concreta" data-exclusivo> Nenhuma entrega concreta</label>
-          </div>
-          <div class="erro-msg" id="err-entrega">Marque ao menos uma opção.</div>
+          <span class="pergunta">Situação atual de cada etapa do mestrado <span class="req">*</span><span class="sub">Indique, para cada etapa, como ela se encontra hoje</span></span>
+          <div class="matriz" id="matriz"></div>
+          <div class="erro-msg" id="err-matriz">Indique a situação de todas as etapas.</div>
         </div>
       </div>
 
+      <!-- 2. ORIENTAÇÃO E ACOMPANHAMENTO -->
       <div class="bloco">
-        <div class="bloco-titulo"><div class="bloco-num">2</div><h2>Autoavaliação</h2></div>
+        <div class="bloco-titulo"><div class="bloco-num">2</div><h2>Orientação e acompanhamento</h2></div>
         <div class="campo">
-          <span class="pergunta">Satisfação com o andamento do trabalho <span class="req">*</span></span>
+          <span class="pergunta">Com que frequência você teve reuniões de orientação neste semestre? <span class="req">*</span></span>
+          <div class="opcoes">
+            <label class="opcao"><input type="radio" name="frequencia" value="Semanal"> Semanal</label>
+            <label class="opcao"><input type="radio" name="frequencia" value="Quinzenal"> Quinzenal</label>
+            <label class="opcao"><input type="radio" name="frequencia" value="Mensal"> Mensal</label>
+            <label class="opcao"><input type="radio" name="frequencia" value="Esporádica (menos de uma vez por mês)"> Esporádica (menos de uma vez por mês)</label>
+            <label class="opcao"><input type="radio" name="frequencia" value="Não houve reuniões"> Não houve reuniões</label>
+          </div>
+          <div class="erro-msg" id="err-frequencia">Selecione uma opção.</div>
+        </div>
+        <div class="campo">
+          <span class="pergunta">Com que frequência você enviou avanços ao(à) orientador(a) por iniciativa própria, sem ser solicitado(a)? <span class="req">*</span></span>
+          <div class="opcoes">
+            <label class="opcao"><input type="radio" name="envio-avancos" value="Frequentemente"> Frequentemente</label>
+            <label class="opcao"><input type="radio" name="envio-avancos" value="Às vezes"> Às vezes</label>
+            <label class="opcao"><input type="radio" name="envio-avancos" value="Raramente"> Raramente</label>
+            <label class="opcao"><input type="radio" name="envio-avancos" value="Nunca"> Nunca</label>
+          </div>
+          <div class="erro-msg" id="err-envio-avancos">Selecione uma opção.</div>
+        </div>
+        <div class="campo">
+          <span class="pergunta">O apoio recebido da orientação tem atendido às suas necessidades? <span class="req">*</span></span>
+          <div class="escala">
+            <label class="escala-item"><input type="radio" name="apoio" value="1">1</label>
+            <label class="escala-item"><input type="radio" name="apoio" value="2">2</label>
+            <label class="escala-item"><input type="radio" name="apoio" value="3">3</label>
+            <label class="escala-item"><input type="radio" name="apoio" value="4">4</label>
+            <label class="escala-item"><input type="radio" name="apoio" value="5">5</label>
+          </div>
+          <div class="escala-legenda"><span>Não atende</span><span>Atende plenamente</span></div>
+          <div class="nota-sigilo">🔒 Resposta confidencial, de uso exclusivo da coordenação.</div>
+          <div class="erro-msg" id="err-apoio">Selecione um valor.</div>
+        </div>
+      </div>
+
+      <!-- 3. ROTINA E CONTEXTO -->
+      <div class="bloco">
+        <div class="bloco-titulo"><div class="bloco-num">3</div><h2>Rotina e contexto de trabalho</h2></div>
+        <div class="campo">
+          <span class="pergunta">Em média, quantas horas por semana você conseguiu dedicar ao mestrado neste semestre? <span class="req">*</span><span class="sub">Considere disciplinas, pesquisa e escrita</span></span>
+          <div class="opcoes">
+            <label class="opcao"><input type="radio" name="horas" value="Menos de 3 h"> Menos de 3 horas</label>
+            <label class="opcao"><input type="radio" name="horas" value="3 a 5 h"> 3 a 5 horas</label>
+            <label class="opcao"><input type="radio" name="horas" value="6 a 10 h"> 6 a 10 horas</label>
+            <label class="opcao"><input type="radio" name="horas" value="11 a 20 h"> 11 a 20 horas</label>
+            <label class="opcao"><input type="radio" name="horas" value="Mais de 20 h"> Mais de 20 horas</label>
+          </div>
+          <div class="erro-msg" id="err-horas">Selecione uma opção.</div>
+        </div>
+        <div class="campo">
+          <span class="pergunta">Qual é a sua situação profissional atual? <span class="req">*</span></span>
+          <div class="opcoes">
+            <label class="opcao"><input type="radio" name="situacao" value="Trabalho em tempo integral"> Trabalho em tempo integral</label>
+            <label class="opcao"><input type="radio" name="situacao" value="Trabalho em tempo parcial"> Trabalho em tempo parcial</label>
+            <label class="opcao"><input type="radio" name="situacao" value="Sem vínculo de trabalho no momento"> Sem vínculo de trabalho no momento</label>
+          </div>
+          <div class="erro-msg" id="err-situacao">Selecione uma opção.</div>
+        </div>
+        <div class="campo">
+          <span class="pergunta">Houve mudança na sua situação de trabalho neste semestre? <span class="req">*</span></span>
+          <div class="opcoes">
+            <label class="opcao"><input type="radio" name="mudanca-trabalho" value="Não houve mudança"> Não houve mudança</label>
+            <label class="opcao"><input type="radio" name="mudanca-trabalho" value="Mudei de função na mesma organização"> Mudei de função na mesma organização</label>
+            <label class="opcao"><input type="radio" name="mudanca-trabalho" value="Mudei de organização"> Mudei de organização</label>
+            <label class="opcao"><input type="radio" name="mudanca-trabalho" value="Deixei de ter vínculo de trabalho"> Deixei de ter vínculo de trabalho</label>
+          </div>
+          <div class="erro-msg" id="err-mudanca-trabalho">Selecione uma opção.</div>
+        </div>
+        <div class="campo">
+          <span class="pergunta">Você conta com liberação de horário do trabalho para as atividades do mestrado? <span class="req">*</span></span>
+          <div class="opcoes">
+            <label class="opcao"><input type="radio" name="liberacao" value="Sim, de forma acordada"> Sim, de forma acordada</label>
+            <label class="opcao"><input type="radio" name="liberacao" value="Informalmente, quando necessário"> Informalmente, quando necessário</label>
+            <label class="opcao"><input type="radio" name="liberacao" value="Não tenho liberação"> Não tenho liberação</label>
+            <label class="opcao"><input type="radio" name="liberacao" value="Não se aplica"> Não se aplica</label>
+          </div>
+          <div class="erro-msg" id="err-liberacao">Selecione uma opção.</div>
+        </div>
+        <div class="campo">
+          <span class="pergunta">Quanto as demandas do trabalho afetaram o andamento do mestrado neste semestre? <span class="req">*</span></span>
+          <div class="opcoes">
+            <label class="opcao"><input type="radio" name="impacto" value="Não afetaram"> Não afetaram</label>
+            <label class="opcao"><input type="radio" name="impacto" value="Afetaram pouco"> Afetaram pouco</label>
+            <label class="opcao"><input type="radio" name="impacto" value="Afetaram moderadamente"> Afetaram moderadamente</label>
+            <label class="opcao"><input type="radio" name="impacto" value="Afetaram muito"> Afetaram muito</label>
+          </div>
+          <div class="erro-msg" id="err-impacto">Selecione uma opção.</div>
+        </div>
+        <div class="campo">
+          <span class="pergunta">O projeto está sendo desenvolvido em conexão com a sua organização de trabalho? <span class="req">*</span></span>
+          <div class="opcoes">
+            <label class="opcao"><input type="radio" name="vinculo" value="Sim, com apoio efetivo da organização"> Sim, com apoio efetivo da organização</label>
+            <label class="opcao"><input type="radio" name="vinculo" value="Sim, mas com apoio limitado"> Sim, mas com apoio limitado</label>
+            <label class="opcao"><input type="radio" name="vinculo" value="Parcialmente"> Parcialmente</label>
+            <label class="opcao"><input type="radio" name="vinculo" value="Não há conexão com a organização"> Não há conexão com a organização</label>
+          </div>
+          <div class="erro-msg" id="err-vinculo">Selecione uma opção.</div>
+        </div>
+        <div class="campo">
+          <span class="pergunta">O que mais dificultou seu trabalho no mestrado neste semestre? <span class="req">*</span><span class="sub">Marque todas que se aplicam</span></span>
+          <div class="opcoes">
+            <label class="opcao"><input type="checkbox" name="dificuldades" value="Gestão do tempo"> Gestão do tempo</label>
+            <label class="opcao"><input type="checkbox" name="dificuldades" value="Dificuldade metodológica"> Dificuldade metodológica</label>
+            <label class="opcao"><input type="checkbox" name="dificuldades" value="Escrita acadêmica"> Escrita acadêmica</label>
+            <label class="opcao"><input type="checkbox" name="dificuldades" value="Acesso a dados, equipamentos ou laboratórios"> Acesso a dados, equipamentos ou laboratórios</label>
+            <label class="opcao"><input type="checkbox" name="dificuldades" value="Demandas do trabalho"> Demandas do trabalho</label>
+            <label class="opcao"><input type="checkbox" name="dificuldades" value="Questões financeiras"> Questões financeiras</label>
+            <label class="opcao"><input type="checkbox" name="dificuldades" value="Deslocamento ou distância"> Deslocamento ou distância</label>
+            <label class="opcao"><input type="checkbox" name="dificuldades" value="Questões pessoais, familiares ou de saúde"> Questões pessoais, familiares ou de saúde</label>
+            <label class="opcao"><input type="checkbox" name="dificuldades" value="Falta de direcionamento"> Falta de direcionamento</label>
+            <label class="opcao"><input type="checkbox" name="dificuldades" value="Relação com a empresa ou organização"> Relação com a empresa ou organização</label>
+            <label class="opcao"><input type="checkbox" name="dificuldades" value="Nenhuma dificuldade relevante" data-exclusivo> Nenhuma dificuldade relevante</label>
+          </div>
+          <div class="erro-msg" id="err-dificuldades">Marque ao menos uma opção.</div>
+        </div>
+      </div>
+
+      <!-- 4. PERCEPÇÃO -->
+      <div class="bloco">
+        <div class="bloco-titulo"><div class="bloco-num">4</div><h2>Sua percepção sobre o semestre</h2></div>
+        <div class="campo">
+          <span class="pergunta">Como você avalia os itens abaixo neste momento? <span class="req">*</span></span>
+          <div class="sub-pergunta">Satisfação com o andamento do trabalho</div>
           <div class="escala">
             <label class="escala-item"><input type="radio" name="satisfacao" value="1">1</label>
             <label class="escala-item"><input type="radio" name="satisfacao" value="2">2</label>
@@ -231,11 +353,10 @@
             <label class="escala-item"><input type="radio" name="satisfacao" value="4">4</label>
             <label class="escala-item"><input type="radio" name="satisfacao" value="5">5</label>
           </div>
-          <div class="escala-legenda"><span>Muito insatisfeito(a)</span><span>Muito satisfeito(a)</span></div>
+          <div class="escala-legenda"><span>Muito baixa</span><span>Muito alta</span></div>
           <div class="erro-msg" id="err-satisfacao">Selecione um valor.</div>
-        </div>
-        <div class="campo">
-          <span class="pergunta">Clareza sobre os próximos passos do projeto <span class="req">*</span></span>
+
+          <div class="sub-pergunta">Clareza sobre os próximos passos do projeto</div>
           <div class="escala">
             <label class="escala-item"><input type="radio" name="clareza" value="1">1</label>
             <label class="escala-item"><input type="radio" name="clareza" value="2">2</label>
@@ -243,134 +364,150 @@
             <label class="escala-item"><input type="radio" name="clareza" value="4">4</label>
             <label class="escala-item"><input type="radio" name="clareza" value="5">5</label>
           </div>
-          <div class="escala-legenda"><span>Totalmente perdido(a)</span><span>Totalmente claro</span></div>
+          <div class="escala-legenda"><span>Muito baixa</span><span>Muito alta</span></div>
           <div class="erro-msg" id="err-clareza">Selecione um valor.</div>
-        </div>
-        <div class="campo">
-          <span class="pergunta">Como você avalia seu próprio ritmo de trabalho neste semestre? <span class="req">*</span></span>
-          <div class="opcoes">
-            <label class="opcao"><input type="radio" name="ritmo" value="Muito abaixo do que deveria"> Muito abaixo do que deveria</label>
-            <label class="opcao"><input type="radio" name="ritmo" value="Abaixo do esperado"> Abaixo do esperado</label>
-            <label class="opcao"><input type="radio" name="ritmo" value="Dentro do esperado"> Dentro do esperado</label>
-            <label class="opcao"><input type="radio" name="ritmo" value="Acima do esperado"> Acima do esperado</label>
+
+          <div class="sub-pergunta">Motivação com o mestrado</div>
+          <div class="escala">
+            <label class="escala-item"><input type="radio" name="motivacao" value="1">1</label>
+            <label class="escala-item"><input type="radio" name="motivacao" value="2">2</label>
+            <label class="escala-item"><input type="radio" name="motivacao" value="3">3</label>
+            <label class="escala-item"><input type="radio" name="motivacao" value="4">4</label>
+            <label class="escala-item"><input type="radio" name="motivacao" value="5">5</label>
           </div>
-          <div class="erro-msg" id="err-ritmo">Selecione uma opção.</div>
+          <div class="escala-legenda"><span>Muito baixa</span><span>Muito alta</span></div>
+          <div class="erro-msg" id="err-motivacao">Selecione um valor.</div>
         </div>
         <div class="campo">
-          <span class="pergunta">Você considera que toma iniciativa entre as reuniões de orientação? <span class="req">*</span></span>
+          <span class="pergunta">Em algum momento deste semestre você pensou em trancar ou interromper o mestrado? <span class="req">*</span></span>
           <div class="opcoes">
-            <label class="opcao"><input type="radio" name="iniciativa" value="Sim — busco o orientador, envio material e avanço sem esperar ser cobrado(a)"> Sim — busco o orientador, envio material e avanço sem esperar ser cobrado(a)</label>
-            <label class="opcao"><input type="radio" name="iniciativa" value="Parcialmente — às vezes tomo iniciativa, às vezes espero ser acionado(a)"> Parcialmente — às vezes tomo iniciativa, às vezes espero ser acionado(a)</label>
-            <label class="opcao"><input type="radio" name="iniciativa" value="Não — costumo avançar principalmente quando sou cobrado(a)"> Não — costumo avançar principalmente quando sou cobrado(a)</label>
+            <label class="opcao"><input type="radio" name="interromper" value="Não pensei"> Não pensei</label>
+            <label class="opcao"><input type="radio" name="interromper" value="Pensei, mas descartei"> Pensei, mas descartei</label>
+            <label class="opcao"><input type="radio" name="interromper" value="Penso nisso com alguma frequência"> Penso nisso com alguma frequência</label>
+            <label class="opcao"><input type="radio" name="interromper" value="Prefiro não responder"> Prefiro não responder</label>
           </div>
-          <div class="erro-msg" id="err-iniciativa">Selecione uma opção.</div>
+          <div class="nota-sigilo">🔒 Se precisar de apoio, a coordenação está à disposição para conversar.</div>
+          <div class="erro-msg" id="err-interromper">Selecione uma opção.</div>
         </div>
         <div class="campo">
-          <span class="pergunta">Você acredita que conseguirá defender no prazo regimental? <span class="req">*</span></span>
+          <span class="pergunta">Você acredita que concluirá o mestrado dentro do prazo regimental? <span class="req">*</span></span>
           <div class="opcoes">
-            <label class="opcao"><input type="radio" name="prazo" value="Sim, sem dificuldades"> Sim, sem dificuldades</label>
-            <label class="opcao"><input type="radio" name="prazo" value="Sim, mas será necessário esforço adicional"> Sim, mas será necessário esforço adicional</label>
+            <label class="opcao"><input type="radio" name="prazo" value="Sim, com tranquilidade"> Sim, com tranquilidade</label>
+            <label class="opcao"><input type="radio" name="prazo" value="Sim, mas com esforço adicional"> Sim, mas com esforço adicional</label>
             <label class="opcao"><input type="radio" name="prazo" value="Tenho dúvidas"> Tenho dúvidas</label>
-            <label class="opcao"><input type="radio" name="prazo" value="Não acredito que conseguirei no prazo atual"> Não acredito que conseguirei no prazo atual</label>
+            <label class="opcao"><input type="radio" name="prazo" value="Acredito que não"> Acredito que não</label>
           </div>
           <div class="erro-msg" id="err-prazo">Selecione uma opção.</div>
         </div>
       </div>
 
-      <div class="bloco">
-        <div class="bloco-titulo"><div class="bloco-num">3</div><h2>Contexto e condições de trabalho</h2></div>
-        <div class="campo">
-          <span class="pergunta">Sua carga de trabalho profissional impactou o mestrado neste semestre? <span class="req">*</span></span>
-          <div class="opcoes">
-            <label class="opcao"><input type="radio" name="carga" value="Não impactou"> Não impactou</label>
-            <label class="opcao"><input type="radio" name="carga" value="Impactou levemente"> Impactou levemente</label>
-            <label class="opcao"><input type="radio" name="carga" value="Impactou moderadamente"> Impactou moderadamente</label>
-            <label class="opcao"><input type="radio" name="carga" value="Impactou gravemente — foi o principal obstáculo"> Impactou gravemente — foi o principal obstáculo</label>
-          </div>
-          <div class="erro-msg" id="err-carga">Selecione uma opção.</div>
-        </div>
-        <div class="campo">
-          <span class="pergunta">O projeto está sendo desenvolvido em contexto real na sua empresa/organização? <span class="req">*</span></span>
-          <div class="opcoes">
-            <label class="opcao"><input type="radio" name="empresa" value="Sim, com total apoio da organização"> Sim, com total apoio da organização</label>
-            <label class="opcao"><input type="radio" name="empresa" value="Sim, mas com apoio limitado"> Sim, mas com apoio limitado</label>
-            <label class="opcao"><input type="radio" name="empresa" value="Parcialmente"> Parcialmente</label>
-            <label class="opcao"><input type="radio" name="empresa" value="Não — o projeto não tem vínculo com minha organização"> Não — o projeto não tem vínculo com minha organização</label>
-          </div>
-          <div class="erro-msg" id="err-empresa">Selecione uma opção.</div>
-        </div>
-        <div class="campo">
-          <span class="pergunta">Principais dificuldades encontradas <span class="req">*</span><span class="sub">Marque todas que se aplicam</span></span>
-          <div class="opcoes">
-            <label class="opcao"><input type="checkbox" name="dificuldades" value="Gestão do tempo"> Gestão do tempo</label>
-            <label class="opcao"><input type="checkbox" name="dificuldades" value="Dificuldade metodológica"> Dificuldade metodológica</label>
-            <label class="opcao"><input type="checkbox" name="dificuldades" value="Dificuldade com escrita acadêmica"> Dificuldade com escrita acadêmica</label>
-            <label class="opcao"><input type="checkbox" name="dificuldades" value="Acesso a dados ou equipamentos"> Acesso a dados ou equipamentos</label>
-            <label class="opcao"><input type="checkbox" name="dificuldades" value="Sobrecarga profissional"> Sobrecarga profissional</label>
-            <label class="opcao"><input type="checkbox" name="dificuldades" value="Questões pessoais ou de saúde"> Questões pessoais ou de saúde</label>
-            <label class="opcao"><input type="checkbox" name="dificuldades" value="Falta de direcionamento na orientação"> Falta de direcionamento na orientação</label>
-            <label class="opcao"><input type="checkbox" name="dificuldades" value="Dificuldades com a empresa/organização"> Dificuldades com a empresa/organização</label>
-            <label class="opcao"><input type="checkbox" name="dificuldades" value="Nenhuma dificuldade relevante" data-exclusivo> Nenhuma dificuldade relevante</label>
-          </div>
-          <div class="erro-msg" id="err-dificuldades">Marque ao menos uma opção.</div>
-        </div>
-      </div>
-
-      <div class="bloco">
-        <div class="bloco-titulo"><div class="bloco-num">4</div><h2>Motivação</h2></div>
-        <div class="campo">
-          <span class="pergunta">Como você descreveria sua motivação atual com o mestrado? <span class="req">*</span></span>
-          <div class="opcoes">
-            <label class="opcao"><input type="radio" name="motivacao" value="Muito motivado(a) — comprometido(a) com a conclusão"> Muito motivado(a) — comprometido(a) com a conclusão</label>
-            <label class="opcao"><input type="radio" name="motivacao" value="Motivado(a), apesar das dificuldades"> Motivado(a), apesar das dificuldades</label>
-            <label class="opcao"><input type="radio" name="motivacao" value="Com dificuldades de motivação, mas seguindo em frente"> Com dificuldades de motivação, mas seguindo em frente</label>
-            <label class="opcao"><input type="radio" name="motivacao" value="Desmotivado(a) — considerando interromper ou abandonar"> Desmotivado(a) — considerando interromper ou abandonar</label>
-          </div>
-          <div class="erro-msg" id="err-motivacao">Selecione uma opção.</div>
-        </div>
-      </div>
-
+      <!-- 5. PLANEJAMENTO -->
       <div class="bloco">
         <div class="bloco-titulo"><div class="bloco-num">5</div><h2>Planejamento</h2></div>
         <div class="campo">
-          <span class="pergunta">Marcos que pretende atingir nos próximos 6 meses <span class="req">*</span><span class="sub">Marque todos que se aplicam</span></span>
-          <div class="opcoes">
-            <label class="opcao"><input type="checkbox" name="marco" value="Concluir a revisão bibliográfica"> Concluir a revisão bibliográfica</label>
-            <label class="opcao"><input type="checkbox" name="marco" value="Concluir a coleta de dados"> Concluir a coleta de dados</label>
-            <label class="opcao"><input type="checkbox" name="marco" value="Concluir a análise de dados"> Concluir a análise de dados</label>
-            <label class="opcao"><input type="checkbox" name="marco" value="Escrever ao menos um capítulo"> Escrever ao menos um capítulo</label>
-            <label class="opcao"><input type="checkbox" name="marco" value="Submeter artigo científico"> Submeter artigo científico</label>
-            <label class="opcao"><input type="checkbox" name="marco" value="Realizar a qualificação"> Realizar a qualificação</label>
-            <label class="opcao"><input type="checkbox" name="marco" value="Realizar a defesa"> Realizar a defesa</label>
-            <label class="opcao"><input type="checkbox" name="marco" value="Outro" id="marco-outro"> Outro</label>
-          </div>
+          <span class="pergunta">Quais etapas você pretende concluir nos próximos 6 meses? <span class="req">*</span><span class="sub">Etapas já concluídas na matriz acima ficam indisponíveis</span></span>
+          <div class="opcoes" id="marcos"></div>
           <div class="outro-wrap" id="marco-outro-wrap">
-            <input type="text" id="marco-outro-texto" maxlength="200" placeholder="Descreva o outro marco que pretende atingir">
-            <div class="erro-msg" id="err-marco-outro">Descreva o marco indicado em "Outro".</div>
+            <input type="text" id="marco-outro-texto" maxlength="200" placeholder="Descreva a outra meta que pretende atingir">
+            <div class="erro-msg" id="err-marco-outro">Descreva a meta indicada em "Outra".</div>
           </div>
-          <div class="erro-msg" id="err-marco">Marque ao menos uma opção.</div>
+          <div class="erro-msg" id="err-marcos">Marque ao menos uma opção.</div>
         </div>
         <div class="campo">
-          <span class="pergunta">Cronograma de atividades previstas para o próximo semestre, mês a mês <span class="req">*</span><span class="sub">O Mês 1 corresponde ao primeiro mês após este relatório. Marque todas as atividades previstas em cada mês.</span></span>
-          <div class="meses-grid" id="meses-grid"></div>
-          <div class="erro-msg" id="err-cronograma">Marque ao menos uma atividade no Mês 1.</div>
+          <label for="prev-qualificacao">Previsão de realização da qualificação <span class="req">*</span></label>
+          <select id="prev-qualificacao"></select>
+          <div class="erro-msg" id="err-prev-qualificacao">Selecione uma opção.</div>
         </div>
         <div class="campo">
-          <span class="pergunta">Recursos ou apoio necessários <span class="req">*</span><span class="sub">Marque todos que se aplicam</span></span>
+          <label for="prev-defesa">Previsão de realização da defesa <span class="req">*</span></label>
+          <select id="prev-defesa"></select>
+          <div class="erro-msg" id="err-prev-defesa">Selecione uma opção.</div>
+        </div>
+        <div class="campo">
+          <span class="pergunta">Que tipo de apoio ajudaria você a cumprir esse planejamento? <span class="req">*</span><span class="sub">Marque todos que se aplicam</span></span>
           <div class="opcoes">
             <label class="opcao"><input type="checkbox" name="recursos" value="Acesso a equipamentos ou laboratórios"> Acesso a equipamentos ou laboratórios</label>
             <label class="opcao"><input type="checkbox" name="recursos" value="Curso ou capacitação técnica"> Curso ou capacitação técnica</label>
+            <label class="opcao"><input type="checkbox" name="recursos" value="Apoio em metodologia ou escrita científica"> Apoio em metodologia ou escrita científica</label>
             <label class="opcao"><input type="checkbox" name="recursos" value="Apoio da biblioteca"> Apoio da biblioteca</label>
-            <label class="opcao"><input type="checkbox" name="recursos" value="Maior frequência nas reuniões de orientação"> Maior frequência nas reuniões de orientação</label>
-            <label class="opcao"><input type="checkbox" name="recursos" value="Mediação com empresa parceira"> Mediação com empresa parceira</label>
+            <label class="opcao"><input type="checkbox" name="recursos" value="Maior frequência de orientação"> Maior frequência de orientação</label>
+            <label class="opcao"><input type="checkbox" name="recursos" value="Mediação com a empresa ou organização"> Mediação com a empresa ou organização</label>
             <label class="opcao"><input type="checkbox" name="recursos" value="Acesso a bases de dados ou softwares"> Acesso a bases de dados ou softwares</label>
-            <label class="opcao"><input type="checkbox" name="recursos" value="Nenhum recurso adicional necessário" data-exclusivo> Nenhum recurso adicional necessário</label>
+            <label class="opcao"><input type="checkbox" name="recursos" value="Nenhum apoio adicional necessário" data-exclusivo> Nenhum apoio adicional necessário</label>
           </div>
           <div class="erro-msg" id="err-recursos">Marque ao menos uma opção.</div>
         </div>
       </div>
 
-      <p class="declaracao">Declaro que as informações prestadas são verídicas. Estou ciente de que este relatório é de uso exclusivo da coordenação do PPGEMIN para fins de acompanhamento acadêmico.</p>
+      <!-- 6. PRODUÇÃO -->
+      <div class="bloco">
+        <div class="bloco-titulo"><div class="bloco-num">6</div><h2>Produção do semestre</h2></div>
+        <div class="campo">
+          <span class="pergunta">Quantidade de produções realizadas neste semestre <span class="sub">Inclua produções em coautoria relacionadas ao mestrado</span></span>
+          <div class="producao">
+            <span>Artigos submetidos a periódicos</span>
+            <select id="prod-submetidos"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3 ou mais</option></select>
+            <span>Artigos aceitos ou publicados em periódicos</span>
+            <select id="prod-publicados"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3 ou mais</option></select>
+            <span>Trabalhos apresentados ou publicados em eventos</span>
+            <select id="prod-eventos"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3 ou mais</option></select>
+            <span>Produtos técnicos ou tecnológicos (relatório técnico, software, processo, patente, material didático, curso etc.)</span>
+            <select id="prod-produtos"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3 ou mais</option></select>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. AVALIAÇÃO DO PROGRAMA -->
+      <div class="bloco">
+        <div class="bloco-titulo"><div class="bloco-num">7</div><h2>Avaliação do programa</h2></div>
+        <div class="campo">
+          <span class="pergunta">Como você avalia os seguintes aspectos do PPGEMIN neste semestre? <span class="req">*</span></span>
+          <div class="sub-pergunta">Disciplinas cursadas</div>
+          <div class="escala">
+            <label class="escala-item"><input type="radio" name="av-disciplinas" value="1">1</label>
+            <label class="escala-item"><input type="radio" name="av-disciplinas" value="2">2</label>
+            <label class="escala-item"><input type="radio" name="av-disciplinas" value="3">3</label>
+            <label class="escala-item"><input type="radio" name="av-disciplinas" value="4">4</label>
+            <label class="escala-item"><input type="radio" name="av-disciplinas" value="5">5</label>
+            <label class="escala-item na"><input type="radio" name="av-disciplinas" value="Não cursei disciplinas">Não cursei</label>
+          </div>
+          <div class="escala-legenda"><span>Muito insatisfeito(a)</span><span>Muito satisfeito(a)</span></div>
+          <div class="erro-msg" id="err-av-disciplinas">Selecione um valor.</div>
+
+          <div class="sub-pergunta">Infraestrutura (laboratórios, biblioteca, equipamentos)</div>
+          <div class="escala">
+            <label class="escala-item"><input type="radio" name="av-infra" value="1">1</label>
+            <label class="escala-item"><input type="radio" name="av-infra" value="2">2</label>
+            <label class="escala-item"><input type="radio" name="av-infra" value="3">3</label>
+            <label class="escala-item"><input type="radio" name="av-infra" value="4">4</label>
+            <label class="escala-item"><input type="radio" name="av-infra" value="5">5</label>
+          </div>
+          <div class="escala-legenda"><span>Muito insatisfeito(a)</span><span>Muito satisfeito(a)</span></div>
+          <div class="erro-msg" id="err-av-infra">Selecione um valor.</div>
+
+          <div class="sub-pergunta">Apoio da secretaria e da coordenação</div>
+          <div class="escala">
+            <label class="escala-item"><input type="radio" name="av-secretaria" value="1">1</label>
+            <label class="escala-item"><input type="radio" name="av-secretaria" value="2">2</label>
+            <label class="escala-item"><input type="radio" name="av-secretaria" value="3">3</label>
+            <label class="escala-item"><input type="radio" name="av-secretaria" value="4">4</label>
+            <label class="escala-item"><input type="radio" name="av-secretaria" value="5">5</label>
+          </div>
+          <div class="escala-legenda"><span>Muito insatisfeito(a)</span><span>Muito satisfeito(a)</span></div>
+          <div class="erro-msg" id="err-av-secretaria">Selecione um valor.</div>
+        </div>
+      </div>
+
+      <!-- 8. ESPAÇO LIVRE -->
+      <div class="bloco">
+        <div class="bloco-titulo"><div class="bloco-num">8</div><h2>Espaço livre</h2></div>
+        <div class="campo">
+          <label for="sugestao">Há algo que a coordenação poderia fazer para apoiar você? <span class="sub">Opcional</span></label>
+          <textarea id="sugestao" maxlength="1000" placeholder="Escreva aqui, se desejar."></textarea>
+        </div>
+      </div>
+
+      <p class="declaracao">Declaro que as informações prestadas são verídicas. Estou ciente de que este relatório é de uso exclusivo da coordenação do PPGEMIN para fins de acompanhamento acadêmico e aprimoramento do programa.</p>
       <button class="btn-primario" id="btn-enviar" type="button">Enviar relatório semestral</button>
       <div class="erro-inline" id="msg-erro">Ocorreu um erro ao enviar. Verifique sua conexão e tente novamente.</div>
     </section>
@@ -387,12 +524,27 @@
   // Regra de semestre: 1º semestre até 17/07 · 2º semestre de 18/07 a 31/12
   var FIM_SEM1_MES = 7, FIM_SEM1_DIA = 17;
 
-  var RADIOS = ['reunioes', 'satisfacao', 'clareza', 'ritmo', 'iniciativa',
-                'prazo', 'carga', 'empresa', 'motivacao'];
-  var CHECKS = ['etapa', 'entrega', 'dificuldades', 'marco', 'recursos'];
-  var ATIVIDADES_MES = ['Revisão bibliográfica', 'Coleta / desenvolvimento', 'Análise de dados',
-                        'Escrita de capítulos', 'Artigo científico', 'Qualificação',
-                        'Defesa / finalização', 'Outra atividade'];
+  // Lista única de etapas (idêntica à do Web App)
+  var ETAPAS = [
+    'Disciplinas obrigatórias',
+    'Definição do problema e dos objetivos',
+    'Revisão bibliográfica',
+    'Metodologia definida',
+    'Coleta de dados / desenvolvimento do produto',
+    'Análise de dados / validação do produto',
+    'Qualificação',
+    'Redação da dissertação',
+    'Artigo ou produto técnico derivado',
+    'Defesa'
+  ];
+  var STATUS = ['Não iniciada', 'Em andamento', 'Concluída'];
+  var IDX_QUALIFICACAO = 6;
+
+  var RADIOS = ['mudanca-tema', 'frequencia', 'envio-avancos', 'apoio', 'horas', 'situacao',
+                'mudanca-trabalho', 'liberacao', 'impacto', 'vinculo', 'satisfacao', 'clareza',
+                'motivacao', 'interromper', 'prazo', 'av-disciplinas', 'av-infra', 'av-secretaria'];
+  var CHECKS = ['dificuldades', 'marcos', 'recursos'];
+  var SELECTS = ['prev-qualificacao', 'prev-defesa'];
   var PAINEIS = ['painel-matricula', 'painel-confirmacao', 'painel-formulario'];
 
   var estado = {
@@ -555,34 +707,106 @@
     mostrar('painel-formulario');
   }
 
-  // ---------- FORMULÁRIO ----------
-  function montarCronograma() {
-    var grid = $('meses-grid');
-    for (var m = 1; m <= 6; m++) {
-      var box = document.createElement('div');
-      box.className = 'mes-box';
-      var cab = document.createElement('div');
-      cab.className = 'mes-header';
-      cab.textContent = 'Mês ' + m;
-      var corpo = document.createElement('div');
-      corpo.className = 'mes-body';
-      ATIVIDADES_MES.forEach(function (atv) {
+  // ---------- MONTAGEM DOS COMPONENTES ----------
+  function montarMatriz() {
+    var box = $('matriz');
+    ETAPAS.forEach(function (etapa, i) {
+      var linha = document.createElement('div');
+      linha.className = 'matriz-linha';
+      linha.id = 'linha-etapa-' + i;
+      var nome = document.createElement('div');
+      nome.className = 'matriz-etapa';
+      nome.textContent = etapa;
+      var segs = document.createElement('div');
+      segs.className = 'segmentos';
+      STATUS.forEach(function (st) {
         var lab = document.createElement('label');
-        lab.className = 'mes-opcao';
+        lab.className = 'seg';
+        lab.setAttribute('data-s', st);
         var inp = document.createElement('input');
-        inp.type = 'checkbox';
-        inp.name = 'mes' + m;
-        inp.value = atv;
+        inp.type = 'radio';
+        inp.name = 'etapa_' + i;
+        inp.value = st;
+        inp.setAttribute('data-indice', i);
         lab.appendChild(inp);
-        lab.appendChild(document.createTextNode(' ' + atv));
-        corpo.appendChild(lab);
+        lab.appendChild(document.createTextNode(st));
+        segs.appendChild(lab);
       });
-      box.appendChild(cab);
-      box.appendChild(corpo);
-      grid.appendChild(box);
+      linha.appendChild(nome);
+      linha.appendChild(segs);
+      box.appendChild(linha);
+    });
+  }
+
+  function montarMarcos() {
+    var box = $('marcos');
+    ETAPAS.forEach(function (etapa, i) {
+      var lab = document.createElement('label');
+      lab.className = 'opcao';
+      lab.id = 'marco-' + i;
+      var inp = document.createElement('input');
+      inp.type = 'checkbox';
+      inp.name = 'marcos';
+      inp.value = etapa;
+      lab.appendChild(inp);
+      lab.appendChild(document.createTextNode(' ' + etapa));
+      box.appendChild(lab);
+    });
+    var outro = document.createElement('label');
+    outro.className = 'opcao';
+    var inpO = document.createElement('input');
+    inpO.type = 'checkbox';
+    inpO.name = 'marcos';
+    inpO.value = 'Outra';
+    inpO.id = 'marco-outro';
+    outro.appendChild(inpO);
+    outro.appendChild(document.createTextNode(' Outra'));
+    box.appendChild(outro);
+  }
+
+  function montarPrevisoes() {
+    var nomesMes = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+    var hoje = new Date();
+    SELECTS.forEach(function (id) {
+      var sel = $(id);
+      var ops = [['', 'Selecione']];
+      if (id === 'prev-qualificacao') ops.push(['Já realizada', 'Já realizada']);
+      for (var k = 0; k <= 36; k++) {
+        var d = new Date(hoje.getFullYear(), hoje.getMonth() + k, 1);
+        var mm = d.getMonth() + 1;
+        ops.push([d.getFullYear() + '-' + (mm < 10 ? '0' : '') + mm, nomesMes[d.getMonth()] + '/' + d.getFullYear()]);
+      }
+      ops.push(['Ainda não sei estimar', 'Ainda não sei estimar']);
+      ops.forEach(function (o) {
+        var op = document.createElement('option');
+        op.value = o[0];
+        op.textContent = o[1];
+        sel.appendChild(op);
+      });
+    });
+  }
+
+  // Etapa concluída não pode ser meta dos próximos 6 meses
+  function sincronizarMarco(i, status) {
+    var lab = $('marco-' + i);
+    if (!lab) return;
+    var inp = lab.querySelector('input');
+    if (status === 'Concluída') {
+      inp.checked = false;
+      inp.disabled = true;
+      lab.classList.remove('selecionada');
+      lab.classList.add('desabilitada');
+    } else {
+      inp.disabled = false;
+      lab.classList.remove('desabilitada');
+    }
+    if (i === IDX_QUALIFICACAO && status === 'Concluída') {
+      $('prev-qualificacao').value = 'Já realizada';
+      $('err-prev-qualificacao').style.display = 'none';
     }
   }
 
+  // ---------- VALIDAÇÃO E ENVIO ----------
   function getRadio(n) {
     var el = document.querySelector('input[name="' + n + '"]:checked');
     return el ? el.value : '';
@@ -594,11 +818,20 @@
 
   function validar() {
     $('err-titulo').style.display = $('titulo').value.trim() ? 'none' : 'block';
+
+    var faltaMatriz = false;
+    ETAPAS.forEach(function (e, i) {
+      var falta = !getRadio('etapa_' + i);
+      $('linha-etapa-' + i).classList.toggle('falta', falta);
+      if (falta) faltaMatriz = true;
+    });
+    $('err-matriz').style.display = faltaMatriz ? 'block' : 'none';
+
     RADIOS.forEach(function (n) { $('err-' + n).style.display = getRadio(n) ? 'none' : 'block'; });
     CHECKS.forEach(function (n) { $('err-' + n).style.display = getChecked(n).length ? 'none' : 'block'; });
-    var outroMarcado = $('marco-outro').checked;
-    $('err-marco-outro').style.display = (outroMarcado && !$('marco-outro-texto').value.trim()) ? 'block' : 'none';
-    $('err-cronograma').style.display = getChecked('mes1').length ? 'none' : 'block';
+    SELECTS.forEach(function (id) { $('err-' + id).style.display = $(id).value ? 'none' : 'block'; });
+    $('err-marco-outro').style.display = ($('marco-outro').checked && !$('marco-outro-texto').value.trim()) ? 'block' : 'none';
+
     var erros = $('painel-formulario').querySelectorAll('.erro-msg');
     for (var i = 0; i < erros.length; i++) {
       if (erros[i].style.display === 'block') {
@@ -619,10 +852,9 @@
     btn.textContent = 'Enviando…';
 
     var a = estado.aluno;
-    var cronograma = [1, 2, 3, 4, 5, 6].map(function (m) {
-      var v = getChecked('mes' + m);
-      return 'Mês ' + m + ': ' + (v.length ? v.join(', ') : '—');
-    });
+    var progresso = {};
+    ETAPAS.forEach(function (e, i) { progresso[e] = getRadio('etapa_' + i); });
+
     var dados = {
       tipo: 'discente',
       semestre: estado.semestre,
@@ -631,23 +863,37 @@
       orientador: a.orientador,
       emailDiscente: a.email,
       titulo: $('titulo').value.trim(),
-      etapa: getChecked('etapa'),
-      reunioes: getRadio('reunioes'),
-      entrega: getChecked('entrega'),
+      mudancaTema: getRadio('mudanca-tema'),
+      progresso: progresso,
+      frequencia: getRadio('frequencia'),
+      envioAvancos: getRadio('envio-avancos'),
+      apoio: getRadio('apoio'),
+      horas: getRadio('horas'),
+      situacao: getRadio('situacao'),
+      mudancaTrabalho: getRadio('mudanca-trabalho'),
+      liberacao: getRadio('liberacao'),
+      impacto: getRadio('impacto'),
+      vinculo: getRadio('vinculo'),
+      dificuldades: getChecked('dificuldades'),
       satisfacao: getRadio('satisfacao'),
       clareza: getRadio('clareza'),
-      ritmo: getRadio('ritmo'),
-      iniciativa: getRadio('iniciativa'),
-      prazo: getRadio('prazo'),
-      carga: getRadio('carga'),
-      empresa: getRadio('empresa'),
-      dificuldades: getChecked('dificuldades'),
       motivacao: getRadio('motivacao'),
-      marco: getChecked('marco').map(function (m) {
-        return m === 'Outro' ? 'Outro: ' + $('marco-outro-texto').value.trim() : m;
+      interromper: getRadio('interromper'),
+      prazo: getRadio('prazo'),
+      marcos: getChecked('marcos').map(function (m) {
+        return m === 'Outra' ? 'Outra: ' + $('marco-outro-texto').value.trim() : m;
       }),
-      cronograma: cronograma,
-      recursos: getChecked('recursos')
+      prevQualificacao: $('prev-qualificacao').value,
+      prevDefesa: $('prev-defesa').value,
+      recursos: getChecked('recursos'),
+      artigosSubmetidos: $('prod-submetidos').value,
+      artigosPublicados: $('prod-publicados').value,
+      eventos: $('prod-eventos').value,
+      produtos: $('prod-produtos').value,
+      avDisciplinas: getRadio('av-disciplinas'),
+      avInfra: getRadio('av-infra'),
+      avSecretaria: getRadio('av-secretaria'),
+      sugestao: $('sugestao').value.trim()
     };
 
     fetch(WEBAPP_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dados) })
@@ -692,8 +938,15 @@
 
   document.addEventListener('change', function (e) {
     var el = e.target;
+
+    if (el.tagName === 'SELECT') {
+      var errSel = $('err-' + el.id);
+      if (errSel && el.value) errSel.style.display = 'none';
+      return;
+    }
     if (el.type !== 'radio' && el.type !== 'checkbox') return;
 
+    // Opções exclusivas ("Nenhum...") desmarcam as demais e vice-versa
     if (el.type === 'checkbox' && el.checked) {
       Array.prototype.forEach.call(document.querySelectorAll('input[name="' + el.name + '"]'), function (o) {
         if (o === el) return;
@@ -707,33 +960,44 @@
 
     if (el.type === 'radio') {
       Array.prototype.forEach.call(document.querySelectorAll('input[name="' + el.name + '"]'), function (r) {
-        var c = r.closest('.opcao, .escala-item');
+        var c = r.closest('.opcao, .escala-item, .seg');
         if (c) c.classList.remove('selecionada');
       });
     }
-    var alvo = el.closest('.opcao, .escala-item');
+    var alvo = el.closest('.opcao, .escala-item, .seg');
     if (alvo) alvo.classList.toggle('selecionada', el.checked);
+
+    // Matriz de progresso
+    if (el.hasAttribute('data-indice')) {
+      var i = Number(el.getAttribute('data-indice'));
+      $('linha-etapa-' + i).classList.remove('falta');
+      sincronizarMarco(i, el.value);
+      var faltam = ETAPAS.some(function (x, k) { return !getRadio('etapa_' + k); });
+      if (!faltam) $('err-matriz').style.display = 'none';
+      return;
+    }
+
+    // Campo "Outra" nas metas
+    if (el.id === 'marco-outro') {
+      $('marco-outro-wrap').style.display = el.checked ? 'block' : 'none';
+      if (el.checked) $('marco-outro-texto').focus();
+      else { $('marco-outro-texto').value = ''; $('err-marco-outro').style.display = 'none'; }
+    }
 
     var campo = el.closest('.campo');
     if (campo) {
-      var er = campo.querySelector('.erro-msg');
+      var er = $('err-' + el.name);
       if (er) er.style.display = 'none';
     }
   });
 
-  $('marco-outro').addEventListener('change', function () {
-    $('marco-outro-wrap').style.display = this.checked ? 'block' : 'none';
-    if (this.checked) $('marco-outro-texto').focus();
-    else { $('marco-outro-texto').value = ''; $('err-marco-outro').style.display = 'none'; }
-  });
-  $('marco-outro-texto').addEventListener('input', function () {
-    if (this.value.trim()) $('err-marco-outro').style.display = 'none';
-  });
-
   $('titulo').addEventListener('input', function () { if (this.value.trim()) $('err-titulo').style.display = 'none'; });
+  $('marco-outro-texto').addEventListener('input', function () { if (this.value.trim()) $('err-marco-outro').style.display = 'none'; });
 
   limparCacheAntigo();
-  montarCronograma();
+  montarMatriz();
+  montarMarcos();
+  montarPrevisoes();
   exibirSemestre();
   mostrar('painel-matricula');
   carregarCadastro(null); // pré-carrega o cadastro em segundo plano

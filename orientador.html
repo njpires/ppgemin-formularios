@@ -39,15 +39,23 @@
   .sub { font-size: 12px; font-weight: 400; color: var(--cinza-3); display: block; margin-top: 3px; letter-spacing: 0; }
   .req { color: var(--alerta); margin-left: 2px; }
 
-  select { width: 100%; border: 1.5px solid var(--cinza-2); border-radius: 8px; padding: 11px 13px; font-size: 14px; font-family: inherit; color: var(--texto); background: var(--branco); }
-  select:focus { outline: none; border-color: var(--roxo-meio); box-shadow: 0 0 0 3px rgba(91,61,174,0.12); }
+  select, textarea { width: 100%; border: 1.5px solid var(--cinza-2); border-radius: 8px; padding: 11px 13px; font-size: 14px; font-family: inherit; color: var(--texto); background: var(--branco); }
+  select:focus, textarea:focus { outline: none; border-color: var(--roxo-meio); box-shadow: 0 0 0 3px rgba(91,61,174,0.12); }
   select:disabled { color: var(--cinza-3); background: var(--cinza-1); }
+  textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
 
   .opcoes { display: flex; flex-direction: column; gap: 7px; }
   .opcao { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border: 1.5px solid var(--cinza-2); border-radius: 8px; cursor: pointer; transition: border-color .15s, background .15s; font-size: 13px; font-weight: 400; color: var(--texto-leve); line-height: 1.45; }
   .opcao:hover { border-color: var(--roxo-meio); background: var(--roxo-claro); }
   .opcao input { margin-top: 2px; flex-shrink: 0; accent-color: var(--roxo); width: 15px; height: 15px; }
   .opcao.selecionada { border-color: var(--roxo); background: var(--roxo-claro); color: var(--texto); font-weight: 600; }
+
+  .escala { display: flex; gap: 8px; }
+  .escala-item { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px 6px; border: 1.5px solid var(--cinza-2); border-radius: 8px; cursor: pointer; transition: all .15s; font-size: 16px; font-weight: 700; color: var(--roxo); }
+  .escala-item:hover { border-color: var(--roxo-meio); background: var(--roxo-claro); }
+  .escala-item input { position: absolute; opacity: 0; pointer-events: none; }
+  .escala-item.selecionada { background: var(--roxo); border-color: var(--roxo); color: #fff; }
+  .escala-legenda { display: flex; justify-content: space-between; font-size: 11px; color: var(--cinza-3); margin-top: 6px; }
 
   .risco-item { display: flex; align-items: flex-start; gap: 12px; padding: 11px 15px; border: 1.5px solid var(--cinza-2); border-radius: 8px; margin-bottom: 7px; cursor: pointer; transition: all .15s; }
   .risco-item:hover { border-color: var(--roxo-meio); background: var(--roxo-claro); }
@@ -59,7 +67,6 @@
 
   .alerta-box { background: #FFF8E6; border-left: 4px solid #F0A500; border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 13px; color: #7A5800; margin-bottom: 22px; line-height: 1.6; }
 
-  /* Chave */
   .centro { text-align: center; }
   .icone-grande { font-size: 46px; margin-bottom: 14px; }
   .titulo-painel { font-size: 19px; font-weight: 700; color: var(--roxo); margin-bottom: 8px; }
@@ -67,11 +74,9 @@
   .chave-input { width: 100%; border: 2px solid var(--cinza-2); border-radius: 10px; padding: 13px 16px; font-size: 17px; font-family: inherit; font-weight: 700; letter-spacing: 0.12em; text-align: center; color: var(--roxo); text-transform: uppercase; }
   .chave-input:focus { outline: none; border-color: var(--roxo); box-shadow: 0 0 0 3px rgba(91,61,174,0.12); }
 
-  /* Semestre */
   .sem-badge { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--roxo-claro); border: 1.5px solid #D9CCF7; border-radius: 10px; padding: 12px 16px; margin-bottom: 24px; font-size: 13px; color: var(--texto-leve); }
   .sem-badge strong { color: var(--roxo); font-size: 14px; }
 
-  /* Lista */
   .ori-box { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--roxo-claro); border: 1.5px solid var(--roxo); border-radius: 12px; padding: 14px 18px; margin-bottom: 18px; }
   .ori-label { font-size: 11px; font-weight: 600; color: var(--cinza-3); text-transform: uppercase; letter-spacing: 0.06em; }
   .ori-nome { font-size: 15px; font-weight: 700; color: var(--roxo); }
@@ -79,6 +84,12 @@
   .ori-sem strong { color: var(--roxo); }
   .btn-sair-mini { background: var(--branco); border: 1.5px solid var(--roxo); color: var(--roxo); border-radius: 8px; padding: 7px 14px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; white-space: nowrap; }
   .btn-sair-mini:hover { background: var(--roxo); color: #fff; }
+
+  .geral-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1.5px dashed var(--roxo-meio); border-radius: 12px; padding: 14px 18px; margin-bottom: 24px; background: #FBF9FF; }
+  .geral-card.respondido { border-style: solid; border-color: #A8D8C2; background: var(--verde-bg); }
+  .geral-titulo { font-size: 14px; font-weight: 700; color: var(--roxo); }
+  .geral-card.respondido .geral-titulo { color: var(--verde); }
+  .geral-desc { font-size: 12px; color: var(--texto-leve); margin-top: 2px; }
 
   .progresso-wrap { margin-bottom: 22px; }
   .progresso-topo { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
@@ -105,7 +116,6 @@
   .aviso-erro { display: none; background: #FDEAEA; border: 1px solid #F1B0A8; border-radius: 8px; padding: 11px 14px; font-size: 13px; color: var(--alerta); margin: 10px 0 16px; }
   .aviso-erro .link-btn { color: var(--alerta); font-size: 13px; font-weight: 600; }
 
-  /* Formulário */
   .disc-selecionado { background: var(--verde-bg); border: 1.5px solid #A8D8C2; border-radius: 10px; padding: 16px 20px; margin-bottom: 28px; display: flex; align-items: center; gap: 14px; }
   .disc-sel-icon { font-size: 26px; }
   .disc-sel-nome { font-size: 16px; font-weight: 700; color: var(--verde); }
@@ -133,7 +143,7 @@
     .header { padding: 24px 20px; }
     .header-top { flex-direction: column; align-items: flex-start; gap: 10px; }
     .body { padding: 24px 18px; }
-    .ori-box, .sem-badge { flex-direction: column; align-items: flex-start; }
+    .ori-box, .sem-badge, .geral-card { flex-direction: column; align-items: flex-start; }
     .disc-item { flex-direction: column; align-items: flex-start; }
     .disc-acao { align-items: flex-start; }
   }
@@ -149,7 +159,7 @@
         <p>Mestrado Profissional em Engenharia de Minas · CEFET-MG Araxá · Orientador(a)</p>
       </div>
     </div>
-    <div class="header-desc">Preencha com atenção. Suas respostas são confidenciais e ficarão disponíveis exclusivamente para a coordenação do PPGEMIN. Os discentes também são consultados separadamente, por meio de formulário próprio.</div>
+    <div class="header-desc">Sua visão sobre o andamento das orientações ajuda a coordenação a apoiar discentes e docentes e a aprimorar o programa. As respostas são confidenciais e ficarão disponíveis exclusivamente para a coordenação do PPGEMIN. Os discentes também são consultados separadamente, por meio de formulário próprio.</div>
   </div>
 
   <div class="body">
@@ -189,6 +199,14 @@
         <button type="button" class="btn-sair-mini" data-sair>Sair</button>
       </div>
 
+      <div class="geral-card" id="geral-card">
+        <div>
+          <div class="geral-titulo">Avaliação geral do semestre</div>
+          <div class="geral-desc">Uma vez por semestre: sua visão sobre as condições de orientação e o programa.</div>
+        </div>
+        <div class="disc-acao" id="geral-acao"></div>
+      </div>
+
       <div class="progresso-wrap">
         <div class="progresso-topo">
           <div class="progresso-label" id="prog-label"></div>
@@ -205,9 +223,9 @@
       <p class="nota-centro">As avaliações já enviadas permanecem registradas. Você pode retomar a qualquer momento, de qualquer dispositivo.</p>
     </section>
 
-    <!-- FORMULÁRIO -->
+    <!-- FORMULÁRIO POR DISCENTE -->
     <section class="painel" id="painel-formulario">
-      <button type="button" class="btn-voltar" id="btn-voltar">← Voltar para a lista</button>
+      <button type="button" class="btn-voltar" data-voltar>← Voltar para a lista</button>
 
       <div class="disc-selecionado">
         <div class="disc-sel-icon">📋</div>
@@ -218,23 +236,24 @@
       </div>
 
       <div class="bloco">
-        <div class="bloco-titulo"><div class="bloco-num">1</div><h2>Acompanhamento real</h2></div>
+        <div class="bloco-titulo"><div class="bloco-num">1</div><h2>Acompanhamento</h2></div>
         <div class="campo">
-          <span class="pergunta">Quantas reuniões de orientação ocorreram neste semestre? <span class="req">*</span></span>
+          <span class="pergunta">Com que frequência ocorreram reuniões de orientação neste semestre? <span class="req">*</span></span>
           <div class="opcoes">
-            <label class="opcao"><input type="radio" name="reunioes" value="Nenhuma"> Nenhuma</label>
-            <label class="opcao"><input type="radio" name="reunioes" value="1 a 2 reuniões"> 1 a 2 reuniões</label>
-            <label class="opcao"><input type="radio" name="reunioes" value="3 a 4 reuniões"> 3 a 4 reuniões</label>
-            <label class="opcao"><input type="radio" name="reunioes" value="5 ou mais reuniões"> 5 ou mais reuniões</label>
+            <label class="opcao"><input type="radio" name="frequencia" value="Semanal"> Semanal</label>
+            <label class="opcao"><input type="radio" name="frequencia" value="Quinzenal"> Quinzenal</label>
+            <label class="opcao"><input type="radio" name="frequencia" value="Mensal"> Mensal</label>
+            <label class="opcao"><input type="radio" name="frequencia" value="Esporádica (menos de uma vez por mês)"> Esporádica (menos de uma vez por mês)</label>
+            <label class="opcao"><input type="radio" name="frequencia" value="Não houve reuniões"> Não houve reuniões</label>
           </div>
-          <div class="erro-msg" id="err-reunioes">Selecione uma opção.</div>
+          <div class="erro-msg" id="err-frequencia">Selecione uma opção.</div>
         </div>
         <div class="campo">
           <span class="pergunta">Como você avalia a qualidade dessas reuniões? <span class="req">*</span></span>
           <div class="opcoes">
             <label class="opcao"><input type="radio" name="qualidade-reunioes" value="Produtivas — com pauta, entregas e encaminhamentos claros"> Produtivas — com pauta, entregas e encaminhamentos claros</label>
-            <label class="opcao"><input type="radio" name="qualidade-reunioes" value="Razoáveis — ocorreram mas sem estrutura definida"> Razoáveis — ocorreram mas sem estrutura definida</label>
-            <label class="opcao"><input type="radio" name="qualidade-reunioes" value="Superficiais — pouco aproveitamento"> Superficiais — pouco aproveitamento</label>
+            <label class="opcao"><input type="radio" name="qualidade-reunioes" value="Razoáveis — ocorreram, mas sem estrutura definida"> Razoáveis — ocorreram, mas sem estrutura definida</label>
+            <label class="opcao"><input type="radio" name="qualidade-reunioes" value="Pouco produtivas"> Pouco produtivas</label>
             <label class="opcao"><input type="radio" name="qualidade-reunioes" value="Não se aplica — não houve reuniões"> Não se aplica — não houve reuniões</label>
           </div>
           <div class="erro-msg" id="err-qualidade-reunioes">Selecione uma opção.</div>
@@ -242,131 +261,172 @@
         <div class="campo">
           <span class="pergunta">O(a) discente demonstra autonomia e iniciativa entre as reuniões? <span class="req">*</span></span>
           <div class="opcoes">
-            <label class="opcao"><input type="radio" name="autonomia" value="Sim — toma iniciativa, envia material e busca o orientador proativamente"> Sim — toma iniciativa, envia material e busca o orientador proativamente</label>
-            <label class="opcao"><input type="radio" name="autonomia" value="Parcialmente — responde quando cobrado mas raramente toma iniciativa"> Parcialmente — responde quando cobrado mas raramente toma iniciativa</label>
-            <label class="opcao"><input type="radio" name="autonomia" value="Não — precisa ser constantemente estimulado(a)"> Não — precisa ser constantemente estimulado(a)</label>
-            <label class="opcao"><input type="radio" name="autonomia" value="Não tenho como avaliar neste semestre"> Não tenho como avaliar neste semestre</label>
+            <label class="opcao"><input type="radio" name="autonomia" value="Sim — toma iniciativa e envia avanços proativamente"> Sim — toma iniciativa e envia avanços proativamente</label>
+            <label class="opcao"><input type="radio" name="autonomia" value="Parcialmente — avança quando acionado(a)"> Parcialmente — avança quando acionado(a)</label>
+            <label class="opcao"><input type="radio" name="autonomia" value="Pouco — precisa de estímulo constante"> Pouco — precisa de estímulo constante</label>
+            <label class="opcao"><input type="radio" name="autonomia" value="Não foi possível avaliar neste semestre"> Não foi possível avaliar neste semestre</label>
           </div>
           <div class="erro-msg" id="err-autonomia">Selecione uma opção.</div>
         </div>
       </div>
 
       <div class="bloco">
-        <div class="bloco-titulo"><div class="bloco-num">2</div><h2>Avaliação do desenvolvimento</h2></div>
+        <div class="bloco-titulo"><div class="bloco-num">2</div><h2>Desenvolvimento do trabalho</h2></div>
         <div class="campo">
-          <span class="pergunta">Comprometimento e dedicação do(a) discente <span class="req">*</span></span>
+          <span class="pergunta">Evolução do projeto no semestre, considerando o momento do curso <span class="req">*</span></span>
           <div class="opcoes">
-            <label class="opcao"><input type="radio" name="comprometimento" value="Excelente — supera as expectativas, proativo(a) e disciplinado(a)"> Excelente — supera as expectativas, proativo(a) e disciplinado(a)</label>
-            <label class="opcao"><input type="radio" name="comprometimento" value="Bom — cumpre as demandas e mantém regularidade satisfatória"> Bom — cumpre as demandas e mantém regularidade satisfatória</label>
-            <label class="opcao"><input type="radio" name="comprometimento" value="Regular — desempenho aceitável, mas com inconsistências"> Regular — desempenho aceitável, mas com inconsistências</label>
-            <label class="opcao"><input type="radio" name="comprometimento" value="Precisa melhorar — dificuldades evidentes de comprometimento ou entrega"> Precisa melhorar — dificuldades evidentes de comprometimento ou entrega</label>
-          </div>
-          <div class="erro-msg" id="err-comprometimento">Selecione uma opção.</div>
-        </div>
-        <div class="campo">
-          <span class="pergunta">Evolução percebida do projeto no semestre <span class="req">*</span></span>
-          <div class="opcoes">
-            <label class="opcao"><input type="radio" name="evolucao" value="Acima do esperado para o período"> Acima do esperado para o período</label>
-            <label class="opcao"><input type="radio" name="evolucao" value="Dentro do esperado para o período"> Dentro do esperado para o período</label>
-            <label class="opcao"><input type="radio" name="evolucao" value="Abaixo do esperado, mas com avanço parcial"> Abaixo do esperado, mas com avanço parcial</label>
+            <label class="opcao"><input type="radio" name="evolucao" value="Acima do esperado"> Acima do esperado</label>
+            <label class="opcao"><input type="radio" name="evolucao" value="Dentro do esperado"> Dentro do esperado</label>
+            <label class="opcao"><input type="radio" name="evolucao" value="Abaixo do esperado, com avanço parcial"> Abaixo do esperado, com avanço parcial</label>
             <label class="opcao"><input type="radio" name="evolucao" value="Abaixo do esperado, com avanço mínimo"> Abaixo do esperado, com avanço mínimo</label>
             <label class="opcao"><input type="radio" name="evolucao" value="Sem avanço perceptível"> Sem avanço perceptível</label>
           </div>
           <div class="erro-msg" id="err-evolucao">Selecione uma opção.</div>
         </div>
         <div class="campo">
-          <span class="pergunta">Como você avalia a qualidade da produção escrita do(a) discente? <span class="req">*</span></span>
+          <span class="pergunta">Qualidade da produção escrita do(a) discente <span class="req">*</span></span>
           <div class="opcoes">
-            <label class="opcao"><input type="radio" name="escrita" value="Não houve produção escrita / ainda não avaliado (1º semestre)"> Não houve produção escrita / ainda não avaliado (1º semestre)</label>
-            <label class="opcao"><input type="radio" name="escrita" value="Abaixo do esperado — requer orientação intensa"> Abaixo do esperado — requer orientação intensa</label>
+            <label class="opcao"><input type="radio" name="escrita" value="Ainda não avaliável (sem produção escrita no período)"> Ainda não avaliável (sem produção escrita no período)</label>
+            <label class="opcao"><input type="radio" name="escrita" value="Requer orientação intensa"> Requer orientação intensa</label>
             <label class="opcao"><input type="radio" name="escrita" value="Em desenvolvimento — evolui com feedback"> Em desenvolvimento — evolui com feedback</label>
-            <label class="opcao"><input type="radio" name="escrita" value="Adequada — escreve com qualidade satisfatória"> Adequada — escreve com qualidade satisfatória</label>
-            <label class="opcao"><input type="radio" name="escrita" value="Acima do esperado — escreve com independência e qualidade"> Acima do esperado — escreve com independência e qualidade</label>
+            <label class="opcao"><input type="radio" name="escrita" value="Adequada"> Adequada</label>
+            <label class="opcao"><input type="radio" name="escrita" value="Acima do esperado — escreve com independência"> Acima do esperado — escreve com independência</label>
           </div>
           <div class="erro-msg" id="err-escrita">Selecione uma opção.</div>
         </div>
-        <div class="campo">
-          <span class="pergunta">O projeto está sendo desenvolvido em contexto real na organização do(a) discente? <span class="req">*</span></span>
-          <div class="opcoes">
-            <label class="opcao"><input type="radio" name="contexto" value="Sim — há integração clara entre o projeto e a organização"> Sim — há integração clara entre o projeto e a organização</label>
-            <label class="opcao"><input type="radio" name="contexto" value="Parcialmente — há vínculo mas com limitações"> Parcialmente — há vínculo mas com limitações</label>
-            <label class="opcao"><input type="radio" name="contexto" value="Não — o projeto perdeu conexão com a realidade organizacional"> Não — o projeto perdeu conexão com a realidade organizacional</label>
-            <label class="opcao"><input type="radio" name="contexto" value="Não se aplica — discente sem vínculo organizacional definido"> Não se aplica — discente sem vínculo organizacional definido</label>
-          </div>
-          <div class="erro-msg" id="err-contexto">Selecione uma opção.</div>
-        </div>
       </div>
 
       <div class="bloco">
-        <div class="bloco-titulo"><div class="bloco-num">3</div><h2>Indicadores de risco</h2></div>
-        <div class="alerta-box">Preencha com base na sua avaliação geral do(a) discente. As informações são de uso exclusivo da coordenação do PPGEMIN para fins de acompanhamento acadêmico e apoio preventivo.</div>
+        <div class="bloco-titulo"><div class="bloco-num">3</div><h2>Pontos de atenção</h2></div>
+        <div class="alerta-box">As informações são de uso exclusivo da coordenação, para apoio preventivo, e não são compartilhadas com o(a) discente.</div>
         <div class="campo">
-          <span class="pergunta">Riscos identificados <span class="req">*</span><span class="sub">Marque todos que se aplicam</span></span>
-          <label class="risco-item"><input type="checkbox" name="riscos" value="Baixa produtividade"><div><div class="risco-titulo">Baixa produtividade</div><div class="risco-desc">Pouco avanço em relação ao esperado para o período</div></div></label>
-          <label class="risco-item"><input type="checkbox" name="riscos" value="Dificuldades acadêmicas específicas (escrita, metodologia, análise)"><div><div class="risco-titulo">Dificuldades acadêmicas</div><div class="risco-desc">Escrita, metodologia ou análise de dados</div></div></label>
-          <label class="risco-item"><input type="checkbox" name="riscos" value="Frequência irregular nas reuniões"><div><div class="risco-titulo">Frequência irregular nas reuniões</div><div class="risco-desc">Ausências recorrentes ou contato esporádico</div></div></label>
-          <label class="risco-item"><input type="checkbox" name="riscos" value="Problemas de comunicação"><div><div class="risco-titulo">Problemas de comunicação</div><div class="risco-desc">Não responde, evita feedback, não cumpre combinados</div></div></label>
-          <label class="risco-item"><input type="checkbox" name="riscos" value="Dificuldades com a empresa ou parceiro"><div><div class="risco-titulo">Dificuldades com a empresa ou parceiro</div><div class="risco-desc">Para projetos com empresa coparticipante</div></div></label>
-          <label class="risco-item"><input type="checkbox" name="riscos" value="Questões pessoais ou profissionais"><div><div class="risco-titulo">Questões pessoais ou profissionais</div><div class="risco-desc">Situações externas que impactam o mestrado</div></div></label>
-          <label class="risco-item"><input type="checkbox" name="riscos" value="Falta de clareza sobre o rumo do projeto"><div><div class="risco-titulo">Falta de clareza sobre o rumo do projeto</div><div class="risco-desc">Tema, problema ou metodologia ainda inseguros</div></div></label>
-          <label class="risco-item"><input type="checkbox" name="riscos" value="Desmotivação ou desânimo aparente"><div><div class="risco-titulo">Desmotivação ou desânimo aparente</div><div class="risco-desc">Sinais de baixa motivação ou intenção de abandono</div></div></label>
-          <label class="risco-item"><input type="checkbox" name="riscos" value="Nenhum risco significativo identificado" data-exclusivo><div><div class="risco-titulo">Nenhum risco significativo identificado</div><div class="risco-desc">O(a) discente apresenta desenvolvimento satisfatório</div></div></label>
+          <span class="pergunta">Você observou algum destes pontos neste semestre? <span class="req">*</span><span class="sub">Marque todos que se aplicam</span></span>
+          <label class="risco-item"><input type="checkbox" name="riscos" value="Ritmo de produção abaixo do esperado"><div><div class="risco-titulo">Ritmo de produção abaixo do esperado</div><div class="risco-desc">Pouco avanço em relação ao momento do curso</div></div></label>
+          <label class="risco-item"><input type="checkbox" name="riscos" value="Dificuldades acadêmicas (escrita, metodologia, análise)"><div><div class="risco-titulo">Dificuldades acadêmicas</div><div class="risco-desc">Escrita, metodologia ou análise de dados</div></div></label>
+          <label class="risco-item"><input type="checkbox" name="riscos" value="Contato irregular com a orientação"><div><div class="risco-titulo">Contato irregular com a orientação</div><div class="risco-desc">Ausências recorrentes ou contato esporádico</div></div></label>
+          <label class="risco-item"><input type="checkbox" name="riscos" value="Dificuldades de comunicação"><div><div class="risco-titulo">Dificuldades de comunicação</div><div class="risco-desc">Demora em responder, pouca troca de feedback</div></div></label>
+          <label class="risco-item"><input type="checkbox" name="riscos" value="Dificuldades com a empresa ou organização"><div><div class="risco-titulo">Dificuldades com a empresa ou organização</div><div class="risco-desc">Acesso a dados, apoio ou liberação</div></div></label>
+          <label class="risco-item"><input type="checkbox" name="riscos" value="Questões pessoais ou profissionais afetando o curso"><div><div class="risco-titulo">Questões pessoais ou profissionais</div><div class="risco-desc">Situações externas que afetam o andamento</div></div></label>
+          <label class="risco-item"><input type="checkbox" name="riscos" value="Indefinição sobre o rumo do projeto"><div><div class="risco-titulo">Indefinição sobre o rumo do projeto</div><div class="risco-desc">Tema, problema ou metodologia ainda instáveis</div></div></label>
+          <label class="risco-item"><input type="checkbox" name="riscos" value="Sinais de desmotivação"><div><div class="risco-titulo">Sinais de desmotivação</div><div class="risco-desc">Baixo engajamento ou menção a interromper o curso</div></div></label>
+          <label class="risco-item"><input type="checkbox" name="riscos" value="Nenhum ponto de atenção" data-exclusivo><div><div class="risco-titulo">Nenhum ponto de atenção</div><div class="risco-desc">Desenvolvimento satisfatório</div></div></label>
           <div class="erro-msg" id="err-riscos">Marque ao menos uma opção.</div>
         </div>
-        <div class="campo">
-          <span class="pergunta">Grau de urgência das ações necessárias <span class="req">*</span></span>
-          <div class="opcoes">
-            <label class="opcao"><input type="radio" name="urgencia" value="Nenhuma ação especial necessária"> Nenhuma ação especial necessária</label>
-            <label class="opcao"><input type="radio" name="urgencia" value="Ação preventiva — monitorar com mais atenção no próximo semestre"> Ação preventiva — monitorar com mais atenção no próximo semestre</label>
-            <label class="opcao"><input type="radio" name="urgencia" value="Ação moderada — intervenção planejada nas próximas semanas"> Ação moderada — intervenção planejada nas próximas semanas</label>
-            <label class="opcao"><input type="radio" name="urgencia" value="Ação imediata — situação requer atenção da coordenação agora"> Ação imediata — situação requer atenção da coordenação agora</label>
-          </div>
-          <div class="erro-msg" id="err-urgencia">Selecione uma opção.</div>
-        </div>
       </div>
 
       <div class="bloco">
-        <div class="bloco-titulo"><div class="bloco-num">4</div><h2>Perspectiva de conclusão</h2></div>
-        <div class="campo">
-          <span class="pergunta">Viabilidade de conclusão no prazo regimental <span class="req">*</span></span>
-          <div class="opcoes">
-            <label class="opcao"><input type="radio" name="prazo" value="No prazo — dentro do cronograma esperado"> No prazo — dentro do cronograma esperado</label>
-            <label class="opcao"><input type="radio" name="prazo" value="Risco leve — pequenos atrasos, mas recuperáveis"> Risco leve — pequenos atrasos, mas recuperáveis</label>
-            <label class="opcao"><input type="radio" name="prazo" value="Risco moderado — necessidade de aceleração significativa"> Risco moderado — necessidade de aceleração significativa</label>
-            <label class="opcao"><input type="radio" name="prazo" value="Risco alto — conclusão no prazo comprometida sem intervenção"> Risco alto — conclusão no prazo comprometida sem intervenção</label>
-          </div>
-          <div class="erro-msg" id="err-prazo">Selecione uma opção.</div>
-        </div>
+        <div class="bloco-titulo"><div class="bloco-num">4</div><h2>Perspectiva e apoio</h2></div>
         <div class="campo">
           <span class="pergunta">Quando você estima que este(a) discente estará pronto(a) para defender? <span class="req">*</span></span>
           <div class="opcoes">
-            <label class="opcao"><input type="radio" name="estimativa" value="Dentro do prazo regimental previsto"> Dentro do prazo regimental previsto</label>
-            <label class="opcao"><input type="radio" name="estimativa" value="Até 6 meses após o prazo regimental"> Até 6 meses após o prazo regimental</label>
-            <label class="opcao"><input type="radio" name="estimativa" value="Entre 6 meses e 1 ano após o prazo"> Entre 6 meses e 1 ano após o prazo</label>
-            <label class="opcao"><input type="radio" name="estimativa" value="Não é possível estimar no momento"> Não é possível estimar no momento</label>
-            <label class="opcao"><input type="radio" name="estimativa" value="Há risco real de não conclusão"> Há risco real de não conclusão</label>
+            <label class="opcao"><input type="radio" name="previsao-defesa" value="Dentro do prazo regimental"> Dentro do prazo regimental</label>
+            <label class="opcao"><input type="radio" name="previsao-defesa" value="Até 6 meses após o prazo regimental"> Até 6 meses após o prazo regimental</label>
+            <label class="opcao"><input type="radio" name="previsao-defesa" value="Mais de 6 meses após o prazo regimental"> Mais de 6 meses após o prazo regimental</label>
+            <label class="opcao"><input type="radio" name="previsao-defesa" value="Não é possível estimar no momento"> Não é possível estimar no momento</label>
+            <label class="opcao"><input type="radio" name="previsao-defesa" value="Há risco real de não conclusão"> Há risco real de não conclusão</label>
           </div>
-          <div class="erro-msg" id="err-estimativa">Selecione uma opção.</div>
+          <div class="erro-msg" id="err-previsao-defesa">Selecione uma opção.</div>
         </div>
-      </div>
-
-      <div class="bloco">
-        <div class="bloco-titulo"><div class="bloco-num">5</div><h2>Ação da coordenação</h2></div>
         <div class="campo">
-          <span class="pergunta">Você considera necessária uma intervenção da coordenação em relação a este(a) discente? <span class="req">*</span></span>
+          <span class="pergunta">Você gostaria que a coordenação atuasse em relação a este(a) discente? <span class="req">*</span></span>
           <div class="opcoes">
-            <label class="opcao"><input type="radio" name="intervencao" value="Não — o acompanhamento segue normal"> Não — o acompanhamento segue normal</label>
-            <label class="opcao"><input type="radio" name="intervencao" value="Não agora, mas monitore no próximo semestre"> Não agora, mas monitore no próximo semestre</label>
-            <label class="opcao"><input type="radio" name="intervencao" value="Sim — contato preventivo da coordenação seria útil"> Sim — contato preventivo da coordenação seria útil</label>
-            <label class="opcao"><input type="radio" name="intervencao" value="Sim — intervenção urgente necessária"> Sim — intervenção urgente necessária</label>
+            <label class="opcao"><input type="radio" name="acao-coordenacao" value="Não é necessário — o acompanhamento segue normal"> Não é necessário — o acompanhamento segue normal</label>
+            <label class="opcao"><input type="radio" name="acao-coordenacao" value="Apenas acompanhar com atenção no próximo semestre"> Apenas acompanhar com atenção no próximo semestre</label>
+            <label class="opcao"><input type="radio" name="acao-coordenacao" value="Sim — um contato preventivo seria útil"> Sim — um contato preventivo seria útil</label>
+            <label class="opcao"><input type="radio" name="acao-coordenacao" value="Sim — a situação requer atenção imediata"> Sim — a situação requer atenção imediata</label>
           </div>
-          <div class="erro-msg" id="err-intervencao">Selecione uma opção.</div>
+          <div class="erro-msg" id="err-acao-coordenacao">Selecione uma opção.</div>
         </div>
       </div>
 
       <p class="declaracao">Declaro que as informações prestadas são verídicas. Estou ciente de que esta avaliação é de uso exclusivo da coordenação do PPGEMIN.</p>
       <button class="btn-primario" id="btn-enviar" type="button">Enviar avaliação</button>
       <div class="erro-inline" id="msg-erro">Ocorreu um erro ao enviar. Verifique sua conexão e tente novamente.</div>
+    </section>
+
+    <!-- AVALIAÇÃO GERAL DO SEMESTRE -->
+    <section class="painel" id="painel-geral">
+      <button type="button" class="btn-voltar" data-voltar>← Voltar para a lista</button>
+
+      <div class="disc-selecionado">
+        <div class="disc-sel-icon">🧭</div>
+        <div>
+          <div class="disc-sel-nome">Avaliação geral do semestre</div>
+          <div class="disc-sel-detalhe">Respondida uma vez por semestre · <span class="js-semestre"></span></div>
+        </div>
+      </div>
+
+      <div class="bloco">
+        <div class="bloco-titulo"><div class="bloco-num">1</div><h2>Condições de orientação</h2></div>
+        <div class="campo">
+          <span class="pergunta">Como você avalia sua carga atual de orientação no programa? <span class="req">*</span></span>
+          <div class="opcoes">
+            <label class="opcao"><input type="radio" name="carga" value="Abaixo da minha disponibilidade — posso orientar mais"> Abaixo da minha disponibilidade — posso orientar mais</label>
+            <label class="opcao"><input type="radio" name="carga" value="Adequada"> Adequada</label>
+            <label class="opcao"><input type="radio" name="carga" value="Elevada, mas administrável"> Elevada, mas administrável</label>
+            <label class="opcao"><input type="radio" name="carga" value="Excessiva — compromete a qualidade da orientação"> Excessiva — compromete a qualidade da orientação</label>
+          </div>
+          <div class="erro-msg" id="err-carga">Selecione uma opção.</div>
+        </div>
+        <div class="campo">
+          <span class="pergunta">O que mais dificultou suas orientações neste semestre? <span class="req">*</span><span class="sub">Marque todas que se aplicam</span></span>
+          <div class="opcoes">
+            <label class="opcao"><input type="checkbox" name="dif-orientacao" value="Tempo disponível para orientação"> Tempo disponível para orientação</label>
+            <label class="opcao"><input type="checkbox" name="dif-orientacao" value="Disponibilidade dos discentes"> Disponibilidade dos discentes</label>
+            <label class="opcao"><input type="checkbox" name="dif-orientacao" value="Acesso a dados ou às empresas dos discentes"> Acesso a dados ou às empresas dos discentes</label>
+            <label class="opcao"><input type="checkbox" name="dif-orientacao" value="Infraestrutura (laboratórios, equipamentos, softwares)"> Infraestrutura (laboratórios, equipamentos, softwares)</label>
+            <label class="opcao"><input type="checkbox" name="dif-orientacao" value="Recursos financeiros para pesquisa"> Recursos financeiros para pesquisa</label>
+            <label class="opcao"><input type="checkbox" name="dif-orientacao" value="Questões administrativas ou burocráticas"> Questões administrativas ou burocráticas</label>
+            <label class="opcao"><input type="checkbox" name="dif-orientacao" value="Nenhuma dificuldade relevante" data-exclusivo> Nenhuma dificuldade relevante</label>
+          </div>
+          <div class="erro-msg" id="err-dif-orientacao">Marque ao menos uma opção.</div>
+        </div>
+        <div class="campo">
+          <span class="pergunta">Como tem sido a interação com as empresas ou organizações dos seus orientandos? <span class="req">*</span></span>
+          <div class="opcoes">
+            <label class="opcao"><input type="radio" name="interacao" value="Ativa — há parceria efetiva"> Ativa — há parceria efetiva</label>
+            <label class="opcao"><input type="radio" name="interacao" value="Pontual"> Pontual</label>
+            <label class="opcao"><input type="radio" name="interacao" value="Pouca ou nenhuma"> Pouca ou nenhuma</label>
+            <label class="opcao"><input type="radio" name="interacao" value="Não se aplica"> Não se aplica</label>
+          </div>
+          <div class="erro-msg" id="err-interacao">Selecione uma opção.</div>
+        </div>
+      </div>
+
+      <div class="bloco">
+        <div class="bloco-titulo"><div class="bloco-num">2</div><h2>Apoio e programa</h2></div>
+        <div class="campo">
+          <span class="pergunta">Que apoio da coordenação seria mais útil para suas orientações? <span class="req">*</span><span class="sub">Marque todos que se aplicam</span></span>
+          <div class="opcoes">
+            <label class="opcao"><input type="checkbox" name="apoio-desejado" value="Capacitação dos discentes em metodologia ou escrita"> Capacitação dos discentes em metodologia ou escrita</label>
+            <label class="opcao"><input type="checkbox" name="apoio-desejado" value="Mediação com empresas e organizações"> Mediação com empresas e organizações</label>
+            <label class="opcao"><input type="checkbox" name="apoio-desejado" value="Apoio à publicação e à produção técnica"> Apoio à publicação e à produção técnica</label>
+            <label class="opcao"><input type="checkbox" name="apoio-desejado" value="Infraestrutura e equipamentos"> Infraestrutura e equipamentos</label>
+            <label class="opcao"><input type="checkbox" name="apoio-desejado" value="Ajustes em disciplinas ou no calendário"> Ajustes em disciplinas ou no calendário</label>
+            <label class="opcao"><input type="checkbox" name="apoio-desejado" value="Nenhum no momento" data-exclusivo> Nenhum no momento</label>
+          </div>
+          <div class="erro-msg" id="err-apoio-desejado">Marque ao menos uma opção.</div>
+        </div>
+        <div class="campo">
+          <span class="pergunta">Satisfação geral com o funcionamento do programa neste semestre <span class="req">*</span></span>
+          <div class="escala">
+            <label class="escala-item"><input type="radio" name="satisfacao-programa" value="1">1</label>
+            <label class="escala-item"><input type="radio" name="satisfacao-programa" value="2">2</label>
+            <label class="escala-item"><input type="radio" name="satisfacao-programa" value="3">3</label>
+            <label class="escala-item"><input type="radio" name="satisfacao-programa" value="4">4</label>
+            <label class="escala-item"><input type="radio" name="satisfacao-programa" value="5">5</label>
+          </div>
+          <div class="escala-legenda"><span>Muito insatisfeito(a)</span><span>Muito satisfeito(a)</span></div>
+          <div class="erro-msg" id="err-satisfacao-programa">Selecione um valor.</div>
+        </div>
+        <div class="campo">
+          <label for="observacoes">Sugestões ou observações para a coordenação <span class="sub">Opcional</span></label>
+          <textarea id="observacoes" maxlength="1000" placeholder="Escreva aqui, se desejar."></textarea>
+        </div>
+      </div>
+
+      <button class="btn-primario" id="btn-enviar-geral" type="button">Enviar avaliação geral</button>
+      <div class="erro-inline" id="msg-erro-geral">Ocorreu um erro ao enviar. Verifique sua conexão e tente novamente.</div>
     </section>
 
     <!-- SESSÃO ENCERRADA -->
@@ -393,13 +453,13 @@
   // Regra de semestre: 1º semestre até 17/07 · 2º semestre de 18/07 a 31/12
   var FIM_SEM1_MES = 7, FIM_SEM1_DIA = 17;
 
-  var RADIOS = ['reunioes', 'qualidade-reunioes', 'autonomia', 'comprometimento', 'evolucao',
-                'escrita', 'contexto', 'urgencia', 'prazo', 'estimativa', 'intervencao'];
-  var PAINEIS = ['painel-chave', 'painel-inicio', 'painel-selecao', 'painel-formulario', 'painel-encerrado'];
+  var FORM_ALUNO = { painel: 'painel-formulario', radios: ['frequencia', 'qualidade-reunioes', 'autonomia', 'evolucao', 'escrita', 'previsao-defesa', 'acao-coordenacao'], checks: ['riscos'] };
+  var FORM_GERAL = { painel: 'painel-geral', radios: ['carga', 'interacao', 'satisfacao-programa'], checks: ['dif-orientacao', 'apoio-desejado'] };
+  var PAINEIS = ['painel-chave', 'painel-inicio', 'painel-selecao', 'painel-formulario', 'painel-geral', 'painel-encerrado'];
 
   var estado = {
     orientacoes: {}, cadastroOk: false, semestre: calcularSemestre(),
-    orientador: '', discente: null, respondidos: {},
+    orientador: '', discente: null, respondidos: {}, geralRespondido: false,
     carregando: false, erroStatus: false, enviando: false
   };
 
@@ -412,7 +472,6 @@
     return (primeiro ? '1º' : '2º') + ' Semestre de ' + d.getFullYear();
   }
 
-  // Remove marcações antigas guardadas no navegador (versões anteriores)
   function limparCacheAntigo() {
     try {
       var chaves = [];
@@ -424,7 +483,6 @@
     } catch (e) {}
   }
 
-  // Consulta ao Web App via JSONP (compatível com GitHub Pages)
   function jsonp(params, callback, tempo) {
     var nome = 'ppgcb_' + Date.now() + '_' + Math.floor(Math.random() * 1e6);
     var script = document.createElement('script');
@@ -492,7 +550,7 @@
     }
   }
 
-  // ---------- CADASTRO (planilha CONTROLE DADOS PPGEMIN) ----------
+  // ---------- CADASTRO ----------
   function carregarCadastro(callback) {
     var sel = $('select-orientador');
     var selecionado = estado.orientador || sel.value;
@@ -536,24 +594,26 @@
     $('err-orientador').style.display = 'none';
     estado.orientador = nome;
     estado.respondidos = {};
+    estado.geralRespondido = false;
     $('ori-nome').textContent = nome;
     mostrar('painel-selecao');
     atualizarStatus();
   }
 
-  // ---------- STATUS: sempre lido da planilha de respostas ----------
+  // ---------- STATUS (fonte da verdade = planilha) ----------
   function atualizarStatus() {
     if (!estado.orientador || estado.carregando) return;
     estado.carregando = true;
     renderizarLista();
-    var orientadorConsultado = estado.orientador;
-    jsonp({ acao: 'respondidos', orientador: orientadorConsultado }, function (dados) {
+    var consultado = estado.orientador;
+    jsonp({ acao: 'respondidos', orientador: consultado }, function (dados) {
       estado.carregando = false;
-      if (orientadorConsultado !== estado.orientador) return;
+      if (consultado !== estado.orientador) return;
       if (dados && dados.status === 'ok' && Array.isArray(dados.respondidos)) {
         var mapa = {};
         dados.respondidos.forEach(function (m) { mapa[String(m)] = true; });
         estado.respondidos = mapa;
+        estado.geralRespondido = !!dados.geralRespondido;
         estado.erroStatus = false;
         if (dados.semestre) { estado.semestre = dados.semestre; exibirSemestre(); }
       } else {
@@ -563,7 +623,7 @@
     });
   }
 
-  // Recarrega a lista de alunos (cadastro) e, em seguida, o status das respostas
+  // Recarrega o cadastro (alunos) e, em seguida, o status das respostas
   function atualizarTudo() {
     if (!estado.orientador || estado.carregando) return;
     estado.carregando = true;
@@ -574,7 +634,38 @@
     });
   }
 
+  function criarBotao(classe, texto, acao, mat) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = classe;
+    b.textContent = texto;
+    b.setAttribute('data-acao', acao);
+    if (mat) b.setAttribute('data-mat', mat);
+    return b;
+  }
+
+  function renderizarGeral() {
+    var box = $('geral-acao');
+    box.innerHTML = '';
+    $('geral-card').classList.toggle('respondido', estado.geralRespondido && !estado.carregando);
+    if (estado.carregando) {
+      var sp = document.createElement('span');
+      sp.className = 'status-carregando';
+      sp.textContent = 'Verificando…';
+      box.appendChild(sp);
+    } else if (estado.geralRespondido) {
+      var tag = document.createElement('span');
+      tag.className = 'tag-respondido';
+      tag.textContent = '✓ Respondida';
+      box.appendChild(tag);
+      box.appendChild(criarBotao('link-btn', 'Responder novamente', 'reabrir-geral'));
+    } else {
+      box.appendChild(criarBotao('btn-responder', 'Responder', 'abrir-geral'));
+    }
+  }
+
   function renderizarLista() {
+    renderizarGeral();
     var alunos = estado.orientacoes[estado.orientador] || [];
     var total = alunos.length;
     var feitos = alunos.filter(function (a) { return estado.respondidos[a.matricula]; }).length;
@@ -587,10 +678,10 @@
       $('prog-label').textContent = 'Consultando as avaliações registradas…';
       $('prog-fill').style.width = '0%';
     } else if (total && feitos === total) {
-      $('prog-label').textContent = 'Todas as ' + total + ' avaliações deste semestre foram concluídas ✅';
+      $('prog-label').textContent = 'Todas as ' + total + ' avaliações de discentes deste semestre foram concluídas ✅';
       $('prog-fill').style.width = '100%';
     } else {
-      $('prog-label').textContent = feitos + ' de ' + total + ' avaliação(ões) registrada(s) neste semestre';
+      $('prog-label').textContent = feitos + ' de ' + total + ' avaliação(ões) de discentes registrada(s) neste semestre';
       $('prog-fill').style.width = (total ? Math.round(feitos / total * 100) : 0) + '%';
     }
 
@@ -607,7 +698,6 @@
       var feito = !!estado.respondidos[a.matricula];
       var item = document.createElement('div');
       item.className = 'disc-item' + (feito ? ' respondido' : '') + (estado.carregando ? ' carregando' : '');
-
       var info = document.createElement('div');
       var nome = document.createElement('div');
       nome.className = 'disc-nome';
@@ -629,24 +719,11 @@
         var tag = document.createElement('span');
         tag.className = 'tag-respondido';
         tag.textContent = '✓ Respondido';
-        var novo = document.createElement('button');
-        novo.type = 'button';
-        novo.className = 'link-btn';
-        novo.textContent = 'Responder novamente';
-        novo.setAttribute('data-acao', 'reabrir');
-        novo.setAttribute('data-mat', a.matricula);
         acao.appendChild(tag);
-        acao.appendChild(novo);
+        acao.appendChild(criarBotao('link-btn', 'Responder novamente', 'reabrir', a.matricula));
       } else {
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'btn-responder';
-        btn.textContent = 'Responder';
-        btn.setAttribute('data-acao', 'abrir');
-        btn.setAttribute('data-mat', a.matricula);
-        acao.appendChild(btn);
+        acao.appendChild(criarBotao('btn-responder', 'Responder', 'abrir', a.matricula));
       }
-
       item.appendChild(info);
       item.appendChild(acao);
       lista.appendChild(item);
@@ -659,27 +736,34 @@
     return null;
   }
 
-  // ---------- FORMULÁRIO ----------
-  function abrirFormulario(aluno) {
-    estado.discente = aluno;
-    $('sel-nome').textContent = nomeBonito(aluno.nome);
-    $('sel-detalhe').textContent = 'Matrícula: ' + aluno.matricula + ' · ' + estado.semestre;
-    limparFormulario();
-    mostrar('painel-formulario');
-  }
-
-  function limparFormulario() {
-    var f = $('painel-formulario');
+  // ---------- FORMULÁRIOS ----------
+  function limpar(painelId) {
+    var f = $(painelId);
     Array.prototype.forEach.call(f.querySelectorAll('input'), function (i) { i.checked = false; });
+    Array.prototype.forEach.call(f.querySelectorAll('textarea'), function (t) { t.value = ''; });
     Array.prototype.forEach.call(f.querySelectorAll('.selecionada, .marcado'), function (el) {
       el.classList.remove('selecionada');
       el.classList.remove('marcado');
     });
-    Array.prototype.forEach.call(f.querySelectorAll('.erro-msg'), function (e) { e.style.display = 'none'; });
-    $('msg-erro').style.display = 'none';
+    Array.prototype.forEach.call(f.querySelectorAll('.erro-msg, .erro-inline'), function (e) { e.style.display = 'none'; });
+    estado.enviando = false;
+  }
+
+  function abrirFormulario(aluno) {
+    estado.discente = aluno;
+    $('sel-nome').textContent = nomeBonito(aluno.nome);
+    $('sel-detalhe').textContent = 'Matrícula: ' + aluno.matricula + ' · ' + estado.semestre;
+    limpar('painel-formulario');
     $('btn-enviar').disabled = false;
     $('btn-enviar').textContent = 'Enviar avaliação';
-    estado.enviando = false;
+    mostrar('painel-formulario');
+  }
+
+  function abrirGeral() {
+    limpar('painel-geral');
+    $('btn-enviar-geral').disabled = false;
+    $('btn-enviar-geral').textContent = 'Enviar avaliação geral';
+    mostrar('painel-geral');
   }
 
   function getRadio(n) {
@@ -691,10 +775,10 @@
     return Array.prototype.map.call(document.querySelectorAll('input[name="' + n + '"]:checked'), function (i) { return i.value; });
   }
 
-  function validar() {
-    RADIOS.forEach(function (n) { $('err-' + n).style.display = getRadio(n) ? 'none' : 'block'; });
-    $('err-riscos').style.display = getChecked('riscos').length ? 'none' : 'block';
-    var erros = $('painel-formulario').querySelectorAll('.erro-msg');
+  function validar(form) {
+    form.radios.forEach(function (n) { $('err-' + n).style.display = getRadio(n) ? 'none' : 'block'; });
+    form.checks.forEach(function (n) { $('err-' + n).style.display = getChecked(n).length ? 'none' : 'block'; });
+    var erros = $(form.painel).querySelectorAll('.erro-msg');
     for (var i = 0; i < erros.length; i++) {
       if (erros[i].style.display === 'block') {
         erros[i].closest('.campo').scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -704,15 +788,30 @@
     return true;
   }
 
-  function enviar() {
-    if (estado.enviando || !estado.discente) return;
-    $('msg-erro').style.display = 'none';
-    if (!validar()) return;
+  function postar(dados, btn, textoBtn, erroId, aoConcluir) {
     estado.enviando = true;
-    var btn = $('btn-enviar');
     btn.disabled = true;
     btn.textContent = 'Enviando…';
+    fetch(WEBAPP_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dados) })
+      .then(function () {
+        estado.enviando = false;
+        aoConcluir();
+        mostrar('painel-selecao');
+        renderizarLista();
+        setTimeout(atualizarStatus, 1500);
+      })
+      .catch(function () {
+        estado.enviando = false;
+        btn.disabled = false;
+        btn.textContent = textoBtn;
+        $(erroId).style.display = 'block';
+      });
+  }
 
+  function enviarAluno() {
+    if (estado.enviando || !estado.discente) return;
+    $('msg-erro').style.display = 'none';
+    if (!validar(FORM_ALUNO)) return;
     var aluno = estado.discente;
     var dados = {
       tipo: 'orientador',
@@ -720,41 +819,47 @@
       nomeOrientador: estado.orientador,
       nomeDiscente: aluno.nome,
       matricula: aluno.matricula,
-      reunioes: getRadio('reunioes'),
+      frequencia: getRadio('frequencia'),
       qualidadeReunioes: getRadio('qualidade-reunioes'),
       autonomia: getRadio('autonomia'),
-      comprometimento: getRadio('comprometimento'),
       evolucao: getRadio('evolucao'),
       escrita: getRadio('escrita'),
-      contexto: getRadio('contexto'),
       riscos: getChecked('riscos'),
-      urgencia: getRadio('urgencia'),
-      prazo: getRadio('prazo'),
-      estimativa: getRadio('estimativa'),
-      intervencao: getRadio('intervencao')
+      previsaoDefesa: getRadio('previsao-defesa'),
+      acaoCoordenacao: getRadio('acao-coordenacao')
     };
+    postar(dados, $('btn-enviar'), 'Enviar avaliação', 'msg-erro', function () {
+      estado.discente = null;
+      estado.respondidos[aluno.matricula] = true;
+      toast('Avaliação de ' + nomeBonito(aluno.nome) + ' registrada com sucesso.');
+    });
+  }
 
-    fetch(WEBAPP_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dados) })
-      .then(function () {
-        estado.enviando = false;
-        estado.discente = null;
-        estado.respondidos[aluno.matricula] = true;
-        mostrar('painel-selecao');
-        renderizarLista();
-        toast('Avaliação de ' + nomeBonito(aluno.nome) + ' registrada com sucesso.');
-        setTimeout(atualizarStatus, 1500);
-      })
-      .catch(function () {
-        estado.enviando = false;
-        btn.disabled = false;
-        btn.textContent = 'Enviar avaliação';
-        $('msg-erro').style.display = 'block';
-      });
+  function enviarGeral() {
+    if (estado.enviando) return;
+    $('msg-erro-geral').style.display = 'none';
+    if (!validar(FORM_GERAL)) return;
+    var dados = {
+      tipo: 'docente_semestre',
+      semestre: estado.semestre,
+      nomeOrientador: estado.orientador,
+      carga: getRadio('carga'),
+      dificuldadesOrientacao: getChecked('dif-orientacao'),
+      interacaoEmpresas: getRadio('interacao'),
+      apoioDesejado: getChecked('apoio-desejado'),
+      satisfacaoPrograma: getRadio('satisfacao-programa'),
+      observacoes: $('observacoes').value.trim()
+    };
+    postar(dados, $('btn-enviar-geral'), 'Enviar avaliação geral', 'msg-erro-geral', function () {
+      estado.geralRespondido = true;
+      toast('Avaliação geral do semestre registrada com sucesso.');
+    });
   }
 
   function voltarLista() {
-    var preenchido = $('painel-formulario').querySelector('input:checked');
-    if (preenchido && !confirm('Descartar o preenchimento desta avaliação e voltar à lista?')) return;
+    var painel = visivel('painel-geral') ? 'painel-geral' : 'painel-formulario';
+    var preenchido = $(painel).querySelector('input:checked');
+    if (preenchido && !confirm('Descartar o preenchimento e voltar à lista?')) return;
     estado.discente = null;
     mostrar('painel-selecao');
     atualizarStatus();
@@ -764,6 +869,7 @@
     estado.orientador = '';
     estado.discente = null;
     estado.respondidos = {};
+    estado.geralRespondido = false;
     $('select-orientador').value = '';
     mostrar('painel-encerrado');
   }
@@ -775,12 +881,11 @@
   $('btn-recarregar-cad').addEventListener('click', function () { carregarCadastro(); });
   $('btn-atualizar').addEventListener('click', atualizarTudo);
   $('btn-tentar-status').addEventListener('click', atualizarTudo);
-  $('btn-voltar').addEventListener('click', voltarLista);
-  $('btn-enviar').addEventListener('click', enviar);
+  $('btn-enviar').addEventListener('click', enviarAluno);
+  $('btn-enviar-geral').addEventListener('click', enviarGeral);
   $('btn-reentrar').addEventListener('click', function () { mostrar('painel-chave'); });
-  Array.prototype.forEach.call(document.querySelectorAll('[data-sair]'), function (b) {
-    b.addEventListener('click', encerrarSessao);
-  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-sair]'), function (b) { b.addEventListener('click', encerrarSessao); });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-voltar]'), function (b) { b.addEventListener('click', voltarLista); });
 
   $('lista-discentes').addEventListener('click', function (e) {
     var b = e.target.closest('button[data-acao]');
@@ -792,14 +897,20 @@
     abrirFormulario(aluno);
   });
 
+  $('geral-acao').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-acao]');
+    if (!b) return;
+    if (b.getAttribute('data-acao') === 'reabrir-geral' &&
+        !confirm('A avaliação geral deste semestre já foi registrada.\n\nDeseja enviar uma nova? A coordenação considerará a mais recente.')) return;
+    abrirGeral();
+  });
+
   document.addEventListener('change', function (e) {
     var el = e.target;
     if (el.type !== 'radio' && el.type !== 'checkbox') return;
 
-    // Opções exclusivas ("Nenhum...") desmarcam as demais e vice-versa
     if (el.type === 'checkbox' && el.checked) {
-      var grupo = document.querySelectorAll('input[name="' + el.name + '"]');
-      Array.prototype.forEach.call(grupo, function (o) {
+      Array.prototype.forEach.call(document.querySelectorAll('input[name="' + el.name + '"]'), function (o) {
         if (o === el) return;
         if (el.hasAttribute('data-exclusivo') || o.hasAttribute('data-exclusivo')) {
           o.checked = false;
@@ -811,22 +922,18 @@
 
     if (el.type === 'radio') {
       Array.prototype.forEach.call(document.querySelectorAll('input[name="' + el.name + '"]'), function (r) {
-        var c = r.closest('.opcao');
+        var c = r.closest('.opcao, .escala-item');
         if (c) c.classList.remove('selecionada');
       });
     }
-    var op = el.closest('.opcao');
+    var op = el.closest('.opcao, .escala-item');
     if (op) op.classList.toggle('selecionada', el.checked);
     var rk = el.closest('.risco-item');
     if (rk) rk.classList.toggle('marcado', el.checked);
-    var campo = el.closest('.campo');
-    if (campo) {
-      var er = campo.querySelector('.erro-msg');
-      if (er) er.style.display = 'none';
-    }
+    var er = $('err-' + el.name);
+    if (er) er.style.display = 'none';
   });
 
-  // Ao voltar para a aba, revalida o status com a planilha
   document.addEventListener('visibilitychange', function () {
     if (document.visibilityState === 'visible' && visivel('painel-selecao')) atualizarTudo();
   });
